@@ -1,0 +1,76 @@
+image: python:3.8
+stages:
+  - test
+  - deploy
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
+# Feel free to remove this in your generated project.
+.disable_on_template: &disable_on_template
+  rules:
+    - if: '$CI_COMMIT_REF_NAME != "template"'
+
+.django_before_script: &django_before_script |-
+  pip install -r requirements.txt
+  python manage.py collectstatic --no-input
+
+.coverage_artifacts: &coverage_artifacts
+  artifacts:
+    paths:
+      - .coverage*
+
+
+UnitTest:
+  <<: *disable_on_template
+  <<: *coverage_artifacts
+  stage: test
+  before_script:
+    - *django_before_script
+  script:
+    - coverage run --parallel --include="./*" --omit="manage.py,pedulilindungi2/*"
+      manage.py test --exclude-tag=functional
+
+FunctionalTest:
+  <<: *disable_on_template
+  <<: *coverage_artifacts
+  stage: test
+  before_script:
+    - apt-get update -q && apt-get install -yq chromium-driver
+    - *django_before_script
+  script:
+    - coverage run --parallel --include="./*" --omit="manage.py,pedulilindungi2/*"
+      manage.py test --tag=functional
+
+
+Coverage:
+  <<: *disable_on_template
+  stage: deploy
+  before_script:
+    - pip install coverage
+    - coverage combine
+  script:
+    - coverage report -m
+    - coverage html
+  artifacts:
+    paths:
+      - htmlcov/
+
+Deployment:
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+  image: ruby:2.7
+  stage: deploy
+  before_script:
+    - gem install dpl
+    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  script:
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+    - heroku run --app $HEROKU_APP_NAME migrate
+  environment:
+    name: production
+    url: https://$HEROKU_APP_NAME.herokuapp.com
