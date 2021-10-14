@@ -20,9 +20,9 @@ Untuk mengendalikan Pandemi Covid-19, pemerintah sedang menggencarkan program va
 2006523413	Alifiyah Nur Rochmah Ariandri<br>
 Halaman log in penyedia dan penerima yang menerima masukan email dan password, homepage
 
-2. Sign up<br>
+2. Sign up & Log out<br>
 2006525330	Ridjky Tegar Perkasa<br>
-Halaman sign up penyedia dan penerima yang menerima masukan email, password, dan radio button yang berisi pilihan peran (penerima atau penyedia)
+Halaman sign up penyedia dan penerima yang menerima masukan email, password, dan radio button yang berisi pilihan peran (penerima atau penyedia). Selain itu, terdapat implementasi log out juga yang dapat diakses melalui navbar.
 
 3. Input Biodata<br>
 2006595892	Erick Ezrandy<br>
