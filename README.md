@@ -34,7 +34,7 @@ Halaman profil yang menampilkan data-data penerima yang sudah terisi saat menged
 
 5. Profil Penyedia<br>
 2006530141	Rakha Rayhan Nusyura<br>
-Halaman profil yang menampilkan data-data penyedia yang sudah terisi saat mengedit biodata. Kita dapat mengedit beberapa data yang sudah ada tersebut. Selain itu, juga ada halaman untuk melihat dan pendaftar berdasarkan jadwal.
+Halaman profil yang menampilkan data-data penyedia yang sudah terisi saat mengedit biodata. Kita dapat mengedit beberapa data yang sudah ada tersebut. Selain itu, juga ada halaman untuk melihat pendaftar berdasarkan jadwal.
 
 6. Pendaftaran Vaksin<br>
 2006527222	Andini Putri Pramudya Wardani<br>
