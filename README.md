@@ -24,15 +24,19 @@ Halaman log in penyedia dan penerima yang menerima masukan email dan password, h
 2006525330	Ridjky Tegar Perkasa<br>
 Halaman sign up penyedia dan penerima yang menerima masukan email, password, dan radio button yang berisi pilihan peran (penerima atau penyedia). Selain itu, terdapat implementasi log out juga yang dapat diakses melalui navbar.
 
-3. Input Biodata<br>
+3. Input Biodata Penerima dan Penyedia<br>
 2006595892	Erick Ezrandy<br>
-Halaman biodata penerima yang berisi data seperti nama lengkap, NIK, umur, jenis kelamin, nomor HP, dan alamat. Pada halaman ini penerima juga bisa melakukan edit biodata.
+Halaman biodata penerima yang berisi data seperti nama lengkap, NIK, umur, jenis kelamin, nomor HP, dan alamat. Halaman biodata penyedia yang berisi data seperti nama instansi, kota, nomor telepon, dan alamat.
 
-4. Profile<br>
+4. Profil Penerima<br>
 2006526812	Stefanus Ndaru Wedhatama<br>
-Halaman profil yang menampilkan rincian siapa saja pengguna yang mendaftarkan vaksin di penyedia tersebut. Halaman ini bersifat static, hanya sebagai arsip saja siapa pengguna yang pernah mendaftar vaksin di penyelenggara tersebut. Modul ni sekaligus berisi halaman untuk mengedit biodata penyedia yang menerima masukan nama instansi baru, alamat baru, dan/atau nomor telepon baru.
+Halaman profil yang menampilkan data-data penerima yang sudah terisi saat mengedit biodata. Kita dapat mengedit beberapa data yang sudah ada tersebut. Selain itu, juga ada halaman untuk melihat dan membatalkan tiket vaksin yang sudah dipilih.
 
-5. Pendaftaran Vaksin<br>
+5. Profil Penyedia<br>
+2006530141	Rakha Rayhan Nusyura<br>
+Halaman profil yang menampilkan data-data penyedia yang sudah terisi saat mengedit biodata. Kita dapat mengedit beberapa data yang sudah ada tersebut. Selain itu, juga ada halaman untuk melihat dan pendaftar berdasarkan jadwal.
+
+6. Pendaftaran Vaksin<br>
 2006527222	Andini Putri Pramudya Wardani<br>
 Halaman untuk melakukan pendaftaran vaksin (khusus bagi penerima). Berikut merupakan fitur pada halaman ini:<br>
 - Dropdown untuk memilih penyedia vaksin. Setelah itu tampilkan data-data rinci dari penyedia yang telah terpilih.
@@ -40,12 +44,6 @@ Halaman untuk melakukan pendaftaran vaksin (khusus bagi penerima). Berikut merup
 Note: <br>
 - Jika kuota pada suatu sesi habis, sesinya hilang dari dropdown
 - Jika kuota semua sesi habis, penyedia vaksin hilang dari dropdown
-
-6. Edit Pendaftaran Vaksin<br>
-2006530141	Rakha Rayhan Nusyura<br>
-Halaman untuk mengedit pendaftaran vaksin yang telah dilakukan oleh penerima. Berikut merupakan fitur rinci pada halaman ini:<br>
-- Bisa melakukan resched. (untuk penyedia yang sama)
-- Bisa membatalkan (delete).
 
 7. Penambahan Vaksin<br>
 2006534764	Rayyan Azka Ihsanuddin<br>
