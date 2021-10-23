@@ -1,0 +1,55 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch test",
+            "request": "launch",
+            "mainClass": "Coba.test",
+            "projectName": "Basa Java_af085ff5"
+        },
+        {
+            "type": "java",
+            "name": "Launch gbsBasaJava",
+            "request": "launch",
+            "mainClass": "Coba.gbsBasaJava",
+            "projectName": "Basa Java_af085ff5"
+        },
+        {
+            "type": "java",
+            "name": "Launch helloWorld",
+            "request": "launch",
+            "mainClass": "Tutorialspoint.helloWorld",
+            "projectName": "Basa Java_af085ff5"
+        },
+        {
+            "type": "java",
+            "name": "Launch kuliah",
+            "request": "launch",
+            "mainClass": "kuliah",
+            "projectName": "Basa Java_af085ff5"
+        },
+        {
+            "type": "java",
+            "name": "Launch firstCode",
+            "request": "launch",
+            "mainClass": "firstCode"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)",
+            "request": "launch",
+            "mainClass": ""
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
