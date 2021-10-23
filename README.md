@@ -16,11 +16,11 @@
 Untuk mengendalikan Pandemi Covid-19, pemerintah sedang menggencarkan program vaksinasi. Saat ini, pendaftaran vaksinasi bisa dilakukan secara online, namun terpisah antara satu penyelenggara dengan penyelenggara lainnya. Hal ini menyebabkan masyarakat bingung karena informasi tidak terpusat. Melihat fenomena tersebut, kami berinisiatif untuk mencoba membuat website yang dapat mengumpulkan semua penyelenggara vaksin ke dalam satu website sehingga masyarakat dapat lebih mudah untuk melihat daftar-daftar vaksin dan waktu vaksin yang tersedia. Dengan adanya website ini, kami harap dapat membantu masyarakat, penyedia vaksin, dan pemerintah untuk bersama-sama meningkatkan laju vaksinasi sehingga pandemi lebih cepat berakhir. 
 
 ## Modul Implementasi
-1. Home page dan Log in<br>
+1. Home page dan Form Pertanyaan<br>
 2006523413	Alifiyah Nur Rochmah Ariandri<br>
-Halaman log in penyedia dan penerima yang menerima masukan email dan password, homepage.
+Halaman homepage dan form untuk mengirimkan pertanyaan kepada e-mail Admin yang akan dijawab melalui e-mail.
 
-2. Sign up & Log out<br>
+2. Sign up, Log in, dan Log out<br>
 2006525330	Ridjky Tegar Perkasa<br>
 Halaman sign up penyedia dan penerima yang menerima masukan email, password, dan radio button yang berisi pilihan peran (penerima atau penyedia). Selain itu, terdapat implementasi log out juga yang dapat diakses melalui navbar.
 
