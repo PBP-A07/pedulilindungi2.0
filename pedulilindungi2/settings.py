@@ -58,7 +58,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'account',
-
+    'biodata',
+    'profil_penerima',
+    'profil_penyedia',
+    
 ]
 
 MIDDLEWARE = [
