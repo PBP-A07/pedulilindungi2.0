@@ -22,7 +22,7 @@ Halaman homepage dan form untuk mengirimkan pertanyaan kepada e-mail Admin yang 
 
 2. Sign up, Log in, dan Log out<br>
 2006525330	Ridjky Tegar Perkasa<br>
-Halaman sign up penyedia dan penerima yang menerima masukan email, password, dan radio button yang berisi pilihan peran (penerima atau penyedia). Selain itu, terdapat implementasi log out juga yang dapat diakses melalui navbar.
+Halaman sign up penyedia dan penerima yang menerima masukan email, username, password, dan radio button yang berisi pilihan peran (penerima atau penyedia). Selain itu, terdapat implementasi log out juga yang dapat diakses melalui navbar.
 
 3. Input Biodata Penerima dan Penyedia<br>
 2006595892	Erick Ezrandy<br>
