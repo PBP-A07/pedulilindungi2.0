@@ -1,6 +1,9 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import widgets
-from .models import Penerima, Penyedia
+from .models import Profile
+from django.contrib.auth.models import User
+
 
 ROLE_CHOICES = [
     ('penerima', 'Penerima'),
@@ -8,20 +11,10 @@ ROLE_CHOICES = [
 ]
 
 
-class RadioForm(forms.Form):
+class CreateUserForm(UserCreationForm):
+    email = forms.EmailField(
+        max_length=254)
+
+    # Radio button
     role_choice = forms.CharField(
         label="Saya adalah", widget=forms.RadioSelect(choices=ROLE_CHOICES))
-
-
-class PenyediaForm(forms.ModelForm):
-    class Meta:
-        model = Penyedia
-        fields = "__all__"
-        widgets = {'password': forms.PasswordInput}
-
-
-class PenerimaForm(forms.ModelForm):
-    class Meta:
-        model = Penerima
-        fields = "__all__"
-        widgets = {'password': forms.PasswordInput}

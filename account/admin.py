@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from account.models import Penerima, Penyedia
+from account.models import Profile
 
 # Register your models here.
-admin.site.register(Penyedia)
-admin.site.register(Penerima)
+admin.site.register(Profile)
