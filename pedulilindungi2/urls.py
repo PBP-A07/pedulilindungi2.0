@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+import daftar_vaksin.urls as daftar_vaksin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
+    path('daftar-vaksin/', include('daftar_vaksin.urls'))
 ]

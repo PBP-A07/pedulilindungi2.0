@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedulilindungi2.0 | Daftar Vaksin</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>DAFTAR VAKSIN</h1>
+        </div>
+        <div class="input-container">
+            <form method="POST" action="">
+                {%csrf_token%}
+                <div class="input">
+                    <label for="">Kota</label>
+                    <br>
+                    {{form.kota}}
+                </div>
+                <div class="input">
+                    <label for="">Tanggal</label>
+                    <br>
+                    {{form.tanggal}}
+                </div>
+                <div class="input">
+                    <label for="">Jenis Vaksin</label>
+                    <br>
+                    {{form.jenis_vaksin}}
+                </div>
+                <div class="input">
+                    <label for="">Tempat</label>
+                    <br>
+                    {{form.tempat}}
+                </div>
+                <div class="input">
+                    <label for="">Waktu</label>
+                    <br>
+                    {{form.waktu}}
+                </div>
+                <input class="btn" type="submit" value="Daftar Vaksinasi">
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
