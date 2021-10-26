@@ -19,6 +19,17 @@ def biodata_peserta(request):
     if (form.is_valid and request.method == 'POST'):
         # save the form data to model
         form.save()
+
+        # Get data from forms.
+        namaLengkap = form.cleaned_data.get("namaLengkap")
+        nik = form.cleaned_data.get("nik")
+        tanggalLahir = form.cleaned_data.get("tanggalLahir")
+        jenisKelamin = form.cleaned_data.get("jenisKelamin")
+        nomorHandphone = form.cleaned_data.get("nomorHandphone")
+        alamat = form.cleaned_data.get("alamat")
+
+        update_profile_peserta(request, request.user.username, namaLengkap, nik, tanggalLahir, jenisKelamin, nomorHandphone, alamat)
+
         return HttpResponseRedirect('/biodata')
   
     context['form']= form
@@ -35,10 +46,37 @@ def biodata_penyedia(request):
     if (form.is_valid and request.method == 'POST'):
         # save the form data to model
         form.save()
+
+        # Get data from forms.
+        instansi = form.cleaned_data.get("namaInstansi")
+        kota = form.cleaned_data.get("kota")
+        telepon = form.cleaned_data.get("nomorTelepon")
+        alamat = form.cleaned_data.get("alamat")
+
+        update_profile_penyedia(request, request.user.username, instansi, kota, telepon, alamat)
+
         return HttpResponseRedirect('/biodata')
   
     context['form']= form
     return render(request, "penyedia_form.html", context)
+
+def update_profile_penyedia(request, user_username, namaInstansi, kota, telepon, alamat):
+    user = User.objects.get(username=user_username)
+    user.profile.namaInstansi = namaInstansi
+    user.profile.kota = kota
+    user.profile.nomorTelepon = telepon
+    user.profile.alamat = alamat
+    user.save()
+
+def update_profile_peserta(request, user_username, namaLengkap, nik, tanggalLahir, jenisKelamin, nomorHandphone, alamat):
+    user = User.objects.get(username=user_username)
+    user.profile.namaLengkap = namaLengkap
+    user.profile.nik = nik
+    user.profile.tanggalLahir = tanggalLahir
+    user.profile.jenisKelamin = jenisKelamin
+    user.profile.nomorHandphone = nomorHandphone
+    user.profile.alamat = alamat
+    user.save()
 
 def ajax_posting_peserta(request):
     if request.method == 'POST':
