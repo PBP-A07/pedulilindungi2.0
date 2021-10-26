@@ -1,0 +1,19 @@
+<div class="container-fluid d-flex flex-column py-5">
+    <div id="form-wrapper" class="p-3 mx-auto">
+        <p class="text-center title p-3 fs-2 fw-bolder" id="form-title"></p>
+        <form id="form"  action="" method="POST">
+            {% csrf_token %}
+            <div id="form-input" class="fs-5">
+                {{ form.as_p }}
+            </div>
+            <div class="text-center">
+                <button class="btn danger rounded-pill mx-2 fs-5 fw-bolder" id="batal">
+                    Batal
+                </button>
+                <button class="btn primary rounded-pill mx-2 fs-5 fw-bolder" id="simpan">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

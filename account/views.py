@@ -22,7 +22,10 @@ def signup(request):
 
             # Edit the role.
             update_profile(request, username, selected, email)
-            return redirect('/auth/login/')
+            if selected == 'penyedia':
+                return redirect('/biodata/penyedia_form')
+            else:
+                return redirect('/biodata/peserta_form')
 
     context['form'] = form
     return render(request, "signup.html", context)
