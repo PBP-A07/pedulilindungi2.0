@@ -1,7 +1,8 @@
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from django.http import JsonResponse
 from account.forms import CreateUserForm
+from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
@@ -21,7 +22,7 @@ def signup(request):
 
             # Edit the role.
             update_profile(request, username, selected, email)
-            # return redirect('/login')
+            return redirect('/auth/login/')
 
     context['form'] = form
     return render(request, "signup.html", context)
@@ -32,3 +33,28 @@ def update_profile(request, user_username, user_role, email):
     user.profile.role = user_role
     user.profile.email = email
     user.save()
+
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            # Ke homepage setelah login.
+            return redirect('/auth/afterLogin/')
+    return render(request, 'login.html')
+
+
+@login_required(login_url='login')
+def afterLogin(request):
+    response = {'user': request.user}
+    return render(request, 'after_login.html', response)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('/auth/login/')
