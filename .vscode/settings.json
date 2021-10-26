@@ -2,8 +2,8 @@
     
     "editor.fontSize": 15,
     "terminal.integrated.fontSize": 15,
-    "workbench.colorTheme": "Noctis Obscuro",
-    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.colorTheme": "2077",
+    "workbench.iconTheme": "vscode-icons",
     // "python.pythonPath": "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
     
 }

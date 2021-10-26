@@ -1,0 +1,14 @@
+nav {background-color: black; z-index: 3;}
+nav a img {border-radius: 50%;}
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255,255,255,.5);
+    border-color: rgba(255,255,255,.1);
+}
+
+.navbar-brand, #navbarNav ul li a {color: whitesmoke;}
+#navbarNav ul li a:hover {color: #D44000}
+.nav-link.active, a.nav-link:hover {
+    color:#be3a1c !important;
+    transition: all 0.25s ease-in-out !important;
+}
