@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from account.forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+from django.http.response import HttpResponse, JsonResponse
+from django.core import serializers
 
 
 def signup(request):
@@ -58,3 +61,17 @@ def afterLogin(request):
 def logout_user(request):
     logout(request)
     return redirect('/auth/login/')
+
+
+def email_compare(request):
+    User = get_user_model()
+    users = User.objects.all()
+
+    if request.is_ajax():
+        email = request.POST.get("email")
+        print(email)
+        for user in users:
+            if email == user.profile.email:
+                print("Masuk pak eko")
+                return JsonResponse({"error": "Maaf, email tersebut sudah terdaftar di database."}, status=400)
+    return JsonResponse({"success": "Email tersebut dapat digunakan."}, status=200)

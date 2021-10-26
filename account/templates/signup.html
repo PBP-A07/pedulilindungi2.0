@@ -1,16 +1,48 @@
 {% load static %}
 
-<!DOCTYPE html>
+<<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Signup</title>
-  </head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+    <title>Sign Up</title>
   <body>
       <form action="" method="POST">
           {% csrf_token %}
-          {{ form.as_p}}
+          {{ form.as_p }}
+          <button id = "email-checker" >
+              Email availability check
+          </button>
           <input type="submit" value="Submit">
       </form>
+
+      <script>
+          $("#email-checker").click(function () {
+            let email_ajax = $("#id_email").val()
+            $.ajax({
+                type: 'POST',
+                url: `email_compare`,
+                data: {
+                // add request body with input value and csrf token
+                'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val(),
+                'email': email_ajax
+                },
+                success: function (response) {
+                // kita kosongin inputnya lagi abis berhasil nembak
+                    alert("Berhasil bosqu")
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+            })
+        })
+      </script>
   </body>
 </html>
