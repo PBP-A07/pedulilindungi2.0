@@ -20,6 +20,6 @@ import daftar_vaksin.urls as daftar_vaksin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    path('daftar-vaksin/', include('daftar_vaksin.urls'))
+    path('daftar-vaksin/', include('daftar_vaksin.urls')),
     path('auth/', include('account.urls')),
 ]
