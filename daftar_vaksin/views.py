@@ -16,8 +16,6 @@ def daftar_vaksin(request):
     return render(request, 'daftar_vaksin.html', {'form': form})
 
 def load_tempat(request):
-    kota = Penyedia.objects.get(pk=request.GET.get('kota_pk'))
-    # kota_id = request.GET.get('penyedia')
-    # tempats = Penyedia.objects.filter(kota_id=kota_id).values_list(
-    #     'namaInstansi', flat=True).distinct()
-    return render(request, 'hr/tempat_dropdown.html', {'kota': kota})
+    kota_id = request.GET.get('kota')
+    tempat = Penyedia.objects.filter(kota=kota_id).values_list('namaInstansi', flat=True).distinct()
+    return render(request, 'hr/tempat_dropdown.html', {'tempat': tempat})

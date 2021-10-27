@@ -4,21 +4,13 @@ from django.forms import ModelForm, CharField, DateField, TimeField, widgets
 from .models import JadwalVaksin
 from biodata.models import Penyedia
 
-KOTA = []
-JENIS_VAKSIN = []
-TANGGAL = []
-TEMPAT = []
-WAKTU = []
-
 class DaftarVaksinForm(ModelForm):
     kota = forms.ModelChoiceField(queryset=Penyedia.objects.order_by('kota').values_list('kota', flat=True).distinct())
+    tempat = forms.ModelChoiceField(queryset=Penyedia.objects.none())
 
     class Meta:
         model = JadwalVaksin
         fields = ('kota', 'tanggal', 'jenis_vaksin', 'tempat', 'waktu')
-        # widgets = {
-        #     'kota': forms.ModelChoiceField(queryset=Penyedia.objects.order_by('kota').values_list('kota', flat=True).distinct())
-        # }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

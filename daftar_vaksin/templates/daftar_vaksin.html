@@ -23,9 +23,9 @@
                     {{form.kota}}
                 </div>
                 <div class="input">
-                    <label for="">Tanggal</label>
+                    <label for="">Tempat</label>
                     <br>
-                    {{form.tanggal}}
+                    {{form.tempat}}
                 </div>
                 <div class="input">
                     <label for="">Jenis Vaksin</label>
@@ -33,9 +33,9 @@
                     {{form.jenis_vaksin}}
                 </div>
                 <div class="input" id="tempat">
-                    <label for="">Tempat</label>
+                    <label for="">Tanggal</label>
                     <br>
-                    {{form.tempat}}
+                    {{form.tanggal}}
                 </div>
                 <div class="input">
                     <label for="">Waktu</label>
@@ -49,17 +49,17 @@
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        $("#daftarVaksinForm").change(function () {
+        $("#id_kota").change(function () {
             var url = $("#daftarVaksinForm").attr("tempat-url");  // get the url of the `load_cities` view
             var kotaId = $(this).val();  // get the selected country ID from the HTML input
 
             $.ajax({                       // initialize an AJAX request
                 url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
                 data: {
-                    'kotaId': kotaId       // add the country id to the GET parameters
+                    'kota': kotaId       // add the country id to the GET parameters
                 },
                 success: function (data) {   // `data` is the return of the `load_cities` view function
-                    $("#tempat").html(data);  // replace the contents of the city input with the data that came from the server
+                    $("#id_tempat").html(data);  // replace the contents of the city input with the data that came from the server
                 }
             });
 
