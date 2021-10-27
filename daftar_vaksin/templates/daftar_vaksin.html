@@ -15,7 +15,7 @@
             <h1>DAFTAR VAKSIN</h1>
         </div>
         <div class="input-container">
-            <form method="POST" action="">
+            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" novalidate>
                 {%csrf_token%}
                 <div class="input">
                     <label for="">Kota</label>
@@ -32,7 +32,7 @@
                     <br>
                     {{form.jenis_vaksin}}
                 </div>
-                <div class="input">
+                <div class="input" id="tempat">
                     <label for="">Tempat</label>
                     <br>
                     {{form.tempat}}
@@ -47,5 +47,23 @@
         </div>
     </div>
     
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $("#daftarVaksinForm").change(function () {
+            var url = $("#daftarVaksinForm").attr("tempat-url");  // get the url of the `load_cities` view
+            var kotaId = $(this).val();  // get the selected country ID from the HTML input
+
+            $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                data: {
+                    'kotaId': kotaId       // add the country id to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_cities` view function
+                    $("#tempat").html(data);  // replace the contents of the city input with the data that came from the server
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>

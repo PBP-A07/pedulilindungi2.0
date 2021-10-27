@@ -1,7 +1,8 @@
 from django import forms
 from django.db.models import fields
-from django.forms import ModelForm, CharField, DateField, TimeField
+from django.forms import ModelForm, CharField, DateField, TimeField, widgets
 from .models import JadwalVaksin
+from biodata.models import Penyedia
 
 KOTA = []
 JENIS_VAKSIN = []
@@ -9,26 +10,29 @@ TANGGAL = []
 TEMPAT = []
 WAKTU = []
 
-# class DropdownChar(CharField):
-#     input_type = 'text'
-
-# class DropdownDate(DateField):
-#     input_type = 'date'
-
-# class DropdownTime(TimeField):
-#     input_type = 'time'
-
 class DaftarVaksinForm(ModelForm):
-    # kota = forms.Select(choices=KOTA)
-    # tanggal = forms.Select(choices=TANGGAL)
-    # jenis_vaksin = forms.Select(JENIS_VAKSIN)
-    # tempat = forms.Select(TEMPAT)
-    # waktu = forms.Select(WAKTU)
+    kota = forms.ModelChoiceField(queryset=Penyedia.objects.order_by('kota').values_list('kota', flat=True).distinct())
+
     class Meta:
         model = JadwalVaksin
-        fields = ['kota', 'tanggal', 'jenis_vaksin', 'tempat', 'waktu']
-    #     widgets = {'kota': DropdownChar(attrs={'placeholder': 'Kota Tempat Vaksin'}, widget=forms.Select(choices=KOTA)),
-    #                'tanggal': DropdownChar(attrs={'placeholder': 'Tanggal Vaksinasi'}, widget=forms.Select(choices=TANGGAL)), 
-    #                'jenis_vaksin': DropdownChar(attrs={'placeholder': 'Jenis Vaksin'}, widget=forms.Select(JENIS_VAKSIN)), 
-    #                'tempat': DropdownChar(attrs={'placeholder': 'Tempat Vaksinasi'}, widget=forms.Select(TEMPAT)),
-    #                'waktu': DropdownChar(attrs={'placeholder': 'Waktu Vaksinasi'}, widget=forms.Select(WAKTU))}
+        fields = ('kota', 'tanggal', 'jenis_vaksin', 'tempat', 'waktu')
+        # widgets = {
+        #     'kota': forms.ModelChoiceField(queryset=Penyedia.objects.order_by('kota').values_list('kota', flat=True).distinct())
+        # }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields['kota'].queryset = Penyedia.objects.all().values_list('kota', flat=True)
+        # self.fields['tanggal'].queryset = Penyedia.objects.none().values_list('tanggal', flat=True)
+        # self.fields['jenis_vaksin'].queryset = Penyedia.objects.none().values_list('jenis_vaksin', flat=True)
+        self.fields['tempat'].queryset = Penyedia.objects.none().values_list('namaInstansi', flat=True)
+        # self.fields['waktu'].queryset = Penyedia.objects.none().values_list('waktu', flat=True)
+
+        if 'kota' in self.data:
+            try:
+                kota_get = self.data.get(kota='kota')
+                self.fields['tempat'].queryset = Penyedia.objects.filter(kota_get=kota_get).values_list('namaInstansi', flat=True).distinct()
+            except (ValueError, TypeError):
+                pass
+        elif self.instance.pk:
+            self.fields['tempat'].queryset = self.instance.kota.namaInstansi_set

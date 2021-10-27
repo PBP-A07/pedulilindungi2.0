@@ -29,6 +29,7 @@ $(document).ready(function () {
                 jenisKelamin: $('#gender').val(),
                 nomorHandphone: $('#hp').val(),
                 alamat: $('#address').val(),
+                superUser: $('#id_superUser').val(),
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
             },
            
