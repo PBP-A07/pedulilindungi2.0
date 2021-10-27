@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 class Peserta(models.Model):
     namaLengkap = models.CharField(max_length=25)
-    NIK = models.IntegerField()
+    NIK = models.IntegerField(unique=True)
     tanggalLahir = models.DateField()
     jenisKelamin = models.CharField(max_length=10)
     nomorHandphone = models.IntegerField()

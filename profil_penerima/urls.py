@@ -1,6 +1,7 @@
 from django.urls import include, path
-from .views import view_profile
+from .views import view_profile, logout_account
 
 urlpatterns = [
-    path('', view_profile, name='view_profile'),
+    path('user/<usn>', view_profile, name='view_profile'),
+    path('logout', logout_account, name='logout_account'),
 ]
