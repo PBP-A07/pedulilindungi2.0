@@ -20,6 +20,7 @@ import biodata.urls as biodata
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
+    path('profile/', include('profil_penerima.urls')),
     path('biodata/', include('biodata.urls')),
     path('auth/', include('account.urls')),
 ]
