@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>Profil Penyedia | PeduliLindungi2.0</title>
+
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder"></div>
+
+    <div class="main">
+        <div class="header">
+            <h1>PROFIL PENYEDIA</h1>
+            <div class="edit-btn">
+                <a href="#" class="edit-btn-txt">Ubah Data</a>
+                <span class="material-icons" style="color: #3561FF;">mode_edit</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="data">
+                    <h5>NAMA INSTANSI</h5>
+                    <p>(Penyedia.NamaInstansi)</p>
+                </div>
+                <div class="data">
+                    <h5>KOTA</h5>
+                    <p>(Penyedia.Kota)</p>
+                </div>
+                <div class="data">
+                    <h5>NOMOR TELEPON</h5>
+                    <p>(Penyedia.NomorTelepon)</p>
+                </div>
+                <div class="data">
+                    <h5>ALAMAT</h5>
+                    <p>(Penyedia.Alamat)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="button-primary-icon">
+                <span class="material-icons" style="color: white;">people</span>
+                <p>Lihat Pendaftar</p>
+            </button>
+        </div>
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+</html>
