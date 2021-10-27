@@ -15,10 +15,11 @@ class Peserta(models.Model):
     superUser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 class Penyedia(models.Model):
-    namaInstansi = models.CharField(max_length=50)
+    namaInstansi = models.CharField(max_length=50, unique=True)
     kota = models.CharField(max_length=20)
     nomorTelepon = models.IntegerField()
     alamat = models.CharField(max_length=100)
+    superUser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 @receiver(post_save, sender=User)
 def create_user_penyedia(sender, instance, created, **kwargs):
