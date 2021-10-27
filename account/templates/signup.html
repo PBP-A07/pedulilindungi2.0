@@ -17,15 +17,17 @@
       <form action="" method="POST">
           {% csrf_token %}
           {{ form.as_p }}
-          <button id = "email-checker" >
-              Email availability check
-          </button>
-          <input type="submit" value="Submit">
+          <input id="submit" type="submit" value="Submit">
       </form>
 
+      <!-- AJAX -->
       <script>
-          $("#email-checker").click(function () {
+         var changeTimer = false;
+        $("#id_email").on("change",function(){
             let email_ajax = $("#id_email").val()
+            if(changeTimer !== false) clearTimeout(changeTimer);
+            changeTimer = setTimeout(function(){
+                /* your ajax here */   
             $.ajax({
                 type: 'POST',
                 url: `email_compare`,
@@ -35,14 +37,17 @@
                 'email': email_ajax
                 },
                 success: function (response) {
-                // kita kosongin inputnya lagi abis berhasil nembak
-                    alert("Berhasil bosqu")
+                // Ubah tombol submit jadi active.
+                    $("#submit").prop('disabled', false);
+                        
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.responseText);
+                    $("#submit").prop('disabled', true);
                 }
             })
-        })
+                changeTimer = false;
+            },300);
+        });
       </script>
   </body>
 </html>

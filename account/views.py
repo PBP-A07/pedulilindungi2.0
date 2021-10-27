@@ -69,9 +69,7 @@ def email_compare(request):
 
     if request.is_ajax():
         email = request.POST.get("email")
-        print(email)
         for user in users:
             if email == user.profile.email:
-                print("Masuk pak eko")
                 return JsonResponse({"error": "Maaf, email tersebut sudah terdaftar di database."}, status=400)
     return JsonResponse({"success": "Email tersebut dapat digunakan."}, status=200)
