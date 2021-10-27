@@ -2,7 +2,7 @@ from django.http.response import HttpResponseRedirect, HttpResponseForbidden
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from biodata.models import Penyedia
-from .forms import EditPenyediaForm
+# from .forms import EditPenyediaForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
