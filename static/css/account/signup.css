@@ -30,7 +30,7 @@
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-  width: 420px;
+  width: 400px;
   height: 30px;
 }
 
@@ -43,7 +43,7 @@ input[type="email"] {
 
 #email-notif {
   text-align: center;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 16;
   font-family: "Poppins", sans-serif;
 }
@@ -60,12 +60,14 @@ input[type="email"] {
   padding-bottom: 25px;
   font-weight: 400;
   border-radius: 12px;
+  width: 100%;
 }
 
 #id_role_choice {
   display: flex;
   gap: 32px;
   justify-content: flex-end;
+  flex-grow: 3;
 }
 
 #kembali {
@@ -120,6 +122,16 @@ li::marker {
   color: rgba(0, 0, 0, 0);
 }
 
+li {
+  font-size: 16;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 12px;
+  color: #d60000;
+}
+
 label {
+  font-size: 14;
   font-weight: 400;
+  color: black;
 }

@@ -20,7 +20,7 @@
   <body>
     <div id="anchor">
       <h2>Log In</h2>
-      <div class="form-container">
+      <div class="form-container" style="width: 420px">
         <form action="" method="POST">
           {% csrf_token %}
           <div class="input-box" name="username" style="margin-top: 40px">
@@ -43,6 +43,9 @@
           <div class="register">
             <p>Belum punya akun? <a href="/auth/">Register</a></p>
           </div>
+          {% for message in messages %}
+          <div id="error">{{ message }}</div>
+          {% endfor %}
           <div class="buttons">
             <input
               class="auth-button"

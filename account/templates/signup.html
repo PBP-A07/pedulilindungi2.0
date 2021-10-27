@@ -23,7 +23,7 @@
   <body>
     <div id="anchor">
       <h2>Sign Up</h2>
-      <div class="form-container">
+      <div class="form-container" style="width: 420px">
         <form action="" method="POST">
           {% csrf_token %}
           <div class="input-box" name="username" style="margin-top: 40px">
@@ -32,7 +32,7 @@
           <div class="input-box" name="password1">{{ form.password1 }}</div>
           <div class="input-box" name="password2">{{ form.password2 }}</div>
           <div class="input-box" name="email">{{ form.email }}</div>
-          <div style="display: flex">
+          <div style="display: flex; width: 100%">
             <p>Saya adalah</p>
             {{ form.role_choice }}
           </div>
@@ -42,6 +42,8 @@
           <div id="email-notif">
             <p id="email-notif-p"></p>
           </div>
+          <!-- Agar tidak memunculkan error jika semua field belum diisi (jika baru membuka laman signup) -->
+          {% if form.errors|length < 5 %} {{ form.errors }} {% endif %}
           <div class="buttons">
             <input
               class="auth-button"
@@ -91,11 +93,13 @@
               $("#submit").prop("disabled", false);
               document.getElementById("email-notif").innerText =
                 "Email dapat digunakan.";
+              document.getElementById("email-notif").style.color = "#3836c9";
             },
             error: function (xhr, ajaxOptions, thrownError) {
               $("#submit").prop("disabled", true);
               document.getElementById("email-notif").innerText =
                 "Email tidak dapat digunakan.";
+              document.getElementById("email-notif").style.color = "#d60000";
             },
           });
           changeTimer = false;

@@ -29,10 +29,11 @@
 
 input[type="text"],
 input[type="password"] {
-  width: 420px;
+  width: 400px;
   height: 55px;
   padding-left: 30px;
   border-radius: 12px;
+  width: 100%;
 }
 
 #anchor {
@@ -59,6 +60,15 @@ input[type="password"] {
 
 #submit:hover {
   background: #3836c9;
+}
+
+#error {
+  font-size: 16;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 12px;
+  color: #d60000;
+  text-align: center;
 }
 
 ::-webkit-input-placeholder {
