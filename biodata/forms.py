@@ -13,7 +13,7 @@ class DateInput(forms.DateInput):
 class PesertaForm (forms.ModelForm):
 	class Meta:
 		model = Peserta
-		fields = "__all__"
+		fields = ['namaLengkap','NIK','tanggalLahir','jenisKelamin','nomorHandphone','alamat']
 		widgets = {
             'namaLengkap': forms.TextInput(attrs={'placeholder': 'Masukkan nama lengkap kamu', 
                     'class' : 'inputan d-flex flex-column w-100 p-2 my-1', 'id' : 'fullName'}),

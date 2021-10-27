@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>User Profile</title>
+
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/main.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/button.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/reminders.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+        <script>
+        </script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder"></div>
+
+    <div class="main">
+        <div class="headers">
+            <h1>PROFIL PENGGUNA</h1>
+            <div class="small-btn">
+                <a href="#" class="edit-btn-txt">Ubah Data</a>
+                <span class="material-icons" style="color: #3561FF;">mode_edit</span>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <div class="rows">
+                <div class="data">
+                    <h5>NIK</h5>
+                    <p>{{ penerima.NIK }}</p>
+                </div>
+                <div class="data">
+                    <h5>NAMA LENGKAP</h5>
+                    <p>{{ penerima.namaLengkap }}</p>
+                </div>
+                <div class="data">
+                    <h5>EMAIL</h5>
+                    <p>{{ user.email }}</p>
+                </div>
+                <div class="data">
+                    <h5>ALAMAT</h5>
+                    <p>{{ penerima.alamat }}</p>
+                </div>
+            </div>
+
+            <div class="rows">
+                <div class="data">
+                    <h5>NOMOR HANDPHONE</h5>
+                    <p>{{ penerima.nomorHandphone }}</p>
+                </div>
+                <div class="data">
+                    <h5>TANGGAL LAHIR</h5>
+                    <p>{{ penerima.tanggalLahir }}</p>
+                </div>
+                <div class="data">
+                    <h5>JENIS KELAMIN</h5>
+                    <p>{{ penerima.jenisKelamin }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="btn-container">
+            <button class="button-primary-icon">
+                <span class="material-icons" style="color: white;">credit_card</span>
+                <p>Lihat Tiket Vaksin</p>
+            </button>
+        </div>
+        <div class="btn-container">
+            <button class="button-primary-icon" style="background-color: #FF2222;" id="logoutBtn" onclick="location.href = '/profile/logout'">
+                <span class="material-icons" style="color: white;">logout</span>
+                <p>Logout</p>
+            </button>
+        </div>
+
+        <div class="main-notes-container">
+            <div class="notes-container-header">
+                <h2>CATATAN PENGINGAT</h2>
+                <p>Butuh catatan sebagai pengingat untuk dirimu?</p>
+                <p>Buat dan simpan catatanmu di sini!</p>
+            </div>
+            <div class="notes-content">
+                <h3>JUDUL NOTES</h3>
+                <p>Konten Dari Notes. Isinya Lorem Ipsum</p>
+                <div class="small-btn-container">
+                    <div class="small-btn">
+                        <a href="#" class="edit-btn-txt">Ubah Catatan</a>
+                        <span class="material-icons" style="color: #3561FF;">mode_edit</span>
+                    </div>
+                    <div class="small-btn">
+                        <a href="#" class="delete-btn-txt">Hapus Catatan</a>
+                        <span class="material-icons" style="color: #FF2222;">delete_forever</span>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="button-secondary">Tambah Catatan Baru</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+
+</html>
