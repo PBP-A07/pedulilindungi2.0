@@ -23,9 +23,6 @@ def view_profile(request, usn):
         return HttpResponseBadRequest()
     
     user = User.objects.get(username = request.user.username).profile
-    print(request.user.profile)
-    print(request.user)
-    # penerima = Peserta.objects.get(NIK = user.nik)
-    # 'penerima':penerima
+    penerima = Peserta.objects.get(superUser = request.user)
 
-    return render(request, 'profile.html', {'user':user, })
+    return render(request, 'profile.html', {'user':user, 'penerima':penerima})
