@@ -1,4 +1,4 @@
-.button-primary, .button-secondary, .button-primary-icon {
+.button-primary, .button-secondary, .button-primary-icon, .button-primary-icon-danger {
     font-weight: bold;
     background-color: #3561FF; /* Green */
     border: none;
@@ -11,24 +11,34 @@
     border-radius: 8px;
 }
 
-.button-primary-icon {
+.button-primary-icon, .button-primary-icon-danger {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.button-primary-icon p {
+.button-primary-icon-danger {
+    background-color: #FF2222;
+}
+
+.button-primary-icon p,.button-primary-icon-danger p {
     margin: 0;
 }
 
 .button-secondary {
-    background-color: white; /* Green */
+    background-color: white;
     border: 2px solid #3561FF;
     color: #3561FF;
 }
   
 .button-primary:hover, .button-secondary:hover, .button-primary-icon:hover {
-    background-color: #113DDB; /* Green */
+    background-color: #113DDB;
+    color: white;
+    cursor: pointer;
+}
+
+.button-primary-icon-danger:hover {
+    background-color: #C91A1A;
     color: white;
     cursor: pointer;
 }
@@ -37,6 +47,14 @@
     display: flex;
     justify-content: center;
     padding: 30px 60px;
+}
+
+.btn-container-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 30px 60px;
+    gap: 40px 40px;
 }
 
 .small-btn-container {
@@ -59,6 +77,7 @@
     text-decoration: none;
     margin: 8px 0px;
     padding: 4px 4px 4px 0px;
+    cursor: pointer;
 }
 
 .delete-btn-txt {

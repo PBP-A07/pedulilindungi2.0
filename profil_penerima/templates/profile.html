@@ -11,18 +11,88 @@
         <link rel="stylesheet" href="{% static 'css/profil_penerima/main.css' %}" />
         <link rel="stylesheet" href="{% static 'css/profil_penerima/button.css' %}" />
         <link rel="stylesheet" href="{% static 'css/profil_penerima/reminders.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/modal.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/forms.css' %}" />
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <script>
+            const editbtn = [];
+            const delbtn = [];
+
+            $(document).ready(function(){
+                $.ajax({
+                    url: "/profil-penerima/get-msg", 
+                    success: function(result){
+                        // there are Messages to Display
+                        if(result.id == undefined){
+                            for(i=0; i < result.length; i++){
+                                console.log(result)
+                                editbtn[i] = ('<div class="small-btn"><a onclick="editFunction(this)" id="' + result[i].pk + '" class="edit-btn-txt">Ubah Catatan</a><span class="material-icons" style="color: #3561FF;">mode_edit</span></div>');
+                                delbtn[i] = ('<div class="small-btn"><a onclick="deleteFunction(this)" id="' + result[i].pk + '" class="delete-btn-txt">Hapus Catatan</a><span class="material-icons" style="color: #FF2222;">delete_forever</span></div>');
+
+                                $(".main-notes-container").append(
+                                    '<div class="notes-content" id="row'+result[i].pk+'">'+
+                                        "<h3>"+result[i].fields.msg_title+"</h3>"+
+                                        "<p>"+result[i].fields.msg_message+"</p>"+
+                                        '<div class="small-btn-container">'+editbtn[i]+delbtn[i]+"</div"+
+                                    "</div>"
+                                );
+                            }
+                        }
+                        // there are NO messages
+                        else{
+                            console.log("No Messages to Show") 
+                        }       
+                }});
+            });
+
+            function showLogoutModal() {
+                $(function(){
+                    $(".modal-placeholder").load("/profil-penerima/logout");
+                });
+            }
+
+            function showAddMessageModal() {
+                $(function(){
+                    $(".modal-placeholder").load("/profil-penerima/notes/add");
+                });
+            }
+
+            function editFunction(elem) {
+                $(function(){
+                    console.log("Pressed")
+                });
+            }
+
+            function deleteFunction(elem) {
+                $(function(){
+                    $(".modal-placeholder").load("/profil-penerima/notes/delete/"+elem.id);
+                    console.log("Pressed")
+
+                    // $.ajax({
+                    //     url: "/profil-penerima/notes/delete/confirm"+elemID, 
+                    //     success: function(result){
+                    //         var tdElements = rowElement.getElementsByTagName("td");
+                    //         console.log(tdElements[0].innerHTML);
+                    //         console.log(result[0].fields.msg_to);
+                    //         tdElements[0].innerHTML = result[0].fields.msg_to;
+                    //         tdElements[1].innerHTML = result[0].fields.msg_from;
+                    //         tdElements[2].innerHTML = result[0].fields.msg_title;     
+                    // }});
+                });
+            }
+
         </script>
 
     </head>
 <body>
 
     <div class="navbar-placeholder"></div>
+    <div class="modal-placeholder"></div>
 
     <div class="main">
         <div class="headers">
@@ -78,7 +148,7 @@
             </button>
         </div>
         <div class="btn-container">
-            <button class="button-primary-icon" style="background-color: #FF2222;" id="logoutBtn" onclick="location.href = '/profile/logout'">
+            <button class="button-primary-icon-danger" id="logoutBtn" onclick="showLogoutModal()">
                 <span class="material-icons" style="color: white;">logout</span>
                 <p>Logout</p>
             </button>
@@ -90,22 +160,8 @@
                 <p>Butuh catatan sebagai pengingat untuk dirimu?</p>
                 <p>Buat dan simpan catatanmu di sini!</p>
             </div>
-            <div class="notes-content">
-                <h3>JUDUL NOTES</h3>
-                <p>Konten Dari Notes. Isinya Lorem Ipsum</p>
-                <div class="small-btn-container">
-                    <div class="small-btn">
-                        <a href="#" class="edit-btn-txt">Ubah Catatan</a>
-                        <span class="material-icons" style="color: #3561FF;">mode_edit</span>
-                    </div>
-                    <div class="small-btn">
-                        <a href="#" class="delete-btn-txt">Hapus Catatan</a>
-                        <span class="material-icons" style="color: #FF2222;">delete_forever</span>
-                    </div>
-                </div>
-            </div>
             <div class="btn-container">
-                <button class="button-secondary">Tambah Catatan Baru</button>
+                <button class="button-secondary" onclick="showAddMessageModal()">Tambah Catatan Baru</button>
             </div>
         </div>
 
