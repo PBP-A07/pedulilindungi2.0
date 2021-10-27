@@ -54,6 +54,7 @@ class PenerimaForm(forms.ModelForm):
         widgets = {
             'tanggalLahir': DateInput(),
             'jenisKelamin': forms.Select(choices = GENDER_CHOICES),
+            'nomorHandphone': forms.TextInput(attrs={'type':"text", 'pattern':"[0-9]*", 'maxlength': 12, 'minlength': 11}),
         }
 
 class UserForm(forms.ModelForm):
