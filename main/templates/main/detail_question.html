@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        {% block meta %}
+        <title>Question | PeduliLindungi2.0</title>
+        {% endblock meta %}
+        <link rel="stylesheet" href="{% static 'home.css' %}">
+    </head>
+
+    <body>
+        {% block content %}
+            <!-- {% include 'main/header.html' %} -->
+
+            
+            <h2 class="hi">{{question.title}}</h2>
+            <p class="hi">{{question.author}}</p>
+            <p class="hi">{{question.body}}</p>
+
+            <div class="responses-container">
+                {%  if not question.responses.all %} 
+                <p>Belum ada jawaban</p>
+                {% else %}
+                {% for response in question.get_responses %}
+                    {% include 'main/components/response.html' with response=response %}
+    
+                {% endfor %}
+                {% endif %}
+            </div>
+
+
+           
+            <form method="POST" action="" class="response-form">
+                {% csrf_token %}
+                {{ response_form.as_p }}
+                <input type="submit"> 
+               
+            </form>
+            <a href="../../#forum"><button>Kembali</button></a>
+        {% endblock %}
+    </body>

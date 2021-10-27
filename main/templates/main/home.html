@@ -1,11 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block meta %}
-<title>Hello, world!</title>
-{% endblock meta %}
+<!DOCTYPE html>
 
-{% block content %}
-  <h1>Hello, world!</h1>
-  <p><img src="{% static 'img/django-logo-negative.svg' %}"></p>
-{% endblock content %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    {% block meta %}
+    <title>Homepage | PeduliLindungi2.0</title>
+    {% endblock meta %}
+</head>
+
+<body>
+    {% block content %}
+    {% include 'main/header.html' %}
+    
+    <section class="landing">
+        <center>
+            <div class="container">
+                <div class="title">
+                    <h1 class="top">Selamat Datang di</h1>
+                    <h1 class="bottom">PeduliLindungi2.0</h1>
+                </div>
+                <a href='auth'><button type="button" class="btn btn-outline-primary">Sign Up</button></a>
+                <a href="/auth/login"><button type="button" class="btn btn-primary">Log In</button></a>
+            </div>
+        </center>
+    </section>
+    
+    <section class="about">
+        <div class="about-text">
+            <h2>Tentang PeduliLindungi2.0</h2>
+            <p>Pedulilindungi2.0 merupakan bentuk partisipasi kami terhadap Proyek Tengah Semester PBP yang bertujuan untuk mengumpulkan semua penyelenggara vaksin ke dalam satu website sehingga masyarakat dapat lebih mudah untuk melihat daftar-daftar vaksin dan waktu vaksin yang tersedia.</p>
+        </div>
+        <div class="about-img">
+            <p><img src="{% static 'img/django-logo-negative.svg' %}"></p>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <div class="template">
+                <h2>Frequently Asked Question</h2>
+                <p class="question">Apa yang harus saya siapkan</p>
+                <p class="answer">Yaaa itu</p>
+                <p class="question">Apa yang harus saya siapkan</p>
+                <p class="answer">Yaaa itu jadi kamu harus menyiapkan blablabla yaa foahwefoa ieghewih eghweoif ewiofhewo ifhaeig hawioegh woeigh weoighweoig hewoighew ogihweiogh weogihew oighewiogh ewog hewogiwhe goewi</p>
+                <p class="question">Apa yang harus saya siapkan</p>
+                <p class="answer">Yaaa itu</p>
+                <p class="question">Apa yang harus saya siapkan</p>
+                <p class="answer">Yaaa itu</p>
+                <p class="question">Apa yang harus saya siapkan</p>
+                <p class="answer">Yaaa itu</p>
+            </div>
+            <div class="to-forum">
+                <p>Ingin tahu lebih dalam?</p>
+                <p>
+                    <a href="auth/login">Masuk</a>dan tanyakan pertanyaanmu di<a href="#forum">forum</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    
+    {% endblock content %}

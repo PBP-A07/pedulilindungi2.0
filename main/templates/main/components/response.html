@@ -1,0 +1,48 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<blockquote id="{{response.id}}" style="margin-left: 50px;">
+    <p class="response-body">
+        {{response.body}}
+    </p>
+    <small>
+        {{response.author}}
+    </small>
+
+    <button id="{{response.id}}" class="reply-button" onclick="handleReplyButton(this.id)">Jawab</button>
+
+    <blockquote id="reply-form-container-{{response.id}}" class="reply-form-container" style="margin-left: 50px;">
+        <form method="POST" action="/reply" class="reply">
+            {% csrf_token %}
+            <input type="hidden" name="question" value={{question.id}}>
+            <input type="hidden" name="parent" value={{response.id}}>
+            {{ reply_form.as_p }}
+            <button id="{{response.id}}" onclick="handleCancelButton(this.id)">Batal</button>
+            <input type="submit">
+
+
+        </form>
+    </blockquote>
+
+    {% for child in response.get_responses %}
+        {% include 'main/components/response.html' with response=child %}
+    {% endfor %}
+
+</blockquote>
+
+<script>
+function handleReplyButton(responseid) {
+    // window.alert(responseid);
+    const replyFormContainer = document.getElementById('reply-form-container-' + responseid);
+    // window.alert('reply-form-container-' + responseid);
+    if (replyFormContainer) {
+        replyFormContainer.className = "reply-form-container-enabled"
+    }
+}
+function handleCancelButton(responseid) {
+    const replyFormContainer = document.getElementById('reply-form-container-' + responseid);
+    // window.alert('reply-form-container-' + responseid);
+    if (replyFormContainer) {
+        replyFormContainer.className = "reply-form-container"
+    }
+}
+</script>
