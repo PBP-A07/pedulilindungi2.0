@@ -32,8 +32,10 @@
           <div class="input-box" name="password1">{{ form.password1 }}</div>
           <div class="input-box" name="password2">{{ form.password2 }}</div>
           <div class="input-box" name="email">{{ form.email }}</div>
-          <p>Saya adalah</p>
-          {{ form.role_choice }}
+          <div style="display: flex">
+            <p>Saya adalah</p>
+            {{ form.role_choice }}
+          </div>
           <div class="register">
             <p>Sudah punya akun? <a href="/auth/login/">Login</a></p>
           </div>

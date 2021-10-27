@@ -14,7 +14,7 @@
 
 .auth-button {
   height: 50px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
@@ -48,36 +48,9 @@ input[type="email"] {
   font-family: "Poppins", sans-serif;
 }
 
-#id_username {
-  padding-left: 30px;
-  font-family: "Poppins", sans-serif;
-  font-size: 16;
-  font-weight: 300;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  font-weight: 400;
-}
-
-#id_password1 {
-  padding-left: 30px;
-  font-family: "Poppins", sans-serif;
-  font-size: 16;
-  font-weight: 300;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  font-weight: 400;
-}
-
-#id_password2 {
-  padding-left: 30px;
-  font-family: "Poppins", sans-serif;
-  font-size: 16;
-  font-weight: 300;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  font-weight: 400;
-}
-
+#id_username,
+#id_password1,
+#id_password2,
 #id_email {
   padding-left: 30px;
   font-family: "Poppins", sans-serif;
@@ -86,11 +59,18 @@ input[type="email"] {
   padding-top: 25px;
   padding-bottom: 25px;
   font-weight: 400;
+  border-radius: 12px;
+}
+
+#id_role_choice {
+  display: flex;
+  gap: 32px;
+  justify-content: flex-end;
 }
 
 #kembali {
   margin-top: 22px;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
   background: #ff0000;
 }
 
@@ -121,8 +101,9 @@ input[type="email"] {
   padding-bottom: 25px;
   font-weight: 400;
 }
+
 h2 {
-  margin-top: 30px;
+  margin-top: 25px;
   font-size: 36;
   font-weight: 700;
   font-family: "Poppins", sans-serif;
@@ -137,4 +118,8 @@ p {
 
 li::marker {
   color: rgba(0, 0, 0, 0);
+}
+
+label {
+  font-weight: 400;
 }

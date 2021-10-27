@@ -14,7 +14,7 @@
 
 .auth-button {
   height: 50px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
@@ -27,10 +27,12 @@
   text-align: center;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   width: 420px;
   height: 55px;
   padding-left: 30px;
+  border-radius: 12px;
 }
 
 #anchor {
@@ -42,7 +44,7 @@ input[type="text"] {
 
 #kembali {
   margin-top: 22px;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
   background: #ff0000;
 }
 
@@ -69,7 +71,7 @@ input[type="text"] {
 }
 
 h2 {
-  margin-top: 30px;
+  margin-top: 25px;
   font-size: 36;
   font-weight: 700;
   font-family: "Poppins", sans-serif;
