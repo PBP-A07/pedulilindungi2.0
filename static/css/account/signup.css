@@ -1,0 +1,139 @@
+/* Font size: 300, 400 & 500 & 700 */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
+
+.input-box {
+  background-color: white;
+  margin-bottom: 21px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.auth-button {
+  height: 64px;
+  border-radius: 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.register {
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 420px;
+  height: 30px;
+}
+
+#anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#email-notif {
+  text-align: center;
+  font-weight: 400;
+  font-size: 16;
+  font-family: "Poppins", sans-serif;
+}
+
+#id_username {
+  padding-left: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16;
+  font-weight: 300;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-weight: 400;
+}
+
+#id_password1 {
+  padding-left: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16;
+  font-weight: 300;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-weight: 400;
+}
+
+#id_password2 {
+  padding-left: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16;
+  font-weight: 300;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-weight: 400;
+}
+
+#id_email {
+  padding-left: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16;
+  font-weight: 300;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-weight: 400;
+}
+
+#kembali {
+  margin-top: 22px;
+  margin-bottom: 70px;
+  background: #ff0000;
+}
+
+#submit {
+  background: #4945ff;
+  margin-top: 20px;
+}
+
+#kembali:hover {
+  background: #d60000;
+}
+
+#submit:hover {
+  background: #3836c9;
+}
+
+#submit:disabled,
+#submit[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+::-webkit-input-placeholder {
+  font-family: "Poppins", sans-serif;
+  font-size: 16;
+  font-weight: 300;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-weight: 400;
+}
+h2 {
+  margin-top: 30px;
+  font-size: 36;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+}
+
+p {
+  font-size: 16;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
+
+li::marker {
+  color: rgba(0, 0, 0, 0);
+}

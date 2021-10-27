@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css\account\signup.css' %}" />
 
     <title>Sign Up</title>
   </head>
@@ -26,28 +26,50 @@
       <div class="form-container">
         <form action="" method="POST">
           {% csrf_token %}
-          <div class="input-box" name="username" style="margin-top: 90px">
+          <div class="input-box" name="username" style="margin-top: 40px">
             {{ form.username }}
           </div>
           <div class="input-box" name="password1">{{ form.password1 }}</div>
           <div class="input-box" name="password2">{{ form.password2 }}</div>
           <div class="input-box" name="email">{{ form.email }}</div>
-          <div id="email-notif">
-            <p></p>
+          <p>Saya adalah</p>
+          {{ form.role_choice }}
+          <div class="register">
+            <p>Sudah punya akun? <a href="/auth/login/">Login</a></p>
           </div>
-          <input
-            class="auth-button"
-            id="submit"
-            type="submit"
-            value="SIGN UP"
-          />
-          <button class="auth-button">Kembali</button>
+          <div id="email-notif">
+            <p id="email-notif-p"></p>
+          </div>
+          <div class="buttons">
+            <input
+              class="auth-button"
+              id="submit"
+              type="submit"
+              value="SIGN UP"
+            />
+            <input
+              id="kembali"
+              class="auth-button"
+              type="submit"
+              value="Kembali"
+            />
+          </div>
         </form>
       </div>
     </div>
 
-    <!-- AJAX -->
     <script>
+      // Untuk mengisi placeholder dari fields.
+      $("document").ready(function () {
+        $("#id_username").attr("placeholder", "Masukkan username di sini.");
+        $("#id_password1").attr("placeholder", "Masukkan password di sini.");
+        $("#id_password2").attr(
+          "placeholder",
+          "Masukkan ulang password di sini."
+        );
+        $("#id_email").attr("placeholder", "Masukkan email di sini.");
+      });
+      // AJAX.
       var changeTimer = false;
       $("#id_email").on("change", function () {
         let email_ajax = $("#id_email").val();
