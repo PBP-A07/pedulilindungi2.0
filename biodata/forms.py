@@ -43,7 +43,7 @@ class PesertaForm (forms.ModelForm):
 class PenyediaForm (forms.ModelForm):
 	class Meta:
 		model = Penyedia
-		fields = "__all__"
+		fields = ['namaInstansi', 'kota', 'nomorTelepon', 'alamat']
 		widgets = {
             'namaInstansi': forms.TextInput(attrs={'placeholder': 'Masukkan nama instansi kamu', 
                         'class' : 'inputan d-flex flex-column w-100 p-2','id' : 'instansi'}),

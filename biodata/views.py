@@ -19,26 +19,27 @@ def biodata_peserta(request):
     return render(request, "peserta_form.html", context)
 
 # @login_required(login_url='/admin/login/')
+@login_required(login_url='/auth/login/')
 def biodata_penyedia(request):
     context ={}
   
     # create object of form
     form = PenyediaForm(request.POST or None, label_suffix="") # label_suffix="" -> ilangin titik-dua (:) untuk field
       
-    # check if form data is valid
-    if (form.is_valid and request.method == 'POST'):
-        # save the form data to model
-        form.save()
+    # # check if form data is valid
+    # if (form.is_valid and request.method == 'POST'):
+    #     # save the form data to model
+    #     form.save()
 
-        # Get data from forms.
-        instansi = form.cleaned_data.get("namaInstansi")
-        kota = form.cleaned_data.get("kota")
-        telepon = form.cleaned_data.get("nomorTelepon")
-        alamat = form.cleaned_data.get("alamat")
+    #     # Get data from forms.
+    #     instansi = form.cleaned_data.get("namaInstansi")
+    #     kota = form.cleaned_data.get("kota")
+    #     telepon = form.cleaned_data.get("nomorTelepon")
+    #     alamat = form.cleaned_data.get("alamat")
 
-        # update_profile_penyedia(request, request.user.username, instansi, kota, telepon, alamat)
+    #     # update_profile_penyedia(request, request.user.username, instansi, kota, telepon, alamat)
 
-        return HttpResponseRedirect('/biodata')
+    #     return HttpResponseRedirect('/biodata')
   
     context['form']= form
     return render(request, "penyedia_form.html", context)
@@ -84,13 +85,16 @@ def ajax_posting_penyedia(request):
         kota = request.POST['kota'] 
         nomorTelepon = request.POST['nomorTelepon']
         alamat = request.POST['alamat']
+        # Updated Here: Added superUser
+        superUser = request.user.username
         
-        if namaInstansi and kota and nomorTelepon and alamat:
+        if namaInstansi and kota and nomorTelepon and alamat and superUser:
             Penyedia.objects.create(
                 namaInstansi = namaInstansi, 
                 kota = kota,
                 nomorTelepon = nomorTelepon,
-                alamat = alamat
+                alamat = alamat,
+                superUser = User.objects.get(username=superUser),
             )
 
             response = {
