@@ -7,7 +7,7 @@
         <span class="close-white">&times;</span>
       </div>
       <div class="modal-body">
-          <form class="form" action="" method="POST" id="renameForm">
+          <form class="form" action="" method="POST" id="createForm">
           {% csrf_token %}
           {{ form.as_p }}
           <input type="submit" value="CREATE" class="button-primary" id="submitbtn">
@@ -41,7 +41,7 @@
                 url: '/profil-penerima/notes/add',
                 type: 'POST',
                 dataType: 'json',
-                data: $('form#renameForm').serialize(),
+                data: $('form#createForm').serialize(),
                 success: function (data) {
                     modal.style.display = "none";
                     $("#modal-placeholder").empty();

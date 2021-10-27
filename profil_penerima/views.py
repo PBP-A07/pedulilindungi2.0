@@ -54,6 +54,9 @@ def get_message(request):
 def create_message(request):
     form = MessageForm(request.POST or None)
 
+    if request.user.profile.role != 'penerima':
+        return HttpResponseForbidden()
+
     if (form.is_valid() and request.method == 'POST'):
         # save the form data to model
         tempMsgObj = form.save(commit=False)
@@ -70,6 +73,10 @@ def create_message(request):
 
 @login_required(login_url='/auth/login/')
 def delete_message(request, id):
+
+    if request.user.profile.role != 'penerima':
+        return HttpResponseForbidden()
+
     try:
         note = Message.objects.get(id = id)
 
@@ -81,3 +88,49 @@ def delete_message(request, id):
         return Http404
     
     return render(request, 'delete-message-modal.html', {'message':note})
+
+@login_required(login_url='/auth/login/')
+def edit_message(request, id):
+    
+    if request.user.profile.role != 'penerima':
+        return HttpResponseForbidden()
+
+    try:
+        note = Message.objects.get(id = id)
+        form = MessageForm(request.POST or None, instance = note)
+
+        if note.creator != User.objects.get(username = request.user.username):
+            return HttpResponseForbidden()
+
+        if (form.is_valid() and request.method == 'POST'):
+            # save the form data to model
+            form.save()
+            return JsonResponse({'url' : '/profil-penerima'})
+        
+    except Message.DoesNotExist:
+        return Http404
+    
+    return render(request, 'edit-message-modal.html', {'form':form, 'message':note})
+
+@login_required(login_url='/auth/login/')
+def edit_profile(request):
+    
+    if request.user.profile.role != 'penerima':
+        return HttpResponseForbidden()
+
+    try:
+        user = User.objects.get(username = request.user.username)
+        penerima = Peserta.objects.get(superUser = user)
+        form = PenerimaForm(request.POST or None, instance = penerima)
+        formUser = UserForm(request.POST or None, instance = user.profile)
+
+        if (form.is_valid() and request.method == 'POST'):
+            # save the form data to model
+            form.save()
+            formUser.save()
+            return JsonResponse({'url' : '/profil-penerima'})
+        
+    except Message.DoesNotExist:
+        return Http404
+    
+    return render(request, 'profile-edit.html', {'form':form, 'formUser':formUser, 'user':penerima, 'userProf':user})

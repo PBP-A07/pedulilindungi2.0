@@ -64,25 +64,19 @@
 
             function editFunction(elem) {
                 $(function(){
-                    console.log("Pressed")
+                    $(".modal-placeholder").load("/profil-penerima/notes/edit/"+elem.id);
                 });
             }
 
             function deleteFunction(elem) {
                 $(function(){
                     $(".modal-placeholder").load("/profil-penerima/notes/delete/"+elem.id);
-                    console.log("Pressed")
+                });
+            }
 
-                    // $.ajax({
-                    //     url: "/profil-penerima/notes/delete/confirm"+elemID, 
-                    //     success: function(result){
-                    //         var tdElements = rowElement.getElementsByTagName("td");
-                    //         console.log(tdElements[0].innerHTML);
-                    //         console.log(result[0].fields.msg_to);
-                    //         tdElements[0].innerHTML = result[0].fields.msg_to;
-                    //         tdElements[1].innerHTML = result[0].fields.msg_from;
-                    //         tdElements[2].innerHTML = result[0].fields.msg_title;     
-                    // }});
+            function editProfile() {
+                $(function(){
+                    $(".modal-placeholder").load("/profil-penerima/profile/edit");
                 });
             }
 
@@ -98,7 +92,7 @@
         <div class="headers">
             <h1>PROFIL PENGGUNA</h1>
             <div class="small-btn">
-                <a href="#" class="edit-btn-txt">Ubah Data</a>
+                <a href="#" class="edit-btn-txt" onclick="editProfile()">Ubah Data</a>
                 <span class="material-icons" style="color: #3561FF;">mode_edit</span>
             </div>
         </div>

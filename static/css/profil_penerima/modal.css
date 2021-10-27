@@ -23,7 +23,7 @@
 .modal-content {
   position: fixed;
   background-color: #fefefe;
-  top: 15rem;
+  top: 5rem;
   min-width: 50rem;
   max-width: 75rem;
   border-radius: 16px;
@@ -31,6 +31,8 @@
   -webkit-animation-duration: 0.4s;
   animation-name: slideIn;
   animation-duration: 0.4s;
+  max-height: calc(100vh - 1rem);
+  overflow-y: auto;
 }
 
 /* The Close Button */
@@ -76,15 +78,21 @@
   color: black;
 }
 
+/* Remove scrollbar */
+/* ::-webkit-scrollbar {
+  width: 0;  
+  background: transparent;  
+} */
+
 /* Add Animation */
 @-webkit-keyframes slideIn {
   from {top: -300px; opacity: 0} 
-  to {top: 15rem; opacity: 1}
+  to {top: 5rem; opacity: 1}
 }
 
 @keyframes slideIn {
   from {top: -300px; opacity: 0}
-  to {top: 15rem; opacity: 1}
+  to {top: 5rem; opacity: 1}
 }
 
 @-webkit-keyframes fadeIn {
