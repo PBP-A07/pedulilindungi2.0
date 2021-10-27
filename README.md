@@ -18,11 +18,11 @@ Untuk mengendalikan Pandemi Covid-19, pemerintah sedang menggencarkan program va
 ## Modul Implementasi
 1. Home page dan Form Pertanyaan<br>
 2006523413	Alifiyah Nur Rochmah Ariandri<br>
-Halaman homepage dan form untuk mengirimkan pertanyaan kepada e-mail Admin yang akan dijawab melalui e-mail.
+Halaman homepage dan forum untuk mengirimkan pertanyaan agar bisa dijawab oleh user-user lain, tidak hanya admin saja.
 
 2. Sign up, Log in, dan Log out<br>
 2006525330	Ridjky Tegar Perkasa<br>
-Halaman sign up penyedia dan penerima yang menerima masukan email, username, password, dan radio button yang berisi pilihan peran (penerima atau penyedia). Selain itu, terdapat implementasi log out juga yang dapat diakses melalui navbar.
+Halaman sign up penyedia dan penerima yang menerima masukan email, username, password, dan radio button yang berisi pilihan peran (penerima atau penyedia). Selain itu, terdapat implementasi log out juga yang dapat diakses melalui navbar. Selain itu, terdapat pula laman yang menampilkan bagaimana tahapan-tahapan untuk melakukan pendaftaran.
 
 3. Input Biodata Penerima dan Penyedia<br>
 2006595892	Erick Ezrandy<br>

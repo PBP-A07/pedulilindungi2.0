@@ -25,7 +25,9 @@ def signup(request):
 
             # Edit the role.
             update_profile(request, username, selected, email)
-            return redirect('/auth/login/')
+            
+            # login first time after signup
+            return redirect('/auth/login-first/')
 
     context['form'] = form
     return render(request, "signup.html", context)
@@ -49,6 +51,24 @@ def login_user(request):
             login(request, user)
             # Ke homepage setelah login.
             return redirect('/auth/afterLogin/')
+    return render(request, 'login.html')
+
+# Added login first time, after register redirect here
+def login_first_time(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            # Ke homepage setelah login.
+            if request.user.profile.role == 'penerima':
+                return redirect('/biodata/peserta_form')
+            elif request.user.profile.role == 'penyedia':
+                return redirect('/biodata/penyedia_form')
+
     return render(request, 'login.html')
 
 
