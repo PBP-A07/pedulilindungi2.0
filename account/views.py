@@ -12,6 +12,10 @@ from django.contrib import messages
 def signup(request):
     context = {}
 
+    # Kalo udah ada user yang login, langsung arahin ke home setelah login.
+    if request.user.is_authenticated:
+        return redirect('/#/')
+
     form = CreateUserForm(request.POST)
     if form.is_valid():
         # Save user
@@ -42,6 +46,10 @@ def update_profile(request, user_username, user_role, email):
 
 
 def login_user(request):
+    # Kalo udah ada user yang log in, langsung arahin ke home setelah login.
+    if request.user.is_authenticated:
+        return redirect('/#/')
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -51,7 +59,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             # Ke homepage setelah login.
-            return redirect('/auth/afterLogin/')
+            return redirect('/#/')
         else:
             messages.error(request, "Your username or password is wrong!")
 
@@ -78,12 +86,6 @@ def login_first_time(request):
             messages.error(request, "Your username or password is wrong!")
 
     return render(request, 'login.html')
-
-
-@login_required(login_url='login')
-def afterLogin(request):
-    response = {'user': request.user}
-    return render(request, 'after_login.html', response)
 
 
 def logout_user(request):
