@@ -21,6 +21,7 @@ class Penyedia(models.Model):
     alamat = models.CharField(max_length=100)
     superUser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
+
 @receiver(post_save, sender=User)
 def create_user_penyedia(sender, instance, created, **kwargs):
     if created and instance.profile.role == "penyedia":
