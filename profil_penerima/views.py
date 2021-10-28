@@ -132,6 +132,8 @@ def edit_profile(request):
             form.save()
             formUser.save()
             return JsonResponse({'url' : '/profil-penerima'})
+        elif (not form.is_valid() and request.method == 'POST'):
+            return JsonResponse({'url' : '/profil-penerima', 'id':-1})
         
     except Peserta.DoesNotExist:
         return Http404
