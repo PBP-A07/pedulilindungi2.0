@@ -10,7 +10,6 @@
           <div class="form-body">
             <form class="form" action="" method="POST" id="editForm">
             {% csrf_token %}
-            {{ formUser.as_p }}
             {{ form.as_p }}
             <input type="submit" value="UPDATE" class="button-primary" id="submitbtn">
             </form>
@@ -43,6 +42,9 @@ $('.button-primary').click(function(event){
             dataType: 'json',
             data: $('form#editForm').serialize(),
             success: function (data) {
+                if(data.id == -1){
+                    alert("Data gagal diubah. Kemungkinan terdapat data yang sudah dipakai orang atau terdapat kesalahan data.")
+                }
                 modal.style.display = "none";
                 $("#modal-placeholder").empty();
                 location.href = data.url;
