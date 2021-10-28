@@ -11,4 +11,5 @@ urlpatterns = [
     path('notes/add', create_message, name='create_message'),
     path('notes/delete/<id>', delete_message, name='create_message'),
     path('notes/edit/<id>', edit_message, name='create_message'),
+    path('notes/load/template', load_template, name='create_message'),
 ]

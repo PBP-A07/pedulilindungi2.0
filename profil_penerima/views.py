@@ -130,7 +130,15 @@ def edit_profile(request):
             formUser.save()
             return JsonResponse({'url' : '/profil-penerima'})
         
-    except Message.DoesNotExist:
+    except Peserta.DoesNotExist:
         return Http404
     
     return render(request, 'profile-edit.html', {'form':form, 'formUser':formUser, 'user':penerima, 'userProf':user})
+
+def load_template(request):
+    
+    if request.user.profile.role != 'penerima':
+        return HttpResponseForbidden()
+    
+    return render(request, 'notes-template.html')
+

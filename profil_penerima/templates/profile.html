@@ -24,6 +24,7 @@
             const delbtn = [];
 
             $(document).ready(function(){
+                loadNotesTemplate();
                 $.ajax({
                     url: "/profil-penerima/get-msg", 
                     success: function(result){
@@ -46,9 +47,23 @@
                         // there are NO messages
                         else{
                             console.log("No Messages to Show") 
+                            $(".main-notes-container").append(
+                                '<div class="notes-container-header" style="margin-top: 64px;">'+
+                                    "<p>Anda tidak memiliki catatan lain untuk ditampilkan.</p>"+
+                                    "<p>Klik tombol buat catatan baru untuk menambahkan catatan.</p>"+
+                                "</div>"
+                            );
                         }       
-                }});
+                    }
+                });
             });
+
+            function loadNotesTemplate() {
+                $(function(){
+                    $('.main-notes-container').append($('<div class="notes-content">').load('/profil-penerima/notes/load/template'));
+                    // $(".main-notes-container").prepend("/profil-penerima/notes/load/template");
+                });
+            }
 
             function showLogoutModal() {
                 $(function(){

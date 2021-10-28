@@ -63,7 +63,7 @@
     gap: 24px;
 }
 
-.small-btn {
+.small-btn, .disabled-small-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,13 +71,18 @@
     text-decoration: none;
 }
 
-.edit-btn-txt, .delete-btn-txt {
+.edit-btn-txt, .delete-btn-txt, .disabled-btn-txt {
     color: #3561FF;
     position: relative;
     text-decoration: none;
     margin: 8px 0px;
     padding: 4px 4px 4px 0px;
     cursor: pointer;
+}
+
+.disabled-btn-txt, .disabled-small-btn {
+    color: grey;
+    cursor: default;
 }
 
 .delete-btn-txt {
