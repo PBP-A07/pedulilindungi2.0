@@ -18,6 +18,7 @@
 
 .notes-container-header p {
     margin: 0px;
+    line-height: 1.5rem;
 }
 
 .notes-content {
@@ -25,8 +26,8 @@
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: flex-start;
-    margin: 40px 0px;
-    min-width: 30rem;
+    margin: 40px 0px 10px 0px;
+    width: 100%;
 }
 
 .notes-content h3 {
@@ -34,8 +35,8 @@
     word-wrap: break-word;
 }
 
-.notes-content p {
+.notes-content p, .notes-content li {
     margin: 0px 0px 10px 0px;
-    max-width: 35rem;
     word-wrap: break-word;
+    line-height: 1.5rem;
 }

@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('daftar-vaksin/', include('daftar_vaksin.urls')),
     path('profil-penyedia/', include('profil_penyedia.urls')),
-    path('profile/', include('profil_penerima.urls')),
+    path('profil-penerima/', include('profil_penerima.urls')),
     path('biodata/', include('biodata.urls')),
     path('auth/', include('account.urls')),
 ]

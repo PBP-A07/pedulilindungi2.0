@@ -13,14 +13,14 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'css\account\login.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account/login.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Login</title>
   </head>
   <body>
     <div id="anchor">
       <h2>Log In</h2>
-      <div class="form-container" style="width: 420px">
+      <div class="form-container">
         <form action="" method="POST">
           {% csrf_token %}
           <div class="input-box" name="username" style="margin-top: 40px">
@@ -53,12 +53,13 @@
               type="submit"
               value="LOG IN"
             />
-            <input
+            <a
               id="kembali"
-              class="auth-button"
-              type="submit"
-              value="Kembali"
-            />
+              class="btn btn-danger auth-button"
+              href="/#/"
+              role="button"
+              >Kembali</a
+            >
           </div>
         </form>
       </div>

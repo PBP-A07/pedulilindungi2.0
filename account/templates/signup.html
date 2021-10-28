@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css\account\signup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account/signup.css' %}" />
 
     <title>Sign Up</title>
   </head>
@@ -23,7 +23,7 @@
   <body>
     <div id="anchor">
       <h2>Sign Up</h2>
-      <div class="form-container" style="width: 420px">
+      <div class="form-container">
         <form action="" method="POST">
           {% csrf_token %}
           <div class="input-box" name="username" style="margin-top: 40px">
@@ -51,12 +51,13 @@
               type="submit"
               value="SIGN UP"
             />
-            <input
+            <a
               id="kembali"
-              class="auth-button"
-              type="submit"
-              value="Kembali"
-            />
+              class="btn btn-danger auth-button"
+              href="/#/"
+              role="button"
+              >Kembali</a
+            >
           </div>
         </form>
       </div>

@@ -1,0 +1,56 @@
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header-white">
+        <h2>Mengubah Data Pengguna {{ userProf.username }}</h2>
+        <span class="close-white">&times;</span>
+      </div>
+      <div class="modal-body">
+          <div class="form-body">
+            <form class="form" action="" method="POST" id="editForm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="UPDATE" class="button-primary" id="submitbtn">
+            </form>
+          </div>
+      </div>
+    </div>
+  
+</div>
+  
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close-white")[0];
+
+
+
+$(document).ready(function(){
+    span.onclick = function() {
+        modal.style.display = "none";
+        $("#modal-placeholder").empty();
+    }
+
+$('.button-primary').click(function(event){
+        event.preventDefault(); //so that we stop normal form submit.
+        $.ajax({
+            url: '/profil-penerima/profile/edit',
+            type: 'POST',
+            dataType: 'json',
+            data: $('form#editForm').serialize(),
+            success: function (data) {
+                if(data.id == -1){
+                    alert("Data gagal diubah. Kemungkinan terdapat data yang sudah dipakai orang atau terdapat kesalahan data.")
+                }
+                modal.style.display = "none";
+                $("#modal-placeholder").empty();
+                location.href = data.url;
+            }
+        });
+    });
+});
+
+</script>
