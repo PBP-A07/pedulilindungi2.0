@@ -1,11 +1,64 @@
-{% extends 'base.html' %}
+{% extends 'main/base.html' %}
 {% load static %}
 
 {% block meta %}
-<title>Hello, world!</title>
+    <title>Homepage | PeduliLindungi2.0</title>
 {% endblock meta %}
 
 {% block content %}
-  <h1>Hello, world!</h1>
-  <p><img src="{% static 'img/django-logo-negative.svg' %}"></p>
+    <div class="circle"></div>
+    {% include 'main/header.html' %}
+    
+    <section class="landing">
+            <div class="container">
+                <div class="title">
+                    <h1 class="top">Selamat Datang di</h1>
+                    <h1 class="bottom">PeduliLindungi2.0</h1>
+                </div>
+                <a href='auth'><button type="button" class="btn btn-outline-primary">Sign Up</button></a>
+                <a href="/auth/login"><button type="button" class="btn btn-primary">Log In</button></a>
+            </div>
+    </section>
+    
+    <section class="about">
+        <div class="about-img">
+            <p><img src="{% static 'img/vaccine-illustration.jpg' %}" width=500px></p>
+        </div>
+        <div class="about-text">
+            <h2>Tentang PeduliLindungi2.0</h2>
+            <p>Pedulilindungi2.0 merupakan bentuk partisipasi kami terhadap Proyek Tengah Semester PBP yang bertujuan untuk mengumpulkan semua penyelenggara vaksin ke dalam satu website sehingga masyarakat dapat lebih mudah untuk melihat daftar-daftar vaksin dan waktu vaksin yang tersedia.</p>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <div class="template">
+                <h2>Frequently Asked Question</h2>
+                <p class="question">Apa itu vaksinasi?</p>
+                <p class="answer">Vaksinasi adalah proses di dalam tubuh seseorang dimana ia menjadi kebal atau terlindungi dari suatu penyakit sehingga apabila suatu saat terpapar penyakit tersebut, ia tidak akan sakit atau hanya mengalami sakit ringan. Vaksinasi dilakukan dengan pemberian vaksin.</p>
+                <p class="question">Siapa sasaran penerima vaksinasi Covid-19?</p>
+                <p class="answer">Kelompok prioritas penerima vaksin adalah penduduk yang berdomisili di Indonesia yang berusia minimal 18 tahun. Kelompok penduduk berusia di bawah 18 tahun dapat diberikan vaksinasi apabila telah tersedia data keamanan vaksin yang memadai dan persetujuan penggunaan pada masa darurat dari NIE dan BPOM.</p>
+                <p class="question">Apa manfaat dan efek samping dari vaksin Covid-19?</p>
+                <p class="answer">Vaksin Covid-19 bertujuan untuk memberi perlindungan tubuh agar tidak jatuh sakit akibat covid dengan cara menimbulkan atau menstimulasi kekebalan spesifik dalam tubuh dengan pemberian vaksin. Efek samping yang timbul pada umumnya ringan (seperti demam, nyeri otot, atau ruam pada bekas suntikan). Namun, tidak semua orang akan merasakan efek samping ini karena bergantung pada kondisi tubuh masing-masing. </p>
+            </div>
+
+            <div class="to-forum">
+                <p>Ingin tahu lebih dalam?<a href="auth/login">Masuk</a>dan tanyakan pertanyaanmu di<a href="#viewNoteModal" data-toggle="modal">forum</a></p>
+                <p class="image"><img src="{% static 'img/forum-illustration.jpg' %}" width=500px></p>
+            </div>
+        </div>
+    </section>
+
+    <div id="viewNoteModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <center>
+                    <h3 class="modal-title">Peringatan</h3>
+                    <p>Anda tidak bisa melihat forum apabila belum masuk</p>
+                </center>
+            </div>
+        </div>
+    </div>
+    
 {% endblock content %}
