@@ -125,12 +125,12 @@ def edit_profile(request):
         user = User.objects.get(username = request.user.username)
         penerima = Peserta.objects.get(superUser = user)
         form = PenerimaForm(request.POST or None, instance = penerima)
-        formUser = UserForm(request.POST or None, instance = user.profile)
+        # formUser = UserForm(request.POST or None, instance = user.profile)
 
         if (form.is_valid() and request.method == 'POST'):
             # save the form data to model
             form.save()
-            formUser.save()
+            # formUser.save()
             return JsonResponse({'url' : '/profil-penerima'})
         elif (not form.is_valid() and request.method == 'POST'):
             return JsonResponse({'url' : '/profil-penerima', 'id':-1})
@@ -138,7 +138,7 @@ def edit_profile(request):
     except Peserta.DoesNotExist:
         return Http404
     
-    return render(request, 'profile-edit.html', {'form':form, 'formUser':formUser, 'user':penerima, 'userProf':user})
+    return render(request, 'profile-edit.html', {'form':form, 'user':penerima, 'userProf':user})
 
 def load_template(request):
     

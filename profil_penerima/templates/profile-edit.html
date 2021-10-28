@@ -10,7 +10,6 @@
           <div class="form-body">
             <form class="form" action="" method="POST" id="editForm">
             {% csrf_token %}
-            {{ formUser.as_p }}
             {{ form.as_p }}
             <input type="submit" value="UPDATE" class="button-primary" id="submitbtn">
             </form>

@@ -25,7 +25,7 @@
   background-color: #fefefe;
   top: 5rem;
   min-width: 50rem;
-  max-width: 75rem;
+  max-width: 50rem;
   border-radius: 16px;
   -webkit-animation-name: slideIn;
   -webkit-animation-duration: 0.4s;
@@ -41,6 +41,7 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .close-white {
@@ -63,6 +64,7 @@
   border-radius: 16px 16px 0px 0px;
   background-color: #3561FF;
   color: white;
+  line-height: 2.2rem;
 }
 
 .modal-header-white {
