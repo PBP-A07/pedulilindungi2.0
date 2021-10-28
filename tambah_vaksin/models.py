@@ -6,3 +6,4 @@ class Vaksin(models.Model):
     tanggal = models.DateField()
     waktu = models.TimeField()
     jumlah = models.SmallIntegerField()
+    penyedia = models.ForeignKey(Penyedia, on_delete=models.CASCADE, null=True, blank=True)
