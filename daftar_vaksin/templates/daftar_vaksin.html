@@ -15,7 +15,7 @@
             <h1>DAFTAR VAKSIN</h1>
         </div>
         <div class="input-container">
-            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis-vaksin' %}" novalidate>
+            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis-vaksin' %}">
                 {%csrf_token%}
                 <div class="input" id="kota">
                     <label for="">Kota</label>

@@ -2,9 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import DaftarVaksinForm
-from biodata.models import Penyedia
 from tambah_vaksin.models import Vaksin
-from datetime import datetime
+from biodata.models import Peserta
 
 # Create your views here.
 
@@ -13,10 +12,11 @@ def daftar_vaksin(request):
     form = DaftarVaksinForm(request.POST or None)
 
     if (form.is_valid() and request.method == 'POST'):
+        person = Peserta.objects.get(superUser=request.user)
         jadwal = form.save(commit=False)
-        jadwal.penerima = request.user
-        jadwal.save(commit=True)
-        return HttpResponseRedirect('')
+        jadwal.penerima = person
+        jadwal.save()
+        return HttpResponseRedirect('/')
     else:
         form = DaftarVaksinForm()
 
