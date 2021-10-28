@@ -15,7 +15,7 @@
             <h1>DAFTAR VAKSIN</h1>
         </div>
         <div class="input-container">
-            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis' %}" novalidate>
+            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis-vaksin' %}" novalidate>
                 {%csrf_token%}
                 <div class="input" id="kota">
                     <label for="">Kota</label>
@@ -27,10 +27,10 @@
                     <br>
                     {{form.tanggal}}
                 </div>
-                <div class="input" id="jenis">
+                <div class="input" id="jenis_vaksin">
                     <label for="">Jenis Vaksin</label>
                     <br>
-                    {{form.jenis}}
+                    {{form.jenis_vaksin}}
                 </div>
                 <div class="input" id="tempat">
                     <label for="">Tempat</label>
@@ -70,7 +70,7 @@
                         'kota': kotaId
                     },
                     success: function (data) {
-                        $("#id_jenis").html(data);
+                        $("#id_jenis_vaksin").html(data);
                     }
                 });
 
