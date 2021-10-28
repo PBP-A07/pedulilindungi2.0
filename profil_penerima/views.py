@@ -32,6 +32,9 @@ def view_profile(request, usn):
         # Change this to redirect to profile for penyedia
         return HttpResponseRedirect('/profil-penyedia')
     
+    elif request.user.profile.role != 'penerima':
+        return HttpResponseForbidden('Currently you have no role. Please contact the admin to assign you a role.')
+    
     user = User.objects.get(username = request.user.username).profile
     penerima = Peserta.objects.get(superUser = request.user)
 
