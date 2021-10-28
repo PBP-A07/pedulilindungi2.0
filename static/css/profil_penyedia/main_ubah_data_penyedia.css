@@ -6,7 +6,7 @@
     margin: 3rem;
 }
 
-.header {
+.header, .header h1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,7 +34,7 @@
     margin-top: 0.6rem;
 }
 
-.data h5, input[type=text] {
+.data h5, input[type=text], input[type=number] {
    margin: 0.6rem; 
    max-width: 20rem;
 }

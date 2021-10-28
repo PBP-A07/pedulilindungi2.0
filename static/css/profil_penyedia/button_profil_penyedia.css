@@ -1,4 +1,4 @@
-.button-primary, .button-secondary, .button-primary-icon {
+.button-primary, .button-secondary, .button-primary-icon, .upper-button-primary-icon {
     font-weight: bold;
     background-color: #3561FF; /* Green */
     border: none;
@@ -10,9 +10,10 @@
     font-size: 16px;
     border-radius: 8px;
 }
-.button-primary-icon {
+.button-primary-icon, .upper-button-primary-icon {
     display: flex;
     align-items: center;
+    margin: 1rem;
     gap: 12px;
 }
 
@@ -26,7 +27,7 @@
     color: #3561FF;
 }
   
-.button-primary:hover, .button-secondary:hover, .button-primary-icon:hover {
+.button-primary:hover, .button-secondary:hover, .button-primary-icon:hover,  .upper-button-primary-icon {
     background-color: #113DDB; /* Green */
     color: white;
     cursor: pointer;
@@ -51,4 +52,10 @@
     transform-origin: center;
     transform: translate(-50%, 0) scaleX(0);
     transition: transform 0.3s ease-in-out;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
 }

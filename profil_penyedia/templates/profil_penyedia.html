@@ -56,10 +56,23 @@
                 <p>Lihat Pendaftar</p>
             </button>
             <button class="button-primary-icon" onclick="location.href = '/profil-penyedia/catatan-penyedia'">
-                <span class="material-icons" style="color: white;">notes</span>
+                <span class="material-icons" style="color: white;">grid_view</span>
                 <p>Catatan Penyedia</p>
             </button>
         </div>
+        <script>
+            $(document).ready(function(){
+              $("#btn1").click(function(){
+                $.ajax({url: "../../static/css/profil_penyedia/img/pesan.jpg", success: function(result){
+                  $('#myImg').toggle('slow');
+                }});
+              });
+            });
+            </script>
+        <div class="btn-container">
+            <a class="edit-btn-txt"id="btn1">klik di sini untuk tampilkan/sembunyikan pesan</a>
+        </div>
+        <img src="../../static/css/profil_penyedia/img/pesan.jpg" alt="Show/Hide Image" id="myImg" width="800" height="480"/>
     </div>
 
     <div class="footer-placeholder"></div>

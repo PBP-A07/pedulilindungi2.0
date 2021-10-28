@@ -23,7 +23,7 @@ def ubah_data_penyedia(request):
     if (form.is_valid() and request.method == 'POST'):
         form.save()
         return HttpResponseRedirect('/profil-penyedia')
-    return render(request, 'ubah_data_penyedia.html')
+    return render(request, 'ubah_data_penyedia.html', {'form': form})
 
 @login_required(login_url='/auth/login/')
 def lihat_pendaftar(request):
