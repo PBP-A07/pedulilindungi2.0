@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(150deg,black,#FED08F,#F2E8C6);
+}
+
+/* NAVBAR */
+nav {background-color: black; z-index: 3;}
+nav a img {border-radius: 50%;}
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255,255,255,.5);
+    border-color: rgba(255,255,255,.1);
+}
+
+.navbar-brand, #navbarNav ul li a {color: whitesmoke;}
+#navbarNav ul li a:hover {color: #D44000}
+.nav-link.active, a.nav-link:hover {
+    color:#be3a1c !important;
+    transition: all 0.25s ease-in-out !important;
+}
+
+/* NAVBAR */
+
+#form-wrapper {
+    backdrop-filter: blur(6.3px);
+    -webkit-backdrop-filter:blur(6.3px);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    background: linear-gradient(-40deg,#FF5200, #FA9905, #F21170, #BA78CD);
+    border-radius: 25px;
+    border-bottom: 0.2px solid rgba( 255, 255, 255, 0.5 );
+    border-right: 0.2px solid rgba( 255, 255, 255, 0.5 );
+    margin: auto 0;
+    width: 40%;
+}
+
+.title {
+    color:  whitesmoke;
+    text-shadow: 5px 5px 7px black;
+}
+
+.inputan {
+    padding: 0.5em;
+    border-radius: 5px;
+}
+
+.inputan:placeholder-shown {
+    font-style: italic;
+}
+
+.inputan:focus {
+    outline: 0;
+    border: 3px solid #3E00FF;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
+    transition: all .6s ease-in-out;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    margin: 0 !important; 
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#arterisk {
+    color: whitesmoke;
+    font-weight: bold;
+}
+.btn {color: whitesmoke !important;}
+.danger {background-color: #FF0000;}
+.primary {background-color: #174AFF;}
+.success {background-color: #068F1C !important;}
+#modDiv2 {cursor: pointer !important;}
+.modal-content, .round {border-radius: 20px !important;}
+#mbody2, #mbody1, #mbody3 {padding-top: 1em !important;}
+#destination {color: whitesmoke !important;}
+
+#no:hover, #yes:hover, #destination:hover, #batal:hover, #simpan:hover {
+    color: #FFEBC9 !important;
+    transition: color .5s ease-in;
+    transition: background-color .4s ease-out;
+}
+
+#no:hover, #batal:hover {background-color: #BD1616;}
+#yes:hover {background-color: #1E6F5C !important;}
+#destination:hover {transition: color .4s ease-in;}
+#simpan:hover {background-color: #14279B;}
+
+@media (max-width:768px) {
+    .modal-content {
+        width: 85%;
+    }
+
+    #form-wrapper {
+        width: 85%;
+    }
+}
+
+@media (max-width:576px) {
+    .modal-content {
+        width: 75%;
+    }
+
+    #form-wrapper {
+        width: 75%;
+    }
+}
+
+@media (max-width:360px) {
+    #batal, #simpan {
+        margin: .5rem auto;
+    }
+}
