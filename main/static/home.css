@@ -1,6 +1,9 @@
 /* LANDING PAGE */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
 .landing {
-    background: url("../../static/img/bg2.jpg");
+    background: url("img/bg2.jpg");
     background-repeat: no-repeat;
     background-position-y: 55px;
     background-size: cover;
@@ -9,7 +12,7 @@
 }
 
 .landing .title {
-    font-family: poppins; 
+    font-family: 'Poppins'; 
     margin-bottom: 3%; 
 }
 
@@ -72,7 +75,7 @@
 }
 
 .about-text h2 {
-    font-family: poppins;
+    font-family: 'Poppins';
     font-weight: bold;
 }
 
@@ -105,7 +108,7 @@
 }
 
 .faq h2 {
-    font-family: poppins;
+    font-family: 'Poppins';
     font-weight: bold;
 }
 
@@ -125,14 +128,14 @@
 
 .faq .to-forum {
     margin-top: 90px;
-    font-family: poppins;
+    font-family: 'Poppins';
     font-size: x-large;
     margin-left: 50px;
 }
 
 .to-forum a {
     color: rgb(130, 132, 255);
-    font-family: poppins;
+    font-family: 'Poppins';
     font-size: x-large;
 }
 
@@ -168,7 +171,7 @@
 
 
 .forum h2 {
-    font-family: poppins;
+    font-family: 'Poppins';
     font-weight: bold;
 }
 
@@ -216,7 +219,7 @@ blockquote {
 }
 
 .quest-title {
-    font-family: poppins;
+    font-family: 'Poppins';
     font-weight: bolder;
     margin-bottom: 3px;
     margin-left: 20px;
