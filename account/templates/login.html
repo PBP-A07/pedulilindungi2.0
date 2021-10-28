@@ -20,7 +20,7 @@
   <body>
     <div id="anchor">
       <h2>Log In</h2>
-      <div class="form-container" style="width: 420px">
+      <div class="form-container">
         <form action="" method="POST">
           {% csrf_token %}
           <div class="input-box" name="username" style="margin-top: 40px">
@@ -53,12 +53,13 @@
               type="submit"
               value="LOG IN"
             />
-            <input
+            <a
               id="kembali"
-              class="auth-button"
-              type="submit"
-              value="Kembali"
-            />
+              class="btn btn-danger auth-button"
+              href="/#/"
+              role="button"
+              >Kembali</a
+            >
           </div>
         </form>
       </div>
