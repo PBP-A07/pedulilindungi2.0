@@ -90,7 +90,7 @@ def login_first_time(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('/auth/login/')
+    return redirect('/#/')
 
 
 def email_compare(request):
