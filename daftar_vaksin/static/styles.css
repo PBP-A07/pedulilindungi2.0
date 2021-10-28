@@ -53,8 +53,3 @@ button:hover {
     margin-bottom: 16px;
     width: 100%;
 }
-
-#id_kota, #id_tanggal, #id_jenis_vaksin, #id_tempat, #id_waktu {
-    width: 100%;
-    padding: 8px;
-}

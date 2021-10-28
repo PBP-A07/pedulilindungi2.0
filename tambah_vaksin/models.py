@@ -1,4 +1,5 @@
 from django.db import models
+from biodata.models import Penyedia
 
 # Create your models here.
 class Vaksin(models.Model):
@@ -6,3 +7,4 @@ class Vaksin(models.Model):
     tanggal = models.DateField()
     waktu = models.TimeField()
     jumlah = models.SmallIntegerField()
+    penyedia = models.ForeignKey(Penyedia, on_delete=models.CASCADE, null=True, blank=True)

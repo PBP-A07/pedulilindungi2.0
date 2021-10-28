@@ -15,32 +15,27 @@
             <h1>DAFTAR VAKSIN</h1>
         </div>
         <div class="input-container">
-            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" novalidate>
+            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis' %}" novalidate>
                 {%csrf_token%}
                 <div class="input" id="kota">
                     <label for="">Kota</label>
                     <br>
                     {{form.kota}}
                 </div>
-                <div class="input" id="tempat">
-                    <label for="">Tempat</label>
-                    <br>
-                    {{form.tempat}}
-                </div>
-                <div class="input" id="jenis_vaksin">
-                    <label for="">Jenis Vaksin</label>
-                    <br>
-                    {{form.jenis_vaksin}}
-                </div>
                 <div class="input" id="tanggal">
                     <label for="">Tanggal</label>
                     <br>
                     {{form.tanggal}}
                 </div>
-                <div class="input" id="waktu">
-                    <label for="">Waktu</label>
+                <div class="input" id="jenis">
+                    <label for="">Jenis Vaksin</label>
                     <br>
-                    {{form.waktu}}
+                    {{form.jenis}}
+                </div>
+                <div class="input" id="tempat">
+                    <label for="">Tempat</label>
+                    <br>
+                    {{form.tempat}}
                 </div>
                 <button class="btn" type="submit" form="daftarVaksinForm" disabled="disabled" value="Daftar Vaksinasi">Daftar Vaksinasi</button>
             </form>
@@ -49,6 +44,38 @@
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
+        $("#id_kota").change(function () {
+            var url = $("#daftarVaksinForm").attr("tanggal-url");  
+            var kotaId = $(this).val();  
+
+            $.ajax({                       
+                url: url,                    
+                data: {
+                    'kota': kotaId       
+                },
+                success: function (data) {   
+                    $("#id_tanggal").html(data);  
+                }
+            });
+
+        });
+
+        $("#id_kota").change(function () {
+                var url = $("#daftarVaksinForm").attr("jenis-url");
+                var kotaId = $(this).val();
+
+                $.ajax({
+                    url: url,
+                    data: {
+                        'kota': kotaId
+                    },
+                    success: function (data) {
+                        $("#id_jenis").html(data);
+                    }
+                });
+
+            });
+
         $("#id_kota").change(function () {
             var url = $("#daftarVaksinForm").attr("tempat-url");  // get the url of the `tempat-url` view
             var kotaId = $(this).val();  // get the selected kota ID from the HTML input
