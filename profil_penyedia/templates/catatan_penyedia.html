@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>Catatan Penyedia | PeduliLindungi2.0</title>
+
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/catatan_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder"></div>
+
+    <div class="main">
+        <div class="header">
+            <h1>CATATAN PENYEDIA</h1>
+            <div class="back-btn">
+                <a href="/profil-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Profil</a>
+                <span class="material-icons" style="color: #FF2222;">person</span>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="upper-btn-container">
+            <button class="button-primary-icon" onclick="location.href = '/profil-penyedia/tambah-catatan'">
+                <span class="material-icons" style="color: white;">add</span>
+                <p>Tambah Catatan</p>
+            </button>
+        </div>
+    </div>
+    <div class="main">
+        <div class="notes-container">
+            {% if notes %}
+                {% for note in notes %}
+                <div class="card">
+                    <h2><b>{{ note.title }}</b></h2>
+                    <br>
+                    <p3><b>{{ note.message }} </b></p3>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+</html>

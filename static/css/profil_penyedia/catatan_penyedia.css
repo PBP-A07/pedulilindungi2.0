@@ -1,0 +1,26 @@
+.notes-container {
+    padding: 2px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 280px;
+    padding: 16px 16px;
+    margin: 10px;
+    background-color: #a6c4ff;
+    text-align: center;
+}
+
+/* body {
+    background: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-position-y: 55px;
+    background-position-x: -10px;
+    background-size: cover;
+    padding-top: 300px;
+    padding-bottom: 250px;
+} */
