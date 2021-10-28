@@ -31,7 +31,6 @@
                         // there are Messages to Display
                         if(result.id == undefined){
                             for(i=0; i < result.length; i++){
-                                console.log(result)
                                 editbtn[i] = ('<div class="small-btn"><a onclick="editFunction(this)" id="' + result[i].pk + '" class="edit-btn-txt">Ubah Catatan</a><span class="material-icons" style="color: #3561FF;">mode_edit</span></div>');
                                 delbtn[i] = ('<div class="small-btn"><a onclick="deleteFunction(this)" id="' + result[i].pk + '" class="delete-btn-txt">Hapus Catatan</a><span class="material-icons" style="color: #FF2222;">delete_forever</span></div>');
 
