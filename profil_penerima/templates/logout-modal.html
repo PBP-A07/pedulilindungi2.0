@@ -1,0 +1,46 @@
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header-white">
+        <h2>Are you sure you want to Logout?</h2>
+        <span class="close-white">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="btn-container-row">
+            <button class="button-primary-icon-danger" id="logoutBtnConfirm" onclick="location.href = '/profil-penerima/logout/confirm';">
+                <span class="material-icons" style="color: white;">logout</span>
+                <p>Logout</p>
+            </button>
+            <button class="button-secondary" onclick="closeModal()">
+                Kembali
+            </button>
+        </div>
+      </div>
+    </div>
+  
+</div>
+  
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close-white")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = () => closeModal();
+
+function closeModal() {
+    $(function(){
+        modal.style.display = "none";
+        $("#modal-placeholder").empty();
+    });
+}
+  
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        $("#modal-placeholder").empty();
+    }
+}
+</script>

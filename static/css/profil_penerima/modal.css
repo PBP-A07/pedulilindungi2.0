@@ -1,0 +1,106 @@
+/* The Modal (background) */
+.modal {
+  display: flex; /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+  position: fixed; /* Stay in place */
+  padding-top: 1rem;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  background-color: #fefefe;
+  top: 5rem;
+  min-width: 50rem;
+  max-width: 75rem;
+  border-radius: 16px;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+  max-height: calc(100vh - 1rem);
+  overflow-y: auto;
+}
+
+/* The Close Button */
+.close, .close-white {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-white {
+  color: grey;
+}
+
+.close:hover, .close:focus, .close-white:hover, .close-white:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header, .modal-header-white {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 24px;
+  margin: 4px 8px;
+  border-radius: 16px 16px 0px 0px;
+  background-color: #3561FF;
+  color: white;
+}
+
+.modal-header-white {
+  background-color: white;
+  color: black;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: white;
+  color: black;
+}
+
+/* Remove scrollbar */
+/* ::-webkit-scrollbar {
+  width: 0;  
+  background: transparent;  
+} */
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {top: -300px; opacity: 0} 
+  to {top: 5rem; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {top: -300px; opacity: 0}
+  to {top: 5rem; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
