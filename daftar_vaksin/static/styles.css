@@ -5,6 +5,7 @@
     --grey: #8C8B8B;
     --blue: #3562FF;
     --white: #FFFFFF;
+    --hover_blue: #2956F4;
 }
 
 
@@ -41,6 +42,11 @@ body{
     width: 480px;
     border: none;
     
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--hover_blue);
 }
 
 .input {

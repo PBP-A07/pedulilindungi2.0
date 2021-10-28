@@ -7,8 +7,10 @@ from biodata.models import Penyedia
 def daftar_vaksin(request):
     form = DaftarVaksinForm(request.POST or None)
 
-    if (form.is_valid() and request.method == 'POST'):
-        form.save()
+    if (form.is_valid() and request.method == 'POST' and request.user.is_authenticated()):
+        jadwal = form.save(commit=False)
+        jadwal.penerima = request.user
+        jadwal.save()
         return HttpResponseRedirect('')
     else:
         form = DaftarVaksinForm()
