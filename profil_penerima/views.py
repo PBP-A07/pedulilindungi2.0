@@ -147,3 +147,9 @@ def load_template(request):
     
     return render(request, 'notes-template.html')
 
+def call_success(request):
+    return render(request, 'success-modal.html')
+
+def call_failed(request):
+    return render(request, 'failed-modal.html')
+
