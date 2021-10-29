@@ -10,4 +10,3 @@ class JadwalVaksin(models.Model):
    tempat = models.CharField(max_length=30)
    penerima = models.ForeignKey(Peserta, on_delete=models.CASCADE, null=True)
 
-# Create your models here.
