@@ -52,6 +52,6 @@ def load_jenis_vaksin(request):
 
 def load_tempat(request):
     jenis_id = request.GET.get('jenis_vaksin')
-    tempat = Vaksin.objects.filter(jenis=jenis_id).distinct()
+    tempat = Vaksin.objects.filter(jenis=jenis_id).exclude(jumlah=0).distinct()
     return render(request, 'hr/tempat_dropdown.html', {'tempat': tempat})
 
