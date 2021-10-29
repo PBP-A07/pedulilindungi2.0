@@ -1,4 +1,4 @@
 <option value="">Pilih tanggal vaksinasi</option>
 {% for date in tanggal %}
-<option value="{{ date }}">{{ date }}</option>
+<option value="{{ date|date:"Y-m-d" }}">{{ date|date:"Y-m-d" }}</option>
 {% endfor %}

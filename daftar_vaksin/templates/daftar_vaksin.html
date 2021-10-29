@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedulilindungi2.0 | Daftar Vaksin</title>
-
+    <title>Daftar Vaksin | Pedulilindungi2.0</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
@@ -37,7 +36,7 @@
                     <br>
                     {{form.tempat}}
                 </div>
-                <button class="btn" type="submit" form="daftarVaksinForm" disabled="disabled" value="Daftar Vaksinasi">Daftar Vaksinasi</button>
+                <button class="btn" type="submit" value="Daftar Vaksinasi">Daftar Vaksinasi</button>
             </form>
         </div>
     </div>
@@ -60,14 +59,14 @@
 
         });
 
-        $("#id_kota").change(function () {
+        $("#id_tanggal").change(function () {
                 var url = $("#daftarVaksinForm").attr("jenis-url");
-                var kotaId = $(this).val();
+                var tanggalId = $(this).val();
 
                 $.ajax({
                     url: url,
                     data: {
-                        'kota': kotaId
+                        'tanggal': tanggalId
                     },
                     success: function (data) {
                         $("#id_jenis_vaksin").html(data);
@@ -76,22 +75,21 @@
 
             });
 
-        $("#id_kota").change(function () {
-            var url = $("#daftarVaksinForm").attr("tempat-url");  // get the url of the `tempat-url` view
-            var kotaId = $(this).val();  // get the selected kota ID from the HTML input
+        $("#id_jenis_vaksin").change(function () {
+            var url = $("#daftarVaksinForm").attr("tempat-url");  
+            var jenisVaksinId = $(this).val();  
 
-            $.ajax({                       // initialize an AJAX request
-                url: url,                    // set the url of the request (= localhost:8000/hr/ajax/tempat-url/)
+            $.ajax({                      
+                url: url,                    
                 data: {
-                    'kota': kotaId       // add the kota id to the GET parameters
+                    'jenis_vaksin': jenisVaksinId       
                 },
-                success: function (data) {   // `data` is the return of the `tempat-url` view function
-                    $("#id_tempat").html(data);  // replace the contents of the tempat input with the data that came from the server
+                success: function (data) {   
+                    $("#id_tempat").html(data);  
                 }
             });
 
         });
-
         
     </script>
 </body>
