@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'biodata',
     'profil_penerima',
     'profil_penyedia',
+    'daftar_vaksin',
+    'tambah_vaksin'
     
 ]
 
