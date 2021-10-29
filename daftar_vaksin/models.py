@@ -1,4 +1,5 @@
 from django.db import models
+from django.http import request
 from biodata.models import Penyedia, Peserta
 
 class JadwalVaksin(models.Model):
