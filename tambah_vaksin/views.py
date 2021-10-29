@@ -1,27 +1,15 @@
 from django.shortcuts import render, redirect
-
-# Create your views here.
 from django.http.response import HttpResponse
 from django.core import serializers
-from .forms import NoteForm
-from lab_2.models import Note
+from tambah_vaksin.forms import VaccineForm
+from tambah_vaksin.models import Vaksin
 
-def index(request):
-    notes = Note.objects.all()
-    response = {'notes' : notes}
-    return render(request, 'lab4_index.html', response)
-
-def add_note(request):
-    form = NoteForm(request.POST or None)
-    notes = Note.objects.all()
-    response = {'notes':notes}  
+def add_vaccine(request):
+    form = VaccineForm(request.POST or None)
+    vaccine = Vaksin.objects.all()
+    response = {'vaccine':vaccine}  
     if (form.is_valid() and request.method == 'POST'):
         form.save()
-        return render(request, 'lab4_index.html', response)
+        return render(request, 'daftar_vaksin.html', response)
     else:
-        return render(request, 'lab4_form.html', {'form': form})
-
-def note_list(request):
-    notes = Note.objects.all()
-    response = {'notes' : notes}
-    return render(request, 'lab4_note_list.html', response)
+        return render(request, 'tambahvaksin_index.html', {'form': form})
