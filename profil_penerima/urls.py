@@ -12,4 +12,6 @@ urlpatterns = [
     path('notes/delete/<id>', delete_message, name='create_message'),
     path('notes/edit/<id>', edit_message, name='create_message'),
     path('notes/load/template', load_template, name='create_message'),
+    path('call/success', call_success, name='create_message'),
+    path('call/failed', call_failed, name='create_message'),
 ]
