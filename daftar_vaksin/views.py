@@ -4,9 +4,6 @@ from django.shortcuts import render
 from .forms import DaftarVaksinForm
 from tambah_vaksin.models import Vaksin
 from biodata.models import Penyedia, Peserta
-from django.forms import formset_factory, formsets
-
-# Create your views here.
 
 @login_required(login_url='/auth/login/')
 def daftar_vaksin(request):
@@ -25,12 +22,16 @@ def daftar_vaksin(request):
     form.fields['tempat'].choices = [(tempat, tempat)]
     
     if (form.is_valid() and request.method == 'POST'):
-        print('masuk')
+
         person = Peserta.objects.get(superUser=request.user)
         jadwal = form.save(commit=False)
         jadwal.place = Penyedia.objects.get(namaInstansi=jadwal.tempat)
         jadwal.penerima = person
         jadwal.save()
+
+        vaksin = Vaksin.objects.get(penyedia=jadwal.place)
+        vaksin.jumlah -= 1
+        vaksin.save()
         return HttpResponseRedirect('/')
     else:
         form = DaftarVaksinForm()
