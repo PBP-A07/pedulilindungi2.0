@@ -15,13 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-import daftar_vaksin.urls as daftar_vaksin
 import biodata.urls as biodata
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    path('daftar-vaksin/', include('daftar_vaksin.urls')),
     path('profil-penyedia/', include('profil_penyedia.urls')),
     path('profil-penerima/', include('profil_penerima.urls')),
     path('biodata/', include('biodata.urls')),
