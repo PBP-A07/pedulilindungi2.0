@@ -3,7 +3,8 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import DaftarVaksinForm
 from tambah_vaksin.models import Vaksin
-from biodata.models import Peserta
+from biodata.models import Penyedia, Peserta
+from django.forms import formset_factory, formsets
 
 # Create your views here.
 
@@ -11,9 +12,23 @@ from biodata.models import Peserta
 def daftar_vaksin(request):
     form = DaftarVaksinForm(request.POST or None)
 
+    kota = request.POST.get('kota')
+    form.fields['kota'].choices = [(kota, kota)]
+
+    tanggal = request.POST.get('tanggal')
+    form.fields['tanggal'].choices = [(tanggal, tanggal)]
+
+    jenis_vaksin = request.POST.get('jenis_vaksin')
+    form.fields['jenis_vaksin'].choices = [(jenis_vaksin, jenis_vaksin)]
+
+    tempat = request.POST.get('tempat')
+    form.fields['tempat'].choices = [(tempat, tempat)]
+    
     if (form.is_valid() and request.method == 'POST'):
+        print('masuk')
         person = Peserta.objects.get(superUser=request.user)
         jadwal = form.save(commit=False)
+        jadwal.place = Penyedia.objects.get(namaInstansi=jadwal.tempat)
         jadwal.penerima = person
         jadwal.save()
         return HttpResponseRedirect('/')
