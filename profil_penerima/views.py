@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from biodata.models import Peserta
 from django.core import serializers
+
+# from daftar_vaksin.models import JadwalVaksin
 from .forms import *
 
 from profil_penerima.models import Message
@@ -153,3 +155,58 @@ def call_success(request):
 def call_failed(request):
     return render(request, 'failed-modal.html')
 
+@login_required(login_url='/auth/login/')
+def view_vaccine(request):
+
+    if request.user.profile.role == 'penyedia':
+        # Change this to redirect to profile for penyedia
+        return HttpResponseRedirect('/profil-penyedia')
+    
+    elif request.user.profile.role != 'penerima':
+        return HttpResponseForbidden('Currently you have no role. Please contact the admin to assign you a role.')
+    
+    user = User.objects.get(username = request.user.username).profile
+    penerima = Peserta.objects.get(superUser = request.user)
+
+    return render(request, 'vaccine-ticket.html', {'user':user, 'penerima':penerima})
+
+@login_required(login_url='/auth/login/')
+def get_vaccine_ticket(request):
+
+    if request.user.profile.role == 'penyedia':
+        # Change this to redirect to profile for penyedia
+        return HttpResponseRedirect('/profil-penyedia')
+    
+    elif request.user.profile.role != 'penerima':
+        return HttpResponseForbidden('Currently you have no role. Please contact the admin to assign you a role.')
+
+    user = User.objects.get(username = request.user.username).profile
+    penerima = Peserta.objects.get(superUser = request.user)
+
+    # # Uncomment and finish this after JadwalVaksin is fixed
+    # try:
+    #     vaccine = JadwalVaksin.objects.get(penerima = penerima)
+
+    # except JadwalVaksin.DoesNotExist:
+    #     return JsonResponse({'id' : -1})
+    
+    # # Serialize the data and returne the JadwalVaksin as HttpResponse
+    # data = serializers.serialize('json', [penerima, ])
+    # return HttpResponse(data, content_type="application/json")
+
+    response = {
+        'id' : -1
+    }
+    return JsonResponse(response)
+
+@login_required(login_url='/auth/login/')
+def get_vaccine_ticket_failed(request):
+
+    if request.user.profile.role == 'penyedia':
+        # Change this to redirect to profile for penyedia
+        return HttpResponseRedirect('/profil-penyedia')
+    
+    elif request.user.profile.role != 'penerima':
+        return HttpResponseForbidden('Currently you have no role. Please contact the admin to assign you a role.')
+
+    return render(request, 'vaccine-ticket-card-failed.html')

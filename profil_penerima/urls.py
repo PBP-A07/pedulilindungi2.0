@@ -14,4 +14,7 @@ urlpatterns = [
     path('notes/load/template', load_template, name='create_message'),
     path('call/success', call_success, name='create_message'),
     path('call/failed', call_failed, name='create_message'),
+    path('vaccine/ticket', view_vaccine, name='create_message'),
+    path('vaccine/ticket/get', get_vaccine_ticket, name='create_message'),
+    path('vaccine/ticket/get/failed', get_vaccine_ticket_failed, name='create_message'),
 ]
