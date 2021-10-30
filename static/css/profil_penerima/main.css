@@ -20,7 +20,7 @@
     margin: 0px;
 }
 
-.content {
+.content, .ticket-div-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
