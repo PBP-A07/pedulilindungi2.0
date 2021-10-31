@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 3rem;
+    margin: 5rem;
 }
 
 .header, .header h1 {
@@ -37,6 +37,10 @@
 .data h5, input[type=text], input[type=number] {
    margin: 0.6rem; 
    max-width: 20rem;
+}
+
+input[type=textarea] {
+    margin: 0.6rem;
 }
 
 input[type=submit] {

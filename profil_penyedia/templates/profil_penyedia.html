@@ -7,7 +7,8 @@
 
         <meta charset="UTF-8" />
         <title>Profil Penyedia | PeduliLindungi2.0</title>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/header_profil_penyedia.css' %}" />
         <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_profil_penyedia.css' %}" />
         <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_profil_penyedia.css' %}" />
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -18,7 +19,17 @@
     </head>
 <body>
 
-    <div class="navbar-placeholder"></div>
+    <div class="navbar-placeholder">
+        <header  style="z-index: 3;">
+            <p class="logo">PeduliLindungi2.0</p>
+            <nav>
+                <a class="tulisan" href="../../">Home</a>
+                <a class="tulisan">Tambah Vaksin</a>
+                <a class="now">Profile</a>
+                <a class="tulisan" href="../../auth/logout">Log Out</a> 
+            </nav>
+        </header>
+    </div>
 
     <div class="main">
         <div class="header">
@@ -63,16 +74,16 @@
         <script>
             $(document).ready(function(){
               $("#btn1").click(function(){
-                $.ajax({url: "../../static/css/profil_penyedia/img/pesan.jpg", success: function(result){
+                $.ajax({url: "../../static/css/profil_penyedia/img/pesan_penyedia.jpg", success: function(result){
                   $('#myImg').toggle('slow');
                 }});
               });
             });
             </script>
         <div class="btn-container">
-            <a class="edit-btn-txt"id="btn1">klik di sini untuk tampilkan/sembunyikan pesan</a>
+            <a class="edit-btn-txt"id="btn1"><b>klik di sini untuk tampilkan/sembunyikan pesan bagi penyedia</b></a>
         </div>
-        <img src="../../static/css/profil_penyedia/img/pesan.jpg" alt="Show/Hide Image" id="myImg" width="800" height="480"/>
+        <img src="../../static/css/profil_penyedia/img/pesan_penyedia.jpg" alt="Show/Hide Image" id="myImg" width="720" height="450"/>
     </div>
 
     <div class="footer-placeholder"></div>
