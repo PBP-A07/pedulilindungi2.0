@@ -43,11 +43,17 @@ $('.button-primary').click(function(event){
             data: $('form#editForm').serialize(),
             success: function (data) {
                 if(data.id == -1){
-                    alert("Data gagal diubah. Kemungkinan terdapat data yang sudah dipakai orang atau terdapat kesalahan data.")
+                    // alert("Data gagal diubah. Kemungkinan terdapat data yang sudah dipakai orang atau terdapat kesalahan data.")
+                    modal.style.display = "none";
+                    $("#modal-placeholder").empty();
+                    $(".modal-placeholder").load("/profil-penerima/call/failed");
                 }
-                modal.style.display = "none";
-                $("#modal-placeholder").empty();
-                location.href = data.url;
+                else{
+                    modal.style.display = "none";
+                    $("#modal-placeholder").empty();
+                    $(".modal-placeholder").load("/profil-penerima/call/success");
+                    // location.href = data.url;
+                }
             }
         });
     });

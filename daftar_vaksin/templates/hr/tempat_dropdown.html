@@ -1,0 +1,4 @@
+<option value="">Pilih tempat vaksinasi</option>
+{% for place in tempat %}
+<option value="{{ place.penyedia.namaInstansi }}">{{ place.penyedia.namaInstansi }}</option>
+{% endfor %}

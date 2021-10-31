@@ -1,4 +1,4 @@
-.button-primary, .button-secondary, .button-primary-icon, .button-primary-icon-danger {
+.button-primary, .button-secondary, .button-primary-icon, .button-primary-icon-danger, .button-primary-icon-success {
     font-weight: bold;
     background-color: #3561FF; /* Green */
     border: none;
@@ -11,7 +11,7 @@
     border-radius: 8px;
 }
 
-.button-primary-icon, .button-primary-icon-danger {
+.button-primary-icon, .button-primary-icon-danger, .button-primary-icon-success {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -21,7 +21,12 @@
     background-color: #FF2222;
 }
 
-.button-primary-icon p,.button-primary-icon-danger p {
+.button-primary-icon-success {
+    background-color: #1ab50e;
+    
+}
+
+.button-primary-icon p,.button-primary-icon-danger p, .button-primary-icon-success p {
     margin: 0;
 }
 
@@ -39,6 +44,12 @@
 
 .button-primary-icon-danger:hover {
     background-color: #C91A1A;
+    color: white;
+    cursor: pointer;
+}
+
+.button-primary-icon-success:hover {
+    background-color: #0f8006;
     color: white;
     cursor: pointer;
 }

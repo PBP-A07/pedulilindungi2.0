@@ -35,6 +35,12 @@
   overflow-y: auto;
 }
 
+
+.modal-body-txt {
+  margin: 0px 12px 0px 12px;
+  line-height: 1.5rem;
+}
+
 /* The Close Button */
 .close, .close-white {
   color: white;

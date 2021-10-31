@@ -7,7 +7,7 @@
 {% endblock meta %}
 
 {% block content %}
-    <div class="circle"></div>
+    
     {% include 'main/header_afterlogin.html' %}
     
     <section class="landing">
@@ -22,7 +22,7 @@
     
     <section class="about">
         <div class="about-img">
-            <p><img src="{% static 'img/vaccine-illustration.jpg' %}" width=500px></p>
+            <div class="circle"></div>
         </div>
         <div class="about-text">
             <h2>Tentang PeduliLindungi2.0</h2>
@@ -44,7 +44,7 @@
 
             <div class="to-forum">
                 <p>Ingin tahu lebih dalam? Tanyakan pertanyaanmu di<a href="#forum">forum</a></p>
-                <p class="image"><img src="{% static 'img/forum-illustration.jpg' %}" width=500px></p>
+                <div class="image"></div>
             </div>
         </div>
     </section>
