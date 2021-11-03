@@ -2,6 +2,7 @@ from django.http.response import Http404, HttpResponseBadRequest, HttpResponseFo
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from biodata.models import Penyedia
+from daftar_vaksin.models import JadwalVaksin
 from .models import CatatanPenyedia
 from .forms import CatatanPenyediaForm, EditPenyediaForm
 from django.contrib.auth.decorators import login_required
@@ -65,4 +66,10 @@ def tambah_catatan(request):
 
 @login_required(login_url='/auth/login/')
 def lihat_pendaftar(request):
-    return render(request, 'lihat_pendaftar.html')
+    if request.user.profile.role != 'penyedia':
+        return HttpResponseForbidden("You are not allowed to access this page because of your current role")
+
+    penyedia = Penyedia.objects.get(superUser = request.user)
+    people = JadwalVaksin.objects.filter(place = penyedia).values('penerima', 'tanggal')
+    response = {'people': people}
+    return render(request, 'lihat_pendaftar.html', response)
