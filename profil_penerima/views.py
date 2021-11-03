@@ -192,6 +192,9 @@ def get_vaccine_ticket(request):
     except JadwalVaksin.DoesNotExist:
         return JsonResponse({'id' : -1})
 
+    except:
+        return JsonResponse({'id' : -1})
+
 @login_required(login_url='/auth/login/')
 def get_vaccine_ticket_failed(request):
 
