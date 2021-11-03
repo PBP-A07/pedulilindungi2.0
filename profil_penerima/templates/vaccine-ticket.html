@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>Vaccine Ticket</title>
+
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/main.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/button.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/reminders.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/modal.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/forms.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penerima/tiket.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            const editbtn = [];
+            const delbtn = [];
+
+            $(document).ready(function(){
+                $.ajax({
+                    url: "/profil-penerima/vaccine/ticket/get", 
+                    success: function(result){
+                        // there are Messages to Display
+                        if(result.id == undefined){
+                            
+                            // editbtn[0] = ('<div class="small-btn"><a onclick="editFunction(this)" id="' + result[0].pk + '" class="edit-btn-txt">Ubah Catatan</a><span class="material-icons" style="color: #3561FF;">mode_edit</span></div>');
+                            delbtn[0] = ('<div class="small-btn"><a onclick="deleteVaccineFunction(this)" id="' + result[1].pk + '" class="delete-btn-txt">Hapus Jadwal Vaksin</a><span class="material-icons" style="color: #FF2222;">delete_forever</span></div>');
+                            var vaccinePlace = result[1].fields.tempat + ", " + result[1].fields.kota;
+
+                            $(".ticket-card").append(
+                                '<div class="ticket-card-content" id="row'+result[0].pk+'">'+
+                                    "<h3>"+result[0].fields.namaLengkap+"</h3>"+
+                                    "<p>NIK: "+result[0].fields.NIK+"</p>"+
+                                    "<div class='ticket-card-details'>"+
+                                        "<h5 class='ticket-card-subtitle'>Tempat Vaksinasi</h5>"+
+                                        "<p>"+vaccinePlace+"</p>"+
+                                        "<h5 class='ticket-card-subtitle'>Tanggal Vaksinasi</h5>"+
+                                        "<p>"+result[1].fields.tanggal+"</p>"+
+                                        "<h5 class='ticket-card-subtitle'>Jenis Vaksin</h5>"+
+                                        "<p>"+result[1].fields.jenis_vaksin+"</p>"+
+                                    "</div>"+
+                                    "<p class='ticket-card-notes'>Jika anda ingin mengganti jadwal vaksinasi,</p>"+
+                                    "<p class='ticket-card-notes'>silakan hapus kartu ini dan buat jadwal baru</p>"+
+                                    '<div class="small-btn-container-center" style="margin-top: 24px;">'+delbtn[0]+"</div>"+
+                                "</div>"
+                            );
+                            
+                        }
+                        // there are NO messages
+                        else{
+                            console.log("No Messages to Show") 
+                            $('.ticket-card').load('/profil-penerima/vaccine/ticket/get/failed');
+                        }       
+                    }
+                });
+            });
+
+            function deleteVaccineFunction(elem) {
+                $(function(){
+                    $(".modal-placeholder").load("/profil-penerima/vaccine/delete/"+elem.id);
+                });
+            }
+
+        </script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder"></div>
+    <div class="modal-placeholder" id="modal-placeholder"></div>
+
+    <div class="main">
+        <div class="top-section">
+            <div class="small-btn">
+                <span class="material-icons" style="color: #3561FF; margin-right: 12px;">arrow_back_ios_new</span>
+                <a href="#" class="edit-btn-txt" onclick="location.href = '/profil-penerima/';">Kembali</a>
+            </div>
+        </div>
+
+        <div class="headers">
+            <h1>TIKET VAKSINASI</h1>
+            <!-- <div class="small-btn">
+                <a href="#" class="edit-btn-txt" onclick="editProfile()">Ubah Data</a>
+                <span class="material-icons" style="color: #3561FF;">mode_edit</span>
+            </div> -->
+        </div>
+
+        <div class="ticket-div-container">
+            <div class="ticket-card-container">
+                <div class="ticket-card">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+
+</html>
