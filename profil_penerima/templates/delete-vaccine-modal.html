@@ -1,0 +1,63 @@
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header-white">
+            <h2 class="h2Delete" id="{{ vaccine.id }}">Anda yakin ingin menghapus jadwal vaksin di {{ vaccine.tempat }}?</h2>
+            <span class="close-white">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="btn-container-row">
+
+                <form action="" method="POST" id="deleteForm">
+                    {% csrf_token %}
+                    <button class="button-primary-icon-danger" id="deleteBtnConfirm">
+                        <span class="material-icons" style="color: white;">delete_forever</span>
+                        <p>Hapus</p>
+                    </button>
+                </form>
+
+                <button class="button-secondary" onclick="closeModal()">
+                    Kembali
+                </button>
+            </div>
+        </div>
+    </div>
+  
+  </div>
+  
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close-white")[0];
+
+function closeModal() {
+    $(function(){
+        modal.style.display = "none";
+        $("#modal-placeholder").empty();
+    });
+}
+span.onclick = () => closeModal();
+
+$(document).ready(function(){
+
+    $('.button-primary-icon-danger').click(function(event){
+            var elemID = document.getElementsByClassName("h2Delete")[0].id;
+            event.preventDefault(); //so that we stop normal form submit.
+            $.ajax({
+                url: '/profil-penerima/vaccine/delete/'+elemID,
+                type: 'POST',
+                dataType: 'json',
+                data: $('form#deleteForm').serialize(),
+                success: function (data) {
+                    modal.style.display = "none";
+                    $("#modal-placeholder").empty();
+                    location.href = data.url;
+                }
+            });
+        });
+});
+
+</script>

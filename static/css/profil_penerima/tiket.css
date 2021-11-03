@@ -30,13 +30,13 @@
     box-shadow: 8px 14px 30px -2px rgba(0, 0, 0, 0.1), inset 7px 12px 7px rgba(255, 255, 255, 0.5), inset -3px -3px 11px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
     
-    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-name: fadeInTicket; /* Fade in the background */
     -webkit-animation-duration: 1s;
-    animation-name: fadeIn;
+    animation-name: fadeInTicket;
     animation-duration: 1s;
-    -webkit-animation-name: slideIn;
+    -webkit-animation-name: slideInTicket;
     -webkit-animation-duration: 1s;
-    animation-name: slideIn;
+    animation-name: slideInTicket;
     animation-duration: 1s;
 }
 
@@ -46,25 +46,48 @@
 }
 
 .ticket-card-content h3 {
-    margin-top: 0px;
+    margin: 0px;
 }
 
-@-webkit-keyframes slideIn {
+.ticket-card-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem 0rem 1rem 0rem;
+    min-width: 20rem;
+}
+
+.ticket-card-details p {
+    margin: 0px 24px 24px 0px;
+}
+
+.ticket-card-subtitle {
+    font-weight: bold;
+    margin: 0px 0px 8px 0px;
+    text-transform: uppercase;
+}
+
+.ticket-card-notes {
+    font-style: italic;
+    margin: 4px;
+}
+
+@-webkit-keyframes slideInTicket {
     from {bottom: -300px; opacity: 0} 
     to {bottom: 0.8rem; opacity: 1}
 }
 
-@keyframes slideIn {
+@keyframes slideInTicket {
     from {bottom: -300px; opacity: 0}
     to {bottom: 0.8rem; opacity: 1}
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes fadeInTicket {
     from {opacity: 0} 
     to {opacity: 1}
 }
 
-@keyframes fadeIn {
+@keyframes fadeInTicket {
     from {opacity: 0} 
     to {opacity: 1}
 }

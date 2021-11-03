@@ -31,14 +31,25 @@
                         // there are Messages to Display
                         if(result.id == undefined){
                             
-                            editbtn[0] = ('<div class="small-btn"><a onclick="editFunction(this)" id="' + result[0].pk + '" class="edit-btn-txt">Ubah Catatan</a><span class="material-icons" style="color: #3561FF;">mode_edit</span></div>');
-                            delbtn[0] = ('<div class="small-btn"><a onclick="deleteFunction(this)" id="' + result[0].pk + '" class="delete-btn-txt">Hapus Catatan</a><span class="material-icons" style="color: #FF2222;">delete_forever</span></div>');
+                            // editbtn[0] = ('<div class="small-btn"><a onclick="editFunction(this)" id="' + result[0].pk + '" class="edit-btn-txt">Ubah Catatan</a><span class="material-icons" style="color: #3561FF;">mode_edit</span></div>');
+                            delbtn[0] = ('<div class="small-btn"><a onclick="deleteVaccineFunction(this)" id="' + result[1].pk + '" class="delete-btn-txt">Hapus Catatan</a><span class="material-icons" style="color: #FF2222;">delete_forever</span></div>');
+                            var vaccinePlace = result[1].fields.tempat + ", " + result[1].fields.kota;
 
                             $(".ticket-card").append(
                                 '<div class="ticket-card-content" id="row'+result[0].pk+'">'+
                                     "<h3>"+result[0].fields.namaLengkap+"</h3>"+
-                                    "<p>"+result[0].fields.NIK+"</p>"+
-                                    '<div class="small-btn-container">'+editbtn[0]+delbtn[0]+"</div"+
+                                    "<p>NIK: "+result[0].fields.NIK+"</p>"+
+                                    "<div class='ticket-card-details'>"+
+                                        "<h5 class='ticket-card-subtitle'>Tempat Vaksinasi</h5>"+
+                                        "<p>"+vaccinePlace+"</p>"+
+                                        "<h5 class='ticket-card-subtitle'>Tanggal Vaksinasi</h5>"+
+                                        "<p>"+result[1].fields.tanggal+"</p>"+
+                                        "<h5 class='ticket-card-subtitle'>Jenis Vaksin</h5>"+
+                                        "<p>"+result[1].fields.jenis_vaksin+"</p>"+
+                                    "</div>"+
+                                    "<p class='ticket-card-notes'>Jika anda ingin mengganti jadwal vaksinasi,</p>"+
+                                    "<p class='ticket-card-notes'>silakan hapus kartu ini dan buat jadwal baru</p>"+
+                                    '<div class="small-btn-container-center" style="margin-top: 24px;">'+delbtn[0]+"</div>"+
                                 "</div>"
                             );
                             
@@ -51,6 +62,12 @@
                     }
                 });
             });
+
+            function deleteVaccineFunction(elem) {
+                $(function(){
+                    $(".modal-placeholder").load("/profil-penerima/vaccine/delete/"+elem.id);
+                });
+            }
 
         </script>
 
