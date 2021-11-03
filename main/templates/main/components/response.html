@@ -17,7 +17,7 @@
             <input type="hidden" name="question" value={{question.id}}>
             <input type="hidden" name="parent" value={{response.id}}>
             <p>{{ reply_form.body }}</p>
-            <button id="{{response.id}}" onclick="handleCancelButton(this.id)" class="btn btn-secondary">Batal</button>
+            <button type="button" id="{{response.id}}" onclick="handleCancelButton(this.id)" class="btn btn-secondary">Batal</button>
             <button type="Submit" class="btn btn-secondary">Kirim</button>
         </form>
     </blockquote>
