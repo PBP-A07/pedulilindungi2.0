@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Vaksin | Pedulilindungi2.0</title>
+    <title>Tambah Vaksin | Pedulilindungi2.0</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
     <div class="container">
         <div class="title">
-            <h1>DAFTAR VAKSIN</h1>
+            <h1>TAMBAH VAKSIN</h1>
         </div>
         <div class="input-container">
-            <form method="POST" action="" id="daftarVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis-vaksin' %}" novalidate>
+            <form method="POST" action="" id="tambahVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis-vaksin' %}">
                 {%csrf_token%}
                 <div class="input" id="kota">
-                    <label for="">Kota</label>
+                    <label for="">Jenis</label>
                     <br>
-                    {{form.kota}}
+                    {{form.jenis}}
                 </div>
                 <div class="input" id="tanggal">
                     <label for="">Tanggal</label>
@@ -28,16 +28,11 @@
                     {{form.tanggal}}
                 </div>
                 <div class="input" id="jenis_vaksin">
-                    <label for="">Jenis Vaksin</label>
+                    <label for="">Jumlah</label>
                     <br>
-                    {{form.jenis_vaksin}}
+                    {{form.jumlah}}
                 </div>
-                <div class="input" id="tempat">
-                    <label for="">Tempat</label>
-                    <br>
-                    {{form.tempat}}
-                </div>
-                <button class="btn" type="submit" value="Daftar Vaksinasi">Daftar Vaksinasi</button>
+                <input type="submit" class="btn" value="Tambahkan Jadwal">
             </form>
         </div>
     </div>
@@ -91,6 +86,7 @@
             });
 
         });
+
         
     </script>
 </body>
