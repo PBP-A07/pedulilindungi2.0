@@ -38,6 +38,7 @@ def daftar_vaksin(request):
 
     return render(request, 'daftar_vaksin.html', {'form': form})
 
+
 def load_tanggal(request):
     kota_id = request.GET.get('kota')
     tanggal = Vaksin.objects.filter(penyedia__kota=kota_id).values_list(
