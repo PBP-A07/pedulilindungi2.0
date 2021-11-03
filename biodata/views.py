@@ -4,10 +4,6 @@ from django.shortcuts import render
 from .forms import PesertaForm, PenyediaForm
 from .models import *
 
-def index(request):
-    response = {}
-    return render(request, 'index_PTS.html', response)
-
 @login_required(login_url='/auth/login/')
 def biodata_peserta(request):
     context ={}
@@ -18,28 +14,12 @@ def biodata_peserta(request):
     context['form']= form
     return render(request, "peserta_form.html", context)
 
-# @login_required(login_url='/admin/login/')
 @login_required(login_url='/auth/login/')
 def biodata_penyedia(request):
     context ={}
   
     # create object of form
     form = PenyediaForm(request.POST or None, label_suffix="") # label_suffix="" -> ilangin titik-dua (:) untuk field
-      
-    # # check if form data is valid
-    # if (form.is_valid and request.method == 'POST'):
-    #     # save the form data to model
-    #     form.save()
-
-    #     # Get data from forms.
-    #     instansi = form.cleaned_data.get("namaInstansi")
-    #     kota = form.cleaned_data.get("kota")
-    #     telepon = form.cleaned_data.get("nomorTelepon")
-    #     alamat = form.cleaned_data.get("alamat")
-
-    #     # update_profile_penyedia(request, request.user.username, instansi, kota, telepon, alamat)
-
-    #     return HttpResponseRedirect('/biodata')
   
     context['form']= form
     return render(request, "penyedia_form.html", context)
