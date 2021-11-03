@@ -88,7 +88,7 @@
 
 .circle {
     position: absolute;
-    top: 680px;
+    top: 600px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -103,7 +103,7 @@
 /* FAQ PAGE */
 .faq {
     background-color: white;
-    padding-top: 70px;
+    padding-top: 100px;
     padding-bottom: 70px;
 }
 
@@ -367,8 +367,9 @@ blockquote {
     /* FAQ PAGE */
     .faq {
         background-color: white;
-        padding-top: 0px;
+        padding-top: 70px;
         padding-bottom: 70px;
+        margin-left: 100px;
     }
 
     .faq .container {
