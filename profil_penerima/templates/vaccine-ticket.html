@@ -32,7 +32,7 @@
                         if(result.id == undefined){
                             
                             // editbtn[0] = ('<div class="small-btn"><a onclick="editFunction(this)" id="' + result[0].pk + '" class="edit-btn-txt">Ubah Catatan</a><span class="material-icons" style="color: #3561FF;">mode_edit</span></div>');
-                            delbtn[0] = ('<div class="small-btn"><a onclick="deleteVaccineFunction(this)" id="' + result[1].pk + '" class="delete-btn-txt">Hapus Catatan</a><span class="material-icons" style="color: #FF2222;">delete_forever</span></div>');
+                            delbtn[0] = ('<div class="small-btn"><a onclick="deleteVaccineFunction(this)" id="' + result[1].pk + '" class="delete-btn-txt">Hapus Jadwal Vaksin</a><span class="material-icons" style="color: #FF2222;">delete_forever</span></div>');
                             var vaccinePlace = result[1].fields.tempat + ", " + result[1].fields.kota;
 
                             $(".ticket-card").append(
