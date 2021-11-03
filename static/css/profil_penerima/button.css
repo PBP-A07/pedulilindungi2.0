@@ -68,10 +68,15 @@
     gap: 40px 40px;
 }
 
-.small-btn-container {
+.small-btn-container, .small-btn-container-center {
     display: flex;
     flex-direction: row;
     gap: 24px;
+}
+
+.small-btn-container-center {
+    align-items: center;
+    justify-content: center;
 }
 
 .small-btn, .disabled-small-btn {

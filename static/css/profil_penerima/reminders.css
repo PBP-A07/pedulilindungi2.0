@@ -21,7 +21,7 @@
     line-height: 1.5rem;
 }
 
-.notes-content {
+.notes-content, .notes-content-template {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -30,12 +30,12 @@
     width: 100%;
 }
 
-.notes-content h3 {
+.notes-content h3, .notes-content-template h3 {
     max-width: 35rem;
     word-wrap: break-word;
 }
 
-.notes-content p, .notes-content li {
+.notes-content p, .notes-content li, .notes-content-template p, .notes-content-template li {
     margin: 0px 0px 10px 0px;
     word-wrap: break-word;
     line-height: 1.5rem;
