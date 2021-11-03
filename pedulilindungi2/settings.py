@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'profil_penerima',
     'profil_penyedia',
     'daftar_vaksin',
-    'tambah_vaksin'
+    'tambah_vaksin',
     
 ]
 
