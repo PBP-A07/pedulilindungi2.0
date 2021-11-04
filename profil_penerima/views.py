@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from biodata.models import Peserta
 from django.core import serializers
+import datetime
 
 from daftar_vaksin.models import JadwalVaksin
 from .forms import *
@@ -186,13 +187,15 @@ def get_vaccine_ticket(request):
     # Uncomment and finish this after JadwalVaksin is fixed
     try:
         vaccine = JadwalVaksin.objects.get(penerima = penerima)
-        data = serializers.serialize('json', [penerima, vaccine, ])
-        return HttpResponse(data, content_type="application/json")
+
+        if vaccine.tanggal < datetime.date.today():
+            vaccine.delete()
+            return JsonResponse({'id' : -1})
+        else:
+            data = serializers.serialize('json', [penerima, vaccine, ])
+            return HttpResponse(data, content_type="application/json")
 
     except JadwalVaksin.DoesNotExist:
-        return JsonResponse({'id' : -1})
-
-    except:
         return JsonResponse({'id' : -1})
 
 @login_required(login_url='/auth/login/')
@@ -221,7 +224,7 @@ def delete_vaccine(request, id):
             vaccine.delete()
             return JsonResponse({'url':'/profil-penerima'})
         
-    except Message.DoesNotExist:
+    except JadwalVaksin.DoesNotExist:
         return Http404
     
     return render(request, 'delete-vaccine-modal.html', {'vaccine':vaccine})
