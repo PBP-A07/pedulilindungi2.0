@@ -4,37 +4,39 @@ from django.shortcuts import render
 from .forms import DaftarVaksinForm
 from tambah_vaksin.models import Vaksin
 from biodata.models import Penyedia, Peserta
+from .models import JadwalVaksin
 
 @login_required(login_url='/auth/login/')
 def daftar_vaksin(request):
+    person = Peserta.objects.get(superUser=request.user)
     form = DaftarVaksinForm(request.POST or None)
 
-    kota = request.POST.get('kota')
-    form.fields['kota'].choices = [(kota, kota)]
-
-    tanggal = request.POST.get('tanggal')
-    form.fields['tanggal'].choices = [(tanggal, tanggal)]
-
-    jenis_vaksin = request.POST.get('jenis_vaksin')
-    form.fields['jenis_vaksin'].choices = [(jenis_vaksin, jenis_vaksin)]
-
-    tempat = request.POST.get('tempat')
-    form.fields['tempat'].choices = [(tempat, tempat)]
-    
-    if (form.is_valid() and request.method == 'POST'):
-    
-
-        person = Peserta.objects.get(superUser=request.user)
-        jadwal = form.save(commit=False)
-        jadwal.place = Penyedia.objects.get(namaInstansi=jadwal.tempat)
-        jadwal.penerima = person
-        jadwal.save()
-        vaksin = Vaksin.objects.get(penyedia=jadwal.place)
-        vaksin.jumlah -= 1
-        vaksin.save()
-        return HttpResponseRedirect('/')
+    if(JadwalVaksin.objects.filter(penerima=person).exists()):
+        return HttpResponseRedirect('/profil-penerima/vaccine/ticket')
     else:
-        form = DaftarVaksinForm()
+        kota = request.POST.get('kota')
+        form.fields['kota'].choices = [(kota, kota)]
+
+        tanggal = request.POST.get('tanggal')
+        form.fields['tanggal'].choices = [(tanggal, tanggal)]
+
+        jenis_vaksin = request.POST.get('jenis_vaksin')
+        form.fields['jenis_vaksin'].choices = [(jenis_vaksin, jenis_vaksin)]
+
+        tempat = request.POST.get('tempat')
+        form.fields['tempat'].choices = [(tempat, tempat)]
+        
+        if (form.is_valid() and request.method == 'POST'):
+            jadwal = form.save(commit=False)
+            jadwal.place = Penyedia.objects.get(namaInstansi=jadwal.tempat)
+            jadwal.penerima = person
+            jadwal.save()
+            vaksin = Vaksin.objects.get(penyedia=jadwal.place)
+            vaksin.jumlah -= 1
+            vaksin.save()
+            return HttpResponseRedirect('/profil-penerima/vaccine/ticket')
+        else:
+            form = DaftarVaksinForm()
 
     return render(request, 'daftar_vaksin.html', {'form': form})
 
