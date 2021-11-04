@@ -47,11 +47,15 @@ def load_tanggal(request):
 
 def load_jenis_vaksin(request):
     tanggal_id = request.GET.get('tanggal')
-    jenis_vaksin = Vaksin.objects.filter(tanggal=tanggal_id).values_list('jenis', flat=True).distinct()
+    kota_id = request.GET.get('kota')
+    jenis_vaksin = Vaksin.objects.filter(tanggal=tanggal_id, penyedia__kota=kota_id).values_list('jenis', flat=True).distinct()
     return render(request, 'hr/jenis_dropdown.html', {'jenis_vaksin': jenis_vaksin})
 
 def load_tempat(request):
     jenis_id = request.GET.get('jenis_vaksin')
-    tempat = Vaksin.objects.filter(jenis=jenis_id).exclude(jumlah=0).distinct()
+    tanggal_id = request.GET.get('tanggal')
+    kota_id = request.GET.get('kota')
+    tempat = Vaksin.objects.filter(
+        jenis=jenis_id, tanggal=tanggal_id, penyedia__kota=kota_id).exclude(jumlah=0).distinct()
     return render(request, 'hr/tempat_dropdown.html', {'tempat': tempat})
 

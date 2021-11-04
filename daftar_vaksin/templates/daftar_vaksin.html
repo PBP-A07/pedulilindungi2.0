@@ -63,11 +63,13 @@
         $("#id_tanggal").change(function () {
                 var url = $("#daftarVaksinForm").attr("jenis-url");
                 var tanggalId = $(this).val();
+                var kotaId = $("#id_kota").val();
 
                 $.ajax({
                     url: url,
                     data: {
-                        'tanggal': tanggalId
+                        'tanggal': tanggalId,
+                        'kota': kotaId
                     },
                     success: function (data) {
                         $("#id_jenis_vaksin").html(data);
@@ -78,12 +80,16 @@
 
         $("#id_jenis_vaksin").change(function () {
             var url = $("#daftarVaksinForm").attr("tempat-url");  
-            var jenisVaksinId = $(this).val();  
+            var jenisVaksinId = $(this).val();
+            var tanggalId = $("#id_tanggal").val();  
+            var kotaId = $("#id_kota").val();  
 
             $.ajax({                      
                 url: url,                    
                 data: {
-                    'jenis_vaksin': jenisVaksinId       
+                    'jenis_vaksin': jenisVaksinId,
+                    'tanggal': tanggalId,
+                    'kota': kotaId       
                 },
                 success: function (data) {   
                     $("#id_tempat").html(data);  
