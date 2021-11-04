@@ -40,6 +40,7 @@ def view_profile(request, usn):
     
     user = User.objects.get(username = request.user.username).profile
     penerima = Peserta.objects.get(superUser = request.user)
+    JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
 
     return render(request, 'profile.html', {'user':user, 'penerima':penerima})
 
@@ -168,6 +169,7 @@ def view_vaccine(request):
     
     user = User.objects.get(username = request.user.username).profile
     penerima = Peserta.objects.get(superUser = request.user)
+    JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
 
     return render(request, 'vaccine-ticket.html', {'user':user, 'penerima':penerima})
 
@@ -183,17 +185,14 @@ def get_vaccine_ticket(request):
 
     # user = User.objects.get(username = request.user.username).profile
     penerima = Peserta.objects.get(superUser = request.user)
+    JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
 
     # Uncomment and finish this after JadwalVaksin is fixed
     try:
         vaccine = JadwalVaksin.objects.get(penerima = penerima)
 
-        if vaccine.tanggal < datetime.date.today():
-            vaccine.delete()
-            return JsonResponse({'id' : -1})
-        else:
-            data = serializers.serialize('json', [penerima, vaccine, ])
-            return HttpResponse(data, content_type="application/json")
+        data = serializers.serialize('json', [penerima, vaccine, ])
+        return HttpResponse(data, content_type="application/json")
 
     except JadwalVaksin.DoesNotExist:
         return JsonResponse({'id' : -1})
