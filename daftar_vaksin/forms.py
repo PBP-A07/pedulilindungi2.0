@@ -4,7 +4,7 @@ from .models import JadwalVaksin
 from tambah_vaksin.models import Vaksin
 
 def get_kota():
-    return [('', 'Pilih kota tempat vaksinasi'), ] + [(i['penyedia__kota'], i['penyedia__kota']) for i in Vaksin.objects.values('penyedia__kota').distinct()]
+    return [('', 'Pilih kota tempat vaksinasi'), ] + [(i['penyedia__kota'], i['penyedia__kota']) for i in Vaksin.objects.values('penyedia__kota').exclude(jumlah=0).distinct()]
 
 class DaftarVaksinForm(ModelForm):
     tanggal_blank_choice = [('', 'Pilih tanggal vaksinasi'), ]
