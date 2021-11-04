@@ -23,7 +23,7 @@
 
     <div class="main">
         <div class="header">
-            <h1>LIHAT PENDAFTAR</h1>
+            <h1>PENDAFTAR VAKSIN</h1>
             <div class="back-btn">
                 <a href="/profil-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Profil</a>
                 <span class="material-icons" style="color: #FF2222;">person</span>
@@ -31,16 +31,19 @@
         </div>
         <br>
         <div class="notes-container">
-            <!-- {% if people %}
+            {% if people %}
                 {% for person in people %}
                 <div class="card">
-                    <h3><b>{{ person.penerima.nama }}</b></h3>
-                    <h4 style=font-weight:normal;>{{ person.tanggal }}</h4>
-                    <h4 style=font-weight:normal;>{{ person.penerima.NIK }}</h4>
-                    <h4 style=font-weight:normal;>{{ person.penerima.nomorHandphone }}</h4>
+                    <h3><b>{{ person.nama }}</b></h3>
+                    <h4 style=font-weight:normal;>NIK: {{ person.nik }}</h4>
+                    <h4 style=font-weight:normal;>No. HP: {{ person.nomor_handphone }}</h4>
+                    <h4 style=font-weight:normal;>Jenis Vaksin: {{ person.jenis_vaksin }}</h4>
+                    <h4 style=font-weight:normal;>Tanggal: {{ person.tanggal }}</h4>
                 </div>
                 {% endfor %}
-            {% endif %} -->
+            {% else %}
+            <h3><b>Belum ada pendaftar</b></h3>
+            {% endif %}
         </div>
     </div>
 

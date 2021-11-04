@@ -13,12 +13,12 @@
     width: 275px;
     padding: 16px 16px;
     margin: 10px;
-    background-color: #a0c0ff;
+    background-color: #89e5ff;
     text-align: center;
     border-radius: 8px;
 }
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    background-color:#7ea8fd;
+    background-color:#61dafc;
   }
