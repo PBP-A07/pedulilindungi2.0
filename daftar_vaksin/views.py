@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import DaftarVaksinForm
 from tambah_vaksin.models import Vaksin
@@ -22,13 +22,13 @@ def daftar_vaksin(request):
     form.fields['tempat'].choices = [(tempat, tempat)]
     
     if (form.is_valid() and request.method == 'POST'):
+    
 
         person = Peserta.objects.get(superUser=request.user)
         jadwal = form.save(commit=False)
         jadwal.place = Penyedia.objects.get(namaInstansi=jadwal.tempat)
         jadwal.penerima = person
         jadwal.save()
-
         vaksin = Vaksin.objects.get(penyedia=jadwal.place)
         vaksin.jumlah -= 1
         vaksin.save()

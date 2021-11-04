@@ -59,7 +59,7 @@
 
             function loadNotesTemplate() {
                 $(function(){
-                    $('.main-notes-container').append($('<div class="notes-content">').load('/profil-penerima/notes/load/template'));
+                    $('.notes-content-template').load('/profil-penerima/notes/load/template');
                     // $(".main-notes-container").prepend("/profil-penerima/notes/load/template");
                 });
             }
@@ -150,7 +150,7 @@
         </div>
 
         <div class="btn-container">
-            <button class="button-primary-icon">
+            <button class="button-primary-icon" onclick="location.href = '/profil-penerima/vaccine/ticket';">
                 <span class="material-icons" style="color: white;">credit_card</span>
                 <p>Lihat Tiket Vaksin</p>
             </button>
@@ -171,6 +171,7 @@
             <div class="btn-container">
                 <button class="button-secondary" onclick="showAddMessageModal()">Tambah Catatan Baru</button>
             </div>
+            <div class="notes-content-template"></div>
         </div>
 
     </div>

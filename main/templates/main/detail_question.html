@@ -24,7 +24,7 @@
             <form method="POST" action="" class="response-form">
                 {% csrf_token %}
                 <p>{{ response_form.body }}</p>
-                <button id="{{response.id}}" onclick="handleCancelButton(this.id)" class="btn btn-secondary">Batal</button>
+                <button type="button" id="{{response.id}}" onclick="handleCancelButton(this.id)" class="btn btn-secondary">Batal</button>
                 <button type="Submit" class="btn btn-secondary">Kirim</button>
             </form>
         </blockquote>
