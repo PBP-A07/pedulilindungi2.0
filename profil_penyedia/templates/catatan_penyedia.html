@@ -6,7 +6,7 @@
     <head>
 
         <meta charset="UTF-8" />
-        <title>Lihat Pendaftar | PeduliLindungi2.0</title>
+        <title>Catatan Penyedia | PeduliLindungi2.0</title>
 
         <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_ubah_data_penyedia.css' %}" />
         <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_profil_penyedia.css' %}" />
@@ -23,26 +23,30 @@
 
     <div class="main">
         <div class="header">
-            <h1>PENDAFTAR VAKSIN</h1>
+            <h1>CATATAN PENYEDIA</h1>
             <div class="back-btn">
                 <a href="/profil-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Profil</a>
                 <span class="material-icons" style="color: #FF2222;">person</span>
             </div>
         </div>
         <br>
+        <div class="upper-btn-container">
+            <button class="button-primary-icon" onclick="location.href = '/profil-penyedia/tambah-catatan'">
+                <span class="material-icons" style="color: white;">add</span>
+                <p>Tambah Catatan</p>
+            </button>
+        </div>
+        <br>
         <div class="notes-container">
-            {% if people %}
-                {% for person in people %}
+            {% if notes %}
+                {% for note in notes %}
                 <div class="card">
-                    <h3><b>{{ person.nama }}</b></h3>
-                    <h4 style=font-weight:normal;>NIK: {{ person.nik }}</h4>
-                    <h4 style=font-weight:normal;>No. HP: {{ person.nomor_handphone }}</h4>
-                    <h4 style=font-weight:normal;>Jenis Vaksin: {{ person.jenis_vaksin }}</h4>
-                    <h4 style=font-weight:normal;>Tanggal: {{ person.tanggal }}</h4>
+                    <h3><b>{{ note.title }}</b></h3>
+                    <h4 style=font-weight:normal;>{{ note.message }}</h4>
                 </div>
                 {% endfor %}
             {% else %}
-            <h3><b>Belum ada pendaftar</b></h3>
+            <h3><b>Belum ada catatan</b></h3>
             {% endif %}
         </div>
     </div>
