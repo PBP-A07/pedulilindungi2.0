@@ -6,7 +6,7 @@
     <head>
 
         <meta charset="UTF-8" />
-        <title>Ubah Data Penyedia | PeduliLindungi2.0</title>
+        <title>Tambah Catatan Penyedia | PeduliLindungi2.0</title>
 
         <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_ubah_data_penyedia.css' %}" />
         <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_ubah_data_penyedia.css' %}" />
@@ -22,10 +22,10 @@
 
     <div class="main">
         <div class="header">
-            <h1>UBAH DATA PENYEDIA</h1>
+            <h1>TAMBAH CATATAN PENYEDIA</h1>
             <div class="back-btn">
-                <a href="/profil-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Profil</a>
-                <span class="material-icons" style="color: #FF2222;">person</span>
+                <a href="/profil-penyedia/catatan-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Kumpulan Catatan</a>
+                <span class="material-icons" style="color: #FF2222;">grid_view</span>
             </div>
         </div>
 
@@ -33,26 +33,16 @@
             <form action="" method="POST">
                 <div class="row">
                     <div class="data">
-                        <h5>Nama Instansi</h5>
+                        <h5>Judul</h5>
                         {% csrf_token %}
-                        {{form.namaInstansi}}
+                        <input type="text" name="title" required>
                     </div>
                     <div class="data">
-                        <h5>Kota</h5>
+                        <h5>Pesan</h5>
                         {% csrf_token %}
-                        {{form.kota}}
+                        <input type="textarea" name="message" required>
                     </div>
-                    <div class="data">
-                        <h5>Nomor Telepon</h5>
-                        {% csrf_token %}
-                        {{form.nomorTelepon}}
-                    </div>
-                    <div class="data">
-                        <h5>Alamat</h5>
-                        {% csrf_token %}
-                        {{form.alamat}}
-                    </div>
-                    <P><input type="submit" value="Simpan"></P>
+                    <P><input type="submit" value="Tambah"></P>
                 </div>
             </form>
         </div>
