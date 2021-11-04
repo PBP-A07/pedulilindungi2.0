@@ -7,17 +7,17 @@ from django.dispatch import receiver
 
 class Peserta(models.Model):
     namaLengkap = models.CharField(max_length=25)
-    NIK = models.IntegerField(unique=True)
+    NIK = models.CharField(max_length=16,unique=True)
     tanggalLahir = models.DateField()
     jenisKelamin = models.CharField(max_length=10)
-    nomorHandphone = models.IntegerField()
+    nomorHandphone = models.CharField(max_length=12)
     alamat = models.CharField(max_length=100)
     superUser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 class Penyedia(models.Model):
     namaInstansi = models.CharField(max_length=50, unique=True)
     kota = models.CharField(max_length=20)
-    nomorTelepon = models.IntegerField()
+    nomorTelepon = models.CharField(max_length=10)
     alamat = models.CharField(max_length=100)
     superUser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
