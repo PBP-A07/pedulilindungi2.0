@@ -11,6 +11,7 @@ from .models import JadwalVaksin
 @login_required(login_url='/auth/login/')
 def daftar_vaksin(request):
     JadwalVaksin.objects.filter(tanggal__lt=date.today()).delete()
+    Vaksin.objects.filter(tanggal__lt=date.today()).delete()
     person = Peserta.objects.get(superUser=request.user)
     form = DaftarVaksinForm(request.POST or None)
 
