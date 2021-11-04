@@ -1,13 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
+from datetime import date
 from .forms import DaftarVaksinForm
 from tambah_vaksin.models import Vaksin
 from biodata.models import Penyedia, Peserta
 from .models import JadwalVaksin
 
+
 @login_required(login_url='/auth/login/')
 def daftar_vaksin(request):
+    # JadwalVaksin.objects.filter(tanggal__lt=date.today()).delete()
     person = Peserta.objects.get(superUser=request.user)
     form = DaftarVaksinForm(request.POST or None)
 
