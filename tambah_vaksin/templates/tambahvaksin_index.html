@@ -15,7 +15,7 @@
             <h1>TAMBAH VAKSIN</h1>
         </div>
         <div class="input-container">
-            <form method="POST" action="" id="tambahVaksinForm" tempat-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jenis-url="{% url 'ajax-load-jenis-vaksin' %}">
+            <form method="POST" action="" id="tambahVaksinForm" jenis-url="{% url 'ajax-load-tempat' %}" tanggal-url="{% url 'ajax-load-tanggal' %}" jumlah-url="{% url 'ajax-load-jenis-vaksin' %}">
                 {%csrf_token%}
                 <div class="input" id="kota">
                     <label for="">Jenis</label>
@@ -39,24 +39,24 @@
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        $("#id_kota").change(function () {
-            var url = $("#daftarVaksinForm").attr("tanggal-url");  
-            var kotaId = $(this).val();  
+        $("#id_jenis").change(function () {
+            var url = $("#tambahVaksinForm").attr("jenis-url");  
+            var jenisId = $(this).val();  
 
             $.ajax({                       
                 url: url,                    
                 data: {
-                    'kota': kotaId       
+                    'jenis': jenisId       
                 },
                 success: function (data) {   
-                    $("#id_tanggal").html(data);  
+                    $("#id_jenis").html(data);  
                 }
             });
 
         });
 
         $("#id_tanggal").change(function () {
-                var url = $("#daftarVaksinForm").attr("jenis-url");
+                var url = $("#tanggalVaksinForm").attr("tanggal-url");
                 var tanggalId = $(this).val();
 
                 $.ajax({
@@ -65,29 +65,12 @@
                         'tanggal': tanggalId
                     },
                     success: function (data) {
-                        $("#id_jenis_vaksin").html(data);
+                        $("#id_tanggal").html(data);
                     }
                 });
 
             });
-
-        $("#id_jenis_vaksin").change(function () {
-            var url = $("#daftarVaksinForm").attr("tempat-url");  
-            var jenisVaksinId = $(this).val();  
-
-            $.ajax({                      
-                url: url,                    
-                data: {
-                    'jenis_vaksin': jenisVaksinId       
-                },
-                success: function (data) {   
-                    $("#id_tempat").html(data);  
-                }
-            });
-
-        });
-
-        
+ 
     </script>
 </body>
 </html>

@@ -26,4 +26,5 @@ urlpatterns = [
     path('biodata/', include('biodata.urls')),
     path('daftar-vaksin/', include('daftar_vaksin.urls')),
     path('auth/', include('account.urls')),
+    path('tambah-vaksin/', include('tambah_vaksin.urls')),
 ]
