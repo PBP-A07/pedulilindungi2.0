@@ -10,6 +10,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
+    <header style="z-index: 3;">
+        <p class="logo">PeduliLindungi2.0</p>
+        <nav>
+            <a class="tulisan" href="/">Home</a>
+            <a class="now" href="">Daftar Vaksin</a>
+            <a class="tulisan" href="/profil-penerima">Profile</a>
+            <a class="tulisan" href="/auth/logout">Log Out</a>
+        </nav>
+    </header>
     <div class="container">
         <div class="title">
             <h1>DAFTAR VAKSIN</h1>
@@ -63,11 +72,13 @@
         $("#id_tanggal").change(function () {
                 var url = $("#daftarVaksinForm").attr("jenis-url");
                 var tanggalId = $(this).val();
+                var kotaId = $("#id_kota").val();
 
                 $.ajax({
                     url: url,
                     data: {
-                        'tanggal': tanggalId
+                        'tanggal': tanggalId,
+                        'kota': kotaId
                     },
                     success: function (data) {
                         $("#id_jenis_vaksin").html(data);
@@ -78,12 +89,16 @@
 
         $("#id_jenis_vaksin").change(function () {
             var url = $("#daftarVaksinForm").attr("tempat-url");  
-            var jenisVaksinId = $(this).val();  
+            var jenisVaksinId = $(this).val();
+            var tanggalId = $("#id_tanggal").val();  
+            var kotaId = $("#id_kota").val();  
 
             $.ajax({                      
                 url: url,                    
                 data: {
-                    'jenis_vaksin': jenisVaksinId       
+                    'jenis_vaksin': jenisVaksinId,
+                    'tanggal': tanggalId,
+                    'kota': kotaId       
                 },
                 success: function (data) {   
                     $("#id_tempat").html(data);  

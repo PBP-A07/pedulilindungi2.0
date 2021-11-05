@@ -18,8 +18,8 @@ class PesertaForm (forms.ModelForm):
             'namaLengkap': forms.TextInput(attrs={'placeholder': 'Masukkan nama lengkap kamu', 
                     'class' : 'inputan d-flex flex-column w-100 p-2 my-1', 'id' : 'fullName'}),
 
-            'NIK': forms.TextInput(attrs={'placeholder': 'Masukkan NIK kamu', 'type' : 'number', 
-                        'maxlength': 16, 'minlength': 15,
+            'NIK': forms.TextInput(attrs={'placeholder': 'Masukkan NIK kamu', 
+                        'type' : 'number', 'minlength': 15,
                     'class' : 'inputan d-flex flex-column w-100 p-2 my-1', 'id' : 'nik'}),
 
             'tanggalLahir': forms.DateInput(attrs={'placeholder': 'Pilih tanggal lahir kamu',
@@ -30,8 +30,8 @@ class PesertaForm (forms.ModelForm):
             'jenisKelamin': forms.Select(choices = GENDER_CHOICES, attrs={
                     'class' : 'inputan d-flex flex-column w-100 p-2 my-1','id' : 'gender'}),
 
-            'nomorHandphone': forms.TextInput(attrs={'placeholder': 'Masukkan nomor handphone kamu', 'type' : 'number',
-                        'maxlength': 12, 'minlength': 11,
+            'nomorHandphone': forms.TextInput(attrs={'placeholder': 'Masukkan nomor handphone kamu', 
+                        'type' : 'number', 'minlength': 11,
                     'class' : 'inputan d-flex flex-column w-100 p-2 my-1','id' : 'hp'}),
                     
             'alamat': forms.TextInput(attrs={'placeholder': 'Masukkan alamat tinggal kamu',
@@ -52,7 +52,7 @@ class PenyediaForm (forms.ModelForm):
                         'class' : 'inputan d-flex flex-column w-100 p-2','id' : 'city'}),
 
             'nomorTelepon': forms.TextInput(attrs={'placeholder': 'Masukkan nomor telepon instansi kamu',
-                        'type' : 'number', 'maxlength': 10, 'size': 10, 'minlength': 9,
+                        'type' : 'number', 'size': 10, 'minlength': 9,
                         'class' : 'inputan d-flex flex-column w-100 p-2','id' : 'telp'}),
 
             'alamat': forms.TextInput(attrs={'placeholder': 'Masukkan alamat instansi kamu',

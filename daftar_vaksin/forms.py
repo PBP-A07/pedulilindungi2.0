@@ -1,10 +1,10 @@
 from django import forms
 from django.forms import ModelForm
 from .models import JadwalVaksin
-from biodata.models import Penyedia
+from tambah_vaksin.models import Vaksin
 
 def get_kota():
-    return [('', 'Pilih kota tempat vaksinasi'), ] + [(i['kota'], i['kota']) for i in Penyedia.objects.values('kota').distinct()]
+    return [('', 'Pilih kota tempat vaksinasi'), ] + [(i['penyedia__kota'], i['penyedia__kota']) for i in Vaksin.objects.values('penyedia__kota').exclude(jumlah=0).distinct()]
 
 class DaftarVaksinForm(ModelForm):
     tanggal_blank_choice = [('', 'Pilih tanggal vaksinasi'), ]
