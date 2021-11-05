@@ -1,0 +1,59 @@
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header-white">
+        <h2 class="h2Edit" id="{{ message.id }}">Mengubah Notes Berjudul {{ message.msg_title }}</h2>
+        <span class="close-white">&times;</span>
+      </div>
+      <div class="modal-body">
+          <div class="form-body">
+            <form class="form" action="" method="POST" id="renameForm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="UPDATE" class="button-primary" id="submitbtn">
+            </form>
+          </div>
+          
+      </div>
+    </div>
+  
+</div>
+  
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close-white")[0];
+
+var submit = $("#submitbtn");
+
+var submitbtn = $(".button-primary");
+
+
+$(document).ready(function(){
+    span.onclick = function() {
+        modal.style.display = "none";
+        $("#modal-placeholder").empty();
+    }
+
+$('.button-primary').click(function(event){
+        var elemID = document.getElementsByClassName("h2Edit")[0].id;
+        event.preventDefault(); //so that we stop normal form submit.
+        $.ajax({
+            url: '/profil-penerima/notes/edit/'+elemID,
+            type: 'POST',
+            dataType: 'json',
+            data: $('form#renameForm').serialize(),
+            success: function (data) {
+                modal.style.display = "none";
+                $("#modal-placeholder").empty();
+                $(".modal-placeholder").load("/profil-penerima/call/success");
+                // location.href = data.url;
+            }
+        });
+    });
+});
+
+</script>

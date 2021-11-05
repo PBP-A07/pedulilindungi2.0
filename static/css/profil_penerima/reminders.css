@@ -1,0 +1,42 @@
+.main-notes-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 60px;
+    margin: 40px 20px;
+    box-shadow: 3px 12px 32px -9px rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    min-width: 30rem;
+    max-width: 35rem;
+}
+
+.notes-container-header {
+    text-align: center;
+    margin: 0px 0px 20px 0px;
+}
+
+.notes-container-header p {
+    margin: 0px;
+    line-height: 1.5rem;
+}
+
+.notes-content, .notes-content-template {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 40px 0px 10px 0px;
+    width: 100%;
+}
+
+.notes-content h3, .notes-content-template h3 {
+    max-width: 35rem;
+    word-wrap: break-word;
+}
+
+.notes-content p, .notes-content li, .notes-content-template p, .notes-content-template li {
+    margin: 0px 0px 10px 0px;
+    word-wrap: break-word;
+    line-height: 1.5rem;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>Ubah Data Penyedia | PeduliLindungi2.0</title>
+
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_ubah_data_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_ubah_data_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder"></div>
+
+    <div class="main">
+        <div class="header">
+            <h1>UBAH DATA PENYEDIA</h1>
+            <div class="back-btn">
+                <a href="/profil-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Profil</a>
+                <span class="material-icons" style="color: #FF2222;">person</span>
+            </div>
+        </div>
+
+        <div class="form_container">
+            <form action="" method="POST">
+                <div class="row">
+                    <div class="data">
+                        <h5>Nama Instansi</h5>
+                        {% csrf_token %}
+                        {{form.namaInstansi}}
+                    </div>
+                    <div class="data">
+                        <h5>Kota</h5>
+                        {% csrf_token %}
+                        {{form.kota}}
+                    </div>
+                    <div class="data">
+                        <h5>Nomor Telepon</h5>
+                        {% csrf_token %}
+                        {{form.nomorTelepon}}
+                    </div>
+                    <div class="data">
+                        <h5>Alamat</h5>
+                        {% csrf_token %}
+                        {{form.alamat}}
+                    </div>
+                    <P><input type="submit" value="Simpan"></P>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+</html>

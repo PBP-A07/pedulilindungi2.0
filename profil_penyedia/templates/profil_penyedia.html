@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>Profil Penyedia | PeduliLindungi2.0</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/header_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder">
+        <header  style="z-index: 3;">
+            <p class="logo">PeduliLindungi2.0</p>
+            <nav>
+                <a class="tulisan" href="../../">Home</a>
+                <a class="tulisan" href="../../add-vaccine">Tambah Vaksin</a>
+                <a class="now">Profile</a>
+                <a class="tulisan" href="../../auth/logout">Log Out</a> 
+            </nav>
+        </header>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>PROFIL PENYEDIA</h1>
+            <div class="edit-btn">
+                <a href="/profil-penyedia/ubah-data-penyedia" class="edit-btn-txt">Ubah Data</a>
+                <span class="material-icons" style="color: #3561FF;">mode_edit</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="data">
+                    <h5>NAMA INSTANSI</h5>
+                    <p>{{ nama }}</p>
+                </div>
+                <div class="data">
+                    <h5>KOTA</h5>
+                    <p>{{ kota }}</p>
+                </div>
+                <div class="data">
+                    <h5>NOMOR TELEPON</h5>
+                    <p>{{ nomor_telepon }}</p>
+                </div>
+                <div class="data">
+                    <h5>ALAMAT</h5>
+                    <p>{{ alamat }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="button-primary-icon" onclick="location.href = '/profil-penyedia/lihat-pendaftar'">
+                <span class="material-icons" style="color: white;">people</span>
+                <p>Lihat Pendaftar</p>
+            </button>
+            <button class="button-primary-icon" onclick="location.href = '/profil-penyedia/catatan-penyedia'">
+                <span class="material-icons" style="color: white;">grid_view</span>
+                <p>Catatan Penyedia</p>
+            </button>
+        </div>
+        <script>
+            $(document).ready(function(){
+              $("#btn1").click(function(){
+                $.ajax({url: "../../static/css/profil_penyedia/img/pesan_penyedia.jpg", success: function(result){
+                  $('#myImg').toggle('slow');
+                }});
+              });
+            });
+            </script>
+        <div class="btn-container">
+            <a class="edit-btn-txt"id="btn1"><b>klik di sini untuk tampilkan/sembunyikan pesan bagi penyedia</b></a>
+        </div>
+        <img src="../../static/css/profil_penyedia/img/pesan_penyedia.jpg" alt="Show/Hide Image" id="myImg" width="720" height="450"/>
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+</html>

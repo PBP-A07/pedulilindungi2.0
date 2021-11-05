@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse
@@ -7,7 +10,7 @@ from tambah_vaksin.models import Vaksin
 from biodata.models import Penyedia
 
 @login_required(login_url='/auth/login/')
-def add_vaccine(request):
+def tambah_vaksin(request):
     form = VaccineForm(request.POST or None)
     
     jenis = request.POST.get('jenis')

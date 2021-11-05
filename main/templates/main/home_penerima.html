@@ -1,0 +1,159 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+    
+{% block meta %}
+<title>Homepage | PeduliLindungi2.0</title>
+{% endblock meta %}
+
+{% block content %}
+    
+    {% include 'main/header_afterlogin.html' %}
+    
+    <section class="landing">
+        <div class="container">
+            <div class="title">
+                <h1 class="top">Selamat Datang,</h1>
+                <h1 class="bottom">{{ user.username }}</h1>
+            </div>
+            <a href="daftar-vaksin"><button type="button" class="btn btn-primary">Daftar Vaksin</button></a>
+        </div>
+    </section>
+    
+    <section class="about">
+        <div class="about-img">
+            <div class="circle"></div>
+        </div>
+        <div class="about-text">
+            <h2>Tentang PeduliLindungi2.0</h2>
+            <p>Pedulilindungi2.0 merupakan bentuk partisipasi kami terhadap Proyek Tengah Semester PBP yang bertujuan untuk mengumpulkan semua penyelenggara vaksin ke dalam satu website sehingga masyarakat dapat lebih mudah untuk melihat daftar-daftar vaksin dan waktu vaksin yang tersedia.</p>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <div class="template">
+                <h2>Frequently Asked Question</h2>
+                <p class="question">Apa itu vaksinasi?</p>
+                <p class="answer">Vaksinasi adalah proses di dalam tubuh seseorang dimana ia menjadi kebal atau terlindungi dari suatu penyakit sehingga apabila suatu saat terpapar penyakit tersebut, ia tidak akan sakit atau hanya mengalami sakit ringan. Vaksinasi dilakukan dengan pemberian vaksin.</p>
+                <p class="question">Siapa sasaran penerima vaksinasi Covid-19?</p>
+                <p class="answer">Kelompok prioritas penerima vaksin adalah penduduk yang berdomisili di Indonesia yang berusia minimal 18 tahun. Kelompok penduduk berusia di bawah 18 tahun dapat diberikan vaksinasi apabila telah tersedia data keamanan vaksin yang memadai dan persetujuan penggunaan pada masa darurat dari NIE dan BPOM.</p>
+                <p class="question">Apa manfaat dan efek samping dari vaksin Covid-19?</p>
+                <p class="answer">Vaksin Covid-19 bertujuan untuk memberi perlindungan tubuh agar tidak jatuh sakit akibat covid dengan cara menimbulkan atau menstimulasi kekebalan spesifik dalam tubuh dengan pemberian vaksin. Efek samping yang timbul pada umumnya ringan (seperti demam, nyeri otot, atau ruam pada bekas suntikan). Namun, tidak semua orang akan merasakan efek samping ini karena bergantung pada kondisi tubuh masing-masing. </p>
+            </div>
+
+            <div class="to-forum">
+                <p>Ingin tahu lebih dalam? Tanyakan pertanyaanmu di<a href="#forum">forum</a></p>
+                <div class="image"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="forum" id="forum">
+        <div class="top">
+            <h2>Forum</h2>
+            <a><button class="btn btn-primary" onclick="newQuestion()">Pertanyaan baru</button></a>
+        </div>
+
+        <center>
+            <blockquote id="new-question-container" class="new-question-container">
+                <form method="POST" action="" class="new-question" id="addQuestion">
+                    {% csrf_token %}
+                    <p>Judul</p>
+                    <p>{{form.title}}</p>
+                    <p>Isi</p>
+                    <p>{{form.body}}</p>
+                    <button type="Submit" class="btn btn-secondary">Kirim</button>
+                    <button type="button" onclick="handleCancelButton()" class="btn btn-secondary">Batal</button>
+                </form>
+            </blockquote>
+        </center>
+
+        <div class="thread-container">
+            
+        </div>
+
+        <!-- replaced with ajax -->
+        <!-- {% for var in questions %}
+        <div class="thread-box">
+            <a href="{% url 'main:question' var.id %}"><p class="question-title">{{var.title}}</p></a>
+            <p class="question-by">Oleh : {{var.author}} | Dibuat pada {{var.created_at}}</p>
+            <p class="question-body">{{var.body}}</p>
+        </div>
+        {% endfor %} -->
+    </section>
+
+    <script>
+        function newQuestion() {
+            const newQuestionContainer = document.getElementById('new-question-container');
+            if (newQuestionContainer) {
+                newQuestionContainer.className = "new-question-container-enabled"
+            }
+        }
+        function handleCancelButton() {
+            const newQuestionContainer = document.getElementById('new-question-container');
+            if (newQuestionContainer) {
+                newQuestionContainer.className = "new-question-container"
+            }
+        }
+    </script>
+
+    <script>
+        const form = document.getElementById('addQuestion')
+        form.addEventListener("submit", submitHandler);
+
+        function submitHandler(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'main:home' %}",
+                data: $("#addQuestion").serialize(),
+                dataType: 'json',
+                success: successHandler
+            })
+        }
+
+        function successHandler(data) {
+            if (data.msg === "Success") {
+                form.reset();
+                alert("Pertanyaan telah disimpan");
+                $.ajax({
+                    url: "/json",
+                    success: function(results) {
+                        $(".thread-box").remove();
+                        for (let i = results.length-1; i >= 0; i--) {
+                            result = results[i]
+                            $(".thread-container").append(`
+                                <div class="thread-box">
+                                    <a href="question/${result.pk}"><p class="question-title">${result.fields.title}</p></a>
+                                    <p class="question-body">${result.fields.body}</p>
+                                </div>`);
+                        }
+                    },
+                });
+            }
+        }
+        </script>
+
+    <script>
+    $(document).ready(function () {
+      $.ajax({
+        url: "/json",
+        success: function(results) {
+            for (let i = results.length-1; i >= 0; i--) {
+                result = results[i]
+                $(".thread-container").append(`
+                    <div class="thread-box">
+                        <a href="question/${result.pk}"><p class="question-title">${result.fields.title}</p></a>
+                        <p class="question-body">${result.fields.body}</p>
+                    </div>`);
+                }
+            },
+        });
+    });
+    </script>
+
+
+    {% endblock content %}
+
+    

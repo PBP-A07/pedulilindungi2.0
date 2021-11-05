@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>Tambah Catatan Penyedia | PeduliLindungi2.0</title>
+
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_ubah_data_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_ubah_data_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder"></div>
+
+    <div class="main">
+        <div class="header">
+            <h1>TAMBAH CATATAN PENYEDIA</h1>
+            <div class="back-btn">
+                <a href="/profil-penyedia/catatan-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Kumpulan Catatan</a>
+                <span class="material-icons" style="color: #FF2222;">grid_view</span>
+            </div>
+        </div>
+
+        <div class="form_container">
+            <form action="" method="POST">
+                <div class="row">
+                    <div class="data">
+                        <h5>Judul</h5>
+                        {% csrf_token %}
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="data">
+                        <h5>Pesan</h5>
+                        {% csrf_token %}
+                        <input type="textarea" name="message" required>
+                    </div>
+                    <P><input type="submit" value="Tambah"></P>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+</html>

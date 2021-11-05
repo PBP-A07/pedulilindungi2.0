@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" />
+        <title>Lihat Pendaftar | PeduliLindungi2.0</title>
+
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/main_ubah_data_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/button_profil_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/profil_penyedia/catatan_penyedia.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    </head>
+<body>
+
+    <div class="navbar-placeholder"></div>
+
+    <div class="main">
+        <div class="header">
+            <h1>PENDAFTAR VAKSIN</h1>
+            <div class="back-btn">
+                <a href="/profil-penyedia" class="back-btn-txt" style="color: #FF2222;">Kembali ke Profil</a>
+                <span class="material-icons" style="color: #FF2222;">person</span>
+            </div>
+        </div>
+        <br>
+        <div class="notes-container">
+            {% if people %}
+                {% for person in people %}
+                <div class="card">
+                    <h3><b>{{ person.nama }}</b></h3>
+                    <h4 style=font-weight:normal;>NIK: {{ person.nik }}</h4>
+                    <h4 style=font-weight:normal;>No. HP: {{ person.nomor_handphone }}</h4>
+                    <h4 style=font-weight:normal;>Jenis Vaksin: {{ person.jenis_vaksin }}</h4>
+                    <h4 style=font-weight:normal;>Tanggal: {{ person.tanggal }}</h4>
+                </div>
+                {% endfor %}
+            {% else %}
+            <h3><b>Belum ada pendaftar</b></h3>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="footer-placeholder"></div>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+.button-primary, .button-secondary, .button-primary-icon, .button-primary-icon-danger, .button-primary-icon-success {
+    font-weight: bold;
+    background-color: #3561FF; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+.button-primary-icon, .button-primary-icon-danger, .button-primary-icon-success {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.button-primary-icon-danger {
+    background-color: #FF2222;
+}
+
+.button-primary-icon-success {
+    background-color: #1ab50e;
+    
+}
+
+.button-primary-icon p,.button-primary-icon-danger p, .button-primary-icon-success p {
+    margin: 0;
+}
+
+.button-secondary {
+    background-color: white;
+    border: 2px solid #3561FF;
+    color: #3561FF;
+}
+  
+.button-primary:hover, .button-secondary:hover, .button-primary-icon:hover {
+    background-color: #113DDB;
+    color: white;
+    cursor: pointer;
+}
+
+.button-primary-icon-danger:hover {
+    background-color: #C91A1A;
+    color: white;
+    cursor: pointer;
+}
+
+.button-primary-icon-success:hover {
+    background-color: #0f8006;
+    color: white;
+    cursor: pointer;
+}
+  
+.btn-container {
+    display: flex;
+    justify-content: center;
+    padding: 30px 60px;
+}
+
+.btn-container-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 30px 60px;
+    gap: 40px 40px;
+}
+
+.small-btn-container, .small-btn-container-center {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.small-btn-container-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.small-btn, .disabled-small-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    text-decoration: none;
+}
+
+.edit-btn-txt, .delete-btn-txt, .disabled-btn-txt {
+    color: #3561FF;
+    position: relative;
+    text-decoration: none;
+    margin: 8px 0px;
+    padding: 4px 4px 4px 0px;
+    cursor: pointer;
+}
+
+.disabled-btn-txt, .disabled-small-btn {
+    color: grey;
+    cursor: default;
+}
+
+.delete-btn-txt {
+    color: #FF2222;
+}
+  
+.edit-btn-txt::before, .delete-btn-txt::before  {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #3561FF;
+    transform-origin: center;
+    transform: translate(-50%, 0) scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.delete-btn-txt::before {
+    background-color: #FF2222;
+}
+
+.edit-btn-txt:hover::before, .delete-btn-txt:hover::before {
+    transform: translate(-50%, 0) scaleX(1);
+}

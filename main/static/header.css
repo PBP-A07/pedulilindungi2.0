@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;    
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    position: fixed; 
+    height: 43px;
+    
+}
+
+nav {
+    padding-top: 10px;
+    margin-right: 10px;
+}
+
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-left: 15px;
+    font-family: 'Poppins';
+    font-size: 12px;
+}
+
+.now {
+    background-color: rgb(11, 36, 255);
+    color: white;
+}
+
+.logo {
+    font-family: 'Rubik', sans-serif;
+    padding-top: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+    display: none;
+}
+
+
+.tulisan:hover {
+    color: rgb(21, 17, 255);
+    transition: all, .2s;
+    
+}
+
+.now:hover {
+    color :rgb(192, 192, 192);
+    transition: all, .2s;
+    background-color: rgb(0, 22, 216);
+}
+
+.logo:hover {
+    opacity: 70%;
+    transition: all, .2s;
+}
+
+@media only screen and (min-width: 600px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        background-color: rgb(255, 255, 255);
+        width: 100%;
+        position: fixed; 
+        height: 56px;
+        padding-top: 5px;
+        
+    }
+
+    nav {
+        padding-top: 15px;
+        margin-right: 50px;
+    }
+
+    a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        padding-right: 30px;
+        padding-bottom: 18px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-family: 'Poppins';
+        font-size: 14px;
+    }
+
+    .now {
+        background-color: rgb(11, 36, 255);
+        color: white;
+    }
+
+    .logo {
+        font-family: 'Rubik', sans-serif;
+        padding-top: 15px;
+        margin-left: 30px;
+        font-weight: bold;
+        display: block;
+    }
+
+
+    .tulisan:hover {
+        color: rgb(21, 17, 255);
+        transition: all, .2s;
+        
+    }
+
+    .now:hover {
+        color :rgb(192, 192, 192);
+        transition: all, .2s;
+        background-color: rgb(0, 22, 216);
+    }
+
+    .logo:hover {
+        opacity: 70%;
+        transition: all, .2s;
+    }
+}

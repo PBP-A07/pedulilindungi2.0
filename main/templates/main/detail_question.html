@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Question | PeduliLindungi2.0</title>
+{% endblock meta %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+
+{% block content %}
+
+<div class="container-forum">
+    <a href="../../#forum" style="margin-left: 20px; margin-top: 20px;">
+        <button class="btn btn-primary">Kembali ke halaman utama</button>
+    </a>
+
+    <div class="head">
+        <h2 class="quest-title">{{question.title}}</h2>
+        <p class="quest-author">Dibuat oleh {{question.author.user}} [{{question.author.role}}] pada {{question.created_at}}</p>
+        <p class="quest-body">{{question.body}}</p>
+        <button id="{{response.id}}" class="reply-button" onclick="handleReplyButton(this.id)">Jawab</button>
+
+        <blockquote id="reply-form-container-{{response.id}}" class="reply-form-container" style="margin-left: 50px;">
+            <form method="POST" action="" class="response-form">
+                {% csrf_token %}
+                <p>{{ response_form.body }}</p>
+                <button type="button" id="{{response.id}}" onclick="handleCancelButton(this.id)" class="btn btn-secondary">Batal</button>
+                <button type="Submit" class="btn btn-secondary">Kirim</button>
+            </form>
+        </blockquote>
+    </div>
+
+
+    <div class="responses-container">
+        {%  if not question.responses.all %} 
+        <p class="nothing">Belum ada jawaban untuk pertanyaan ini</p>
+        {% else %}
+        {% for response in question.get_responses %}
+            {% include 'main/components/response.html' with response=response %}
+        {% endfor %}
+        {% endif %}
+    </div>
+    
+</div>
+
+<script>
+    function handleReplyButton(responseid) {
+        const replyFormContainer = document.getElementById('reply-form-container-' + responseid);
+        if (replyFormContainer) {
+            replyFormContainer.className = "reply-form-container-enabled"
+        }
+    }
+    function handleCancelButton(responseid) {
+        const replyFormContainer = document.getElementById('reply-form-container-' + responseid);
+        if (replyFormContainer) {
+            replyFormContainer.className = "reply-form-container"
+        }
+    }
+</script>
+
+{% endblock %}
+
+    

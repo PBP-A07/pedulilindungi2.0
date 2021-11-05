@@ -1,0 +1,45 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.header, .header h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+}
+
+.header h1 {
+    margin: 0px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0rem 12rem;
+    margin: 2rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+.data {
+    margin-top: 0.6rem;
+}
+
+.data h5, .data p {
+   margin: 0.6rem; 
+   max-width: 20rem;
+}
+
+#myImg {
+    display: none;
+}
