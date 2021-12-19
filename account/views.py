@@ -94,7 +94,6 @@ def flutter_login(request):
     data = json.loads(request.body)
     username = data["username"]
     password = data["password"]
-    email = data["email"]
 
     user = authenticate(request, username=username, password=password)
     if (user is not None):
