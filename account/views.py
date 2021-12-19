@@ -7,8 +7,10 @@ from django.contrib.auth import get_user_model
 from django.http.response import HttpResponse, JsonResponse
 from django.core import serializers
 from django.contrib import messages
+import json
+from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def signup(request):
     context = {}
 
@@ -44,7 +46,7 @@ def update_profile(request, user_username, user_role, email):
     user.profile.email = email
     user.save()
 
-
+@csrf_exempt
 def login_user(request):
     # Kalo udah ada user yang log in, langsung arahin ke home setelah login.
     if request.user.is_authenticated:
@@ -67,7 +69,7 @@ def login_user(request):
 
 # Added login first time, after register redirect here.
 
-
+@csrf_exempt
 def login_first_time(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -87,6 +89,20 @@ def login_first_time(request):
 
     return render(request, 'login.html')
 
+@csrf_exempt
+def flutter_login(request):
+    data = json.loads(request.body)
+    username = data["username"]
+    password = data["password"]
+    email = data["email"]
+
+    user = authenticate(request, username=username, password=password)
+    if (user is not None):
+        print("Not None")
+        return JsonResponse({"message": "You're logged in successfully!", "username": username}, status = 200)
+    else:
+        print("None")
+        return JsonResponse({"message": "Your password or username is wrong!"}, status = 404)
 
 def logout_user(request):
     logout(request)
