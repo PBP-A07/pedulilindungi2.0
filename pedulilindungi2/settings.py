@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'profil_penyedia',
     'daftar_vaksin',
     'tambah_vaksin',
+    'corsheaders',
     
 ]
 
@@ -74,6 +75,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:19236',
+    'http://localhost:8000',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
 ]
 
 ROOT_URLCONF = 'pedulilindungi2.urls'
