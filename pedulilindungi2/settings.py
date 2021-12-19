@@ -37,7 +37,7 @@ PRODUCTION = os.getenv('DATABASE_URL') is not None
 # SECURITY WARNING: don't run with debug turned on in production!
 # If you want to enable debugging on Heroku for learning purposes,
 # set this to True.
-DEBUG = True
+DEBUG = not PRODUCTION
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 
 ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com']
@@ -74,6 +74,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ALLOWED_HOSTS = [
+    '10.0.2.2',
+    '127.0.0.1',
 ]
 
 ROOT_URLCONF = 'pedulilindungi2.urls'

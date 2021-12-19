@@ -5,7 +5,6 @@ from .forms import PesertaForm, PenyediaForm
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
-import datetime
 
 @login_required(login_url='/auth/login/')
 def biodata_peserta(request):
