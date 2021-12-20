@@ -94,7 +94,7 @@ def ajax_posting_penyedia(request):
 @csrf_exempt
 def peserta_flutter(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode('utf-8'))
         namaLengkap = data['namaLengkap']  
         nik = data['nik']  
         tanggalLahir = data['tanggalLahir']
@@ -118,6 +118,12 @@ def peserta_flutter(request):
             response = {
                 'msg':  'Biodata Anda berhasil disimpan!',
                 'id' : 1
+            }
+        
+        else :
+            response = {
+                'msg':  'Maaf biodata Anda gagal terbuat!',
+                'id' : 2
             }
         
         

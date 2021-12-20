@@ -79,6 +79,7 @@ MIDDLEWARE = [
 ALLOWED_HOSTS = [
     '10.0.2.2',
     '127.0.0.1',
+    'pedulilindungi2.herokuapp.com'
 ]
 
 ROOT_URLCONF = 'pedulilindungi2.urls'
