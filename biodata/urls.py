@@ -5,5 +5,7 @@ urlpatterns = [
     path('peserta_form', biodata_peserta, name='peserta'), 
     path('penyedia_form', biodata_penyedia, name='penyedia'),
     path('peserta/create', ajax_posting_peserta),
-    path('penyedia/create', ajax_posting_penyedia)
+    path('penyedia/create', ajax_posting_penyedia),
+    path('peserta/flutter', peserta_flutter),
+    path('penyedia/flutter', penyedia_flutter),
 ]
