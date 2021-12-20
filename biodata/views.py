@@ -94,7 +94,7 @@ def ajax_posting_penyedia(request):
 @csrf_exempt
 def peserta_flutter(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode('utf-8'))
         namaLengkap = data['namaLengkap']  
         nik = data['nik']  
         tanggalLahir = data['tanggalLahir']
