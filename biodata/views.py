@@ -120,6 +120,12 @@ def peserta_flutter(request):
                 'id' : 1
             }
         
+        else :
+            response = {
+                'msg':  'Maaf biodata Anda gagal terbuat!',
+                'id' : 2
+            }
+        
         
         return JsonResponse(response)
 
