@@ -10,6 +10,7 @@ from django.contrib import messages
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+
 @csrf_exempt
 def signup(request):
     context = {}
@@ -40,11 +41,53 @@ def signup(request):
     return render(request, "signup.html", context)
 
 
+@csrf_exempt
+def flutter_signup(request):
+    if request.method != "POST":
+        return JsonResponse({"result": "Must use POST method!"})
+
+    if not request.body:
+        return JsonResponse({"result": "Must provide request body!"})
+
+    data = json.loads(request.body)
+    email = data["email"]
+    username = data["username"]
+    password = data["password"]
+    selected = data["role"]
+
+    if not email or not username or not password:
+        return JsonResponse({"result": "Must provide email, username, and password"})
+
+    form = CreateUserForm({
+        'username': username,
+        'email': email,
+        'password1': password,
+        'password2': password,
+        'role_choice': selected,
+    })
+
+    try:
+        User.objects.get(username=username)
+    except User.DoesNotExist:
+        if form.is_valid():
+            form.save()
+
+            # Edit the role.
+            update_profile(request, username, selected, email)
+
+            return JsonResponse({"result": "Sign up success!"})
+
+        return JsonResponse({"result": "Sign up data not valid!"})
+
+    return JsonResponse({"result:" "This username already exist!"}, status=400)
+
+
 def update_profile(request, user_username, user_role, email):
     user = User.objects.get(username=user_username)
     user.profile.role = user_role
     user.profile.email = email
     user.save()
+
 
 @csrf_exempt
 def login_user(request):
@@ -69,6 +112,7 @@ def login_user(request):
 
 # Added login first time, after register redirect here.
 
+
 @csrf_exempt
 def login_first_time(request):
     if request.method == 'POST':
@@ -89,6 +133,7 @@ def login_first_time(request):
 
     return render(request, 'login.html')
 
+
 @csrf_exempt
 def flutter_login(request):
     data = json.loads(request.body)
@@ -98,10 +143,11 @@ def flutter_login(request):
     user = authenticate(request, username=username, password=password)
     if (user is not None):
         print("Not None")
-        return JsonResponse({"message": "You're logged in successfully!", "username": username}, status = 200)
+        return JsonResponse({"message": "You're logged in successfully!", "username": username}, status=200)
     else:
         print("None")
-        return JsonResponse({"message": "Your password or username is wrong!"}, status = 404)
+        return JsonResponse({"message": "Your password or username is wrong!"}, status=404)
+
 
 def logout_user(request):
     logout(request)
