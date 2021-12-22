@@ -52,7 +52,7 @@ jobs:
         restore-keys: |
           pip-
     - name: Install ChromiumDriver
-      run: sudo apt-get update -q && sudo apt-get install -yq chromium-driver
+      run: sudo snap install chromium
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Collect static files
@@ -107,7 +107,7 @@ jobs:
   Deployment:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    needs: [UnitTest]
+    needs: [UnitTest, FunctionalTest]
     env:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
