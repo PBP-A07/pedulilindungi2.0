@@ -88,11 +88,6 @@ CORS_ALLOW_METHODS = [
     'POST',
 ]
 
-ALLOWED_HOSTS = [
-    '10.0.2.2',
-    '127.0.0.1',
-]
-
 ROOT_URLCONF = 'pedulilindungi2.urls'
 
 TEMPLATES = [

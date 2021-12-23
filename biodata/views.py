@@ -120,19 +120,12 @@ def peserta_flutter(request):
                 'id' : 1
             }
         
-        else :
-            response = {
-                'msg':  'Maaf biodata Anda gagal terbuat!',
-                'id' : 2
-            }
-        
-        
         return JsonResponse(response)
 
 @csrf_exempt
 def penyedia_flutter(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode('utf-8'))
         namaInstansi = data['namaInstansi']  
         kota = data['kota'] 
         nomorTelepon = data['nomorTelepon']
@@ -153,6 +146,5 @@ def penyedia_flutter(request):
                 'msg':  'Informasi instansi Anda berhasil disimpan!',
                 'id' : 1
             }
-        
         
         return JsonResponse(response)
