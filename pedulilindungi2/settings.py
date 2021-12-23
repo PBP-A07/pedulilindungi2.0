@@ -45,8 +45,9 @@ ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com']
 if not PRODUCTION:
     ALLOWED_HOSTS += ['.localhost', '127.0.0.1', '[::1]']
 
-
 # Application definition
+
+ALLOWED_HOSTS = ['127.0.0.1', '10.0.2.2']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'main',
     'account',
     'biodata',
@@ -62,10 +64,10 @@ INSTALLED_APPS = [
     'profil_penyedia',
     'daftar_vaksin',
     'tambah_vaksin',
-    
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,6 +77,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = ["*"]
 
 ROOT_URLCONF = 'pedulilindungi2.urls'
 
