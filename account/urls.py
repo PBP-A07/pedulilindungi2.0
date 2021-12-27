@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', logout_user),
     path('email_compare', email_compare),
     path('login-first/', login_first_time),
-    path('flutter-login/', flutter_login),
+    path('flutter-signin/', flutter_login),
     path('flutter-signup/', flutter_signup),
+    path('flutter-signout/', flutter_signup),
 ]

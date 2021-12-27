@@ -10,6 +10,8 @@ from django.contrib import messages
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+from account.models import Profile
+
 
 @csrf_exempt
 def signup(request):
@@ -138,15 +140,16 @@ def login_first_time(request):
 def flutter_login(request):    
     username = request.POST['username']
     password = request.POST['password']
-    print(username)
-    print(password)
 
     user = authenticate(request, username=username, password=password)
+
     if (user is not None):
-        print("Not None")
-        return JsonResponse({"message": "You're logged in successfully!", "username": username}, status=200)
+        userFound = User.objects.get(username=username)
+        profileFound = Profile.objects.get(user_id = getattr(userFound, "id"))
+
+        login(request, user)
+        return JsonResponse({"message": "You're logged in successfully!", "username": username, "email": getattr(profileFound, "email"), "role": getattr(profileFound, "role")}, status=200)
     else:
-        print("None")
         return JsonResponse({"message": "Your password or username is wrong!"}, status=404)
 
 
@@ -154,6 +157,19 @@ def logout_user(request):
     logout(request)
     return redirect('/#/')
 
+@csrf_exempt
+def flutter_logout(request):
+    try:
+        logout(request)
+        return JsonResponse({
+                    "status": True,
+                    "message": "Successfully Logged out!"
+                }, status=200)
+    except:
+        return JsonResponse({
+        "status": False,
+        "message": "Failed to Logout"
+        }, status=401)
 
 def email_compare(request):
     User = get_user_model()
