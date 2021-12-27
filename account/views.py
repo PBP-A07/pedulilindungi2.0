@@ -135,10 +135,11 @@ def login_first_time(request):
 
 
 @csrf_exempt
-def flutter_login(request):
-    data = json.loads(request.body)
-    username = data["username"]
-    password = data["password"]
+def flutter_login(request):    
+    username = request.POST['username']
+    password = request.POST['password']
+    print(username)
+    print(password)
 
     user = authenticate(request, username=username, password=password)
     if (user is not None):

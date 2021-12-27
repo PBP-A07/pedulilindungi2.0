@@ -43,7 +43,7 @@ HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com']
 
 if not PRODUCTION:
-    ALLOWED_HOSTS += ['.localhost', '127.0.0.1', '[::1]']
+    ALLOWED_HOSTS += ['.localhost', '127.0.0.1', '[::1]', '10.0.2.2']
 
 
 # Application definition
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'main',
     'account',
     'biodata',
@@ -62,8 +63,7 @@ INSTALLED_APPS = [
     'profil_penyedia',
     'daftar_vaksin',
     'tambah_vaksin',
-    'corsheaders',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -78,9 +78,19 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = ["*"]
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:19236',
     'http://localhost:8000',
+    'http://10.0.2.2:8000',
+    'http://localhost:59474'
 ]
 
 CORS_ALLOW_METHODS = [
@@ -110,6 +120,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pedulilindungi2.wsgi.application'
 
+# Variables for flutter auth
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
