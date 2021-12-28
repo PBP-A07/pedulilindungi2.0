@@ -7,5 +7,5 @@ urlpatterns = [
     path('ajax/load-jenis-vaksin', load_jenis_vaksin,
          name='ajax-load-jenis-vaksin'),
     path('ajax/load-tempat', load_tempat, name='ajax-load-tempat'),
-    path('daftar-vaksin/flutter', daftar_vaksin_flutter, name="daftar_vaksin_flutter")
+    path('flutter', daftar_vaksin_flutter, name="daftar_vaksin_flutter")
 ]
