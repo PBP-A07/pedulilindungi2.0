@@ -143,11 +143,8 @@ def post_question_flutter(request):
         body = data['body']
        
         if title and body :
-            # try :
-            person = Profile.objects.get(email="a@gmail.com")
-            # print(person)
-            # except :
-            #     print("gabisa ambil user")
+            person = User.objects.get(username=data['username'])
+            person = Profile.objects.get(user=person)
            
             Questions.objects.create(
                 author = person,
@@ -156,7 +153,7 @@ def post_question_flutter(request):
             )
  
             response = {
-                'msg':  'Informasi instansi Anda berhasil disimpan!',
+                'msg':  'Pertanyaan Anda berhasil disimpan!',
                 'id' : 1
             }
        
