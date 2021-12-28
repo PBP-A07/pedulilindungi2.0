@@ -7,8 +7,13 @@ from django.contrib.auth import get_user_model
 from django.http.response import HttpResponse, JsonResponse
 from django.core import serializers
 from django.contrib import messages
+import json
+from django.views.decorators.csrf import csrf_exempt
+
+from account.models import Profile
 
 
+@csrf_exempt
 def signup(request):
     context = {}
 
@@ -38,6 +43,47 @@ def signup(request):
     return render(request, "signup.html", context)
 
 
+@csrf_exempt
+def flutter_signup(request):
+    if request.method != "POST":
+        return JsonResponse({"result": "Must use POST method!"})
+
+    if not request.body:
+        return JsonResponse({"result": "Must provide request body!"})
+
+    data = json.loads(request.body)
+    email = data["email"]
+    username = data["username"]
+    password = data["password"]
+    selected = data["role"]
+
+    if not email or not username or not password:
+        return JsonResponse({"result": "Must provide email, username, and password"})
+
+    form = CreateUserForm({
+        'username': username,
+        'email': email,
+        'password1': password,
+        'password2': password,
+        'role_choice': selected,
+    })
+
+    try:
+        User.objects.get(username=username)
+    except User.DoesNotExist:
+        if form.is_valid():
+            form.save()
+
+            # Edit the role.
+            update_profile(request, username, selected, email)
+
+            return JsonResponse({"result": "Sign up success!"})
+
+        return JsonResponse({"result": "Sign up data not valid!"})
+
+    return JsonResponse({"result:" "This username already exist!"}, status=400)
+
+
 def update_profile(request, user_username, user_role, email):
     user = User.objects.get(username=user_username)
     user.profile.role = user_role
@@ -45,6 +91,7 @@ def update_profile(request, user_username, user_role, email):
     user.save()
 
 
+@csrf_exempt
 def login_user(request):
     # Kalo udah ada user yang log in, langsung arahin ke home setelah login.
     if request.user.is_authenticated:
@@ -68,6 +115,7 @@ def login_user(request):
 # Added login first time, after register redirect here.
 
 
+@csrf_exempt
 def login_first_time(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -88,10 +136,40 @@ def login_first_time(request):
     return render(request, 'login.html')
 
 
+@csrf_exempt
+def flutter_login(request):    
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = authenticate(request, username=username, password=password)
+
+    if (user is not None):
+        userFound = User.objects.get(username=username)
+        profileFound = Profile.objects.get(user_id = getattr(userFound, "id"))
+
+        login(request, user)
+        return JsonResponse({"message": "You're logged in successfully!", "username": username, "email": getattr(profileFound, "email"), "role": getattr(profileFound, "role")}, status=200)
+    else:
+        return JsonResponse({"message": "Your password or username is wrong!"}, status=404)
+
+
 def logout_user(request):
     logout(request)
     return redirect('/#/')
 
+@csrf_exempt
+def flutter_logout(request):
+    try:
+        logout(request)
+        return JsonResponse({
+                    "status": True,
+                    "message": "Successfully Logged out!"
+                }, status=200)
+    except:
+        return JsonResponse({
+        "status": False,
+        "message": "Failed to Logout"
+        }, status=401)
 
 def email_compare(request):
     User = get_user_model()

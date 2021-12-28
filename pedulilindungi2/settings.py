@@ -37,17 +37,16 @@ PRODUCTION = os.getenv('DATABASE_URL') is not None
 # SECURITY WARNING: don't run with debug turned on in production!
 # If you want to enable debugging on Heroku for learning purposes,
 # set this to True.
-DEBUG = True
+DEBUG = not PRODUCTION
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 
 ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com']
 
 if not PRODUCTION:
-    ALLOWED_HOSTS += ['.localhost', '127.0.0.1', '[::1]']
+    ALLOWED_HOSTS += ['.localhost', '127.0.0.1', '[::1]', '10.0.2.2']
+
 
 # Application definition
-
-ALLOWED_HOSTS = ['127.0.0.1', '10.0.2.2']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -56,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    "corsheaders",
     'main',
     'account',
     'biodata',
@@ -64,6 +63,7 @@ INSTALLED_APPS = [
     'profil_penyedia',
     'daftar_vaksin',
     'tambah_vaksin',
+
 ]
 
 MIDDLEWARE = [
@@ -76,10 +76,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+]
 
 ROOT_URLCONF = 'pedulilindungi2.urls'
 
@@ -103,6 +115,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pedulilindungi2.wsgi.application'
 
+# Variables for flutter auth
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
