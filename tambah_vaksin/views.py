@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponse
+from django.http.response import HttpResponseRedirect
 from django.core import serializers
 from tambah_vaksin.forms import VaccineForm
 from tambah_vaksin.models import Vaksin
@@ -25,10 +25,8 @@ def tambah_vaksin(request):
         person = Penyedia.objects.get(superUser=request.user)
         vaksin = Vaksin.objects.all()
         jadwal = form.save(commit=False)
-        jadwal.jenis = Vaksin.objects.get(namaInstansi=jadwal.jenis)
         jadwal.penyedia = person
         jadwal.save()
-        vaksin = Vaksin.objects.get(penyedia=jadwal.jenis)
         vaksin.jumlah -= 1
         vaksin.save()
         return HttpResponseRedirect('/')
