@@ -102,9 +102,9 @@ def peserta_flutter(request):
         nomorHandphone = data['nomorHandphone']
         alamat = data['alamat']
         # Updated Here: Added superUser
-        # superUser = request.user.username
+        username = data['username']
         
-        if namaLengkap and nik and tanggalLahir and jenisKelamin and nomorHandphone and alamat:
+        if namaLengkap and nik and tanggalLahir and jenisKelamin and nomorHandphone and alamat and username:
             Peserta.objects.create(
                 namaLengkap = namaLengkap, 
                 NIK = nik,
@@ -112,7 +112,7 @@ def peserta_flutter(request):
                 jenisKelamin = jenisKelamin,
                 nomorHandphone = nomorHandphone,
                 alamat = alamat,
-                # superUser = User.objects.get(username=superUser),
+                superUser = User.objects.get(username=username),
             )
 
             response = {
@@ -131,15 +131,15 @@ def penyedia_flutter(request):
         nomorTelepon = data['nomorTelepon']
         alamat = data['alamat']
         # Updated Here: Added superUser
-        # superUser = request.user.username
+        username = data['username']
         
-        if namaInstansi and kota and nomorTelepon and alamat:
+        if namaInstansi and kota and nomorTelepon and alamat and username:
             Penyedia.objects.create(
                 namaInstansi = namaInstansi, 
                 kota = kota,
                 nomorTelepon = nomorTelepon,
                 alamat = alamat,
-                # superUser = User.objects.get(username=superUser),
+                superUser = User.objects.get(username=username),
             )
 
             response = {
