@@ -169,7 +169,7 @@ def flutter_profil_penyedia(request):
         nomor_telepon_val = value['nomorTelepon']
         alamat_val = value['alamat']
         username_val = value['username']
-        print(nama_instansi_val + kota_val + nomor_telepon_val + alamat_val + username_val)
+
         if nama_instansi_val and kota_val and nomor_telepon_val and alamat_val and username_val:
             penyedia = Penyedia.objects.get(superUser = User.objects.get(username = username_val))
             penyedia.namaInstansi = nama_instansi_val
