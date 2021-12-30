@@ -8,6 +8,10 @@ from django.contrib.auth.models import User
 from biodata.models import Peserta
 from django.core import serializers
 import datetime
+import json
+
+from django.views.decorators.csrf import csrf_exempt
+import json as JSON
 
 from daftar_vaksin.models import JadwalVaksin
 from .forms import *
@@ -43,6 +47,16 @@ def view_profile(request, usn):
     JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
 
     return render(request, 'profile.html', {'user':user, 'penerima':penerima})
+
+@csrf_exempt
+def view_profile_flutter(request, usn):
+    user = User.objects.get(username = usn).profile
+    penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+    JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
+
+    data = serializers.serialize('json', [user, penerima,])
+    return HttpResponse(data, content_type="application/json")
+
 
 @login_required(login_url='/auth/login/')
 def get_message(request):
@@ -143,6 +157,47 @@ def edit_profile(request):
         return Http404
     
     return render(request, 'profile-edit.html', {'form':form, 'user':penerima, 'userProf':user})
+
+@csrf_exempt
+def edit_profile_flutter(request, usn):
+
+    response = {}
+
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        namaLengkap = data['namaLengkap']  
+        nik = data['nik']  
+        tanggalLahir = data['tanggalLahir']
+        jenisKelamin = data['jenisKelamin']
+        nomorHandphone = data['nomorHandphone']
+        alamat = data['alamat']
+        # Updated Here: Added superUser
+        username = data['username']
+
+        if namaLengkap and nik and tanggalLahir and jenisKelamin and nomorHandphone and alamat and username:
+            penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+            form = PenerimaForm(request.POST or None, instance = penerima)
+
+            temp = form.save(commit = False)
+
+            temp.namaLengkap = namaLengkap
+            temp.NIK = nik
+            temp.tanggalLahir = tanggalLahir
+            temp.jenisKelamin = jenisKelamin
+            temp.nomorHandphone = nomorHandphone
+            temp.alamat = alamat
+
+            temp.save()
+
+            response = {
+                'msg':  'Biodata Anda berhasil disimpan!',
+                'id' : 1
+            }
+
+    return JsonResponse(response)
+
+
+
 
 def load_template(request):
     

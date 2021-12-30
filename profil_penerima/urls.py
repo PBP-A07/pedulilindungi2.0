@@ -18,4 +18,6 @@ urlpatterns = [
     path('vaccine/ticket/get', get_vaccine_ticket, name='get_vaccine'),
     path('vaccine/ticket/get/failed', get_vaccine_ticket_failed, name='get_vaccine_failed'),
     path('vaccine/delete/<id>', delete_vaccine, name='delete_vaccine'),
+    path('user/flutter/<usn>', view_profile_flutter),
+    path('profile/edit/flutter/<usn>', edit_profile_flutter),
 ]
