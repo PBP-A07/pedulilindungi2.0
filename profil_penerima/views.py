@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.decorators import csrf
 from biodata.models import Peserta
 from django.core import serializers
 import datetime
@@ -196,9 +197,6 @@ def edit_profile_flutter(request, usn):
 
     return JsonResponse(response)
 
-
-
-
 def load_template(request):
     
     if request.user.profile.role != 'penerima':
@@ -211,6 +209,19 @@ def call_success(request):
 
 def call_failed(request):
     return render(request, 'failed-modal.html')
+
+@csrf_exempt
+def get_vaccine_flutter(request, usn):
+    JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
+    penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+    try:
+        vaccine = JadwalVaksin.objects.get(penerima = penerima)
+
+        data = serializers.serialize('json', [penerima, vaccine, ])
+        return HttpResponse(data, content_type="application/json")
+
+    except JadwalVaksin.DoesNotExist:
+        return JsonResponse({'id' : -1})
 
 @login_required(login_url='/auth/login/')
 def view_vaccine(request):
@@ -282,3 +293,25 @@ def delete_vaccine(request, id):
         return Http404
     
     return render(request, 'delete-vaccine-modal.html', {'vaccine':vaccine})
+
+@csrf_exempt
+def delete_vaccine_flutter(request, usn):
+    response = {
+                'msg':  'Tikat anda berhasil dihapus',
+                'id' : 1
+            }
+
+    try:
+        penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+        vaccine = JadwalVaksin.objects.get(penerima = penerima)
+
+        if(request.method == 'POST'):
+            vaccine.delete()
+            return JsonResponse(response)
+        
+    except JadwalVaksin.DoesNotExist:
+        return JsonResponse({
+                'msg':  'Tikat anda gagal dihapus',
+                'id' : 1
+            })
+    return JsonResponse(response)
