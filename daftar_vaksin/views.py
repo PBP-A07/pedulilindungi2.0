@@ -90,11 +90,12 @@ def daftar_vaksin_flutter(request):
                 tanggal = tanggal,
                 jenis_vaksin = jenis_vaksin,
                 tempat = tempat,
-                place = place,
-                penerima = penerima,
+                place = Penyedia.objects.get(namaInstansi = place),
+                penerima = User.objects.get(username = penerima),
             )
 
-            vaksin = Vaksin.objects.get(penyedia=jadwal.penyedia)
+            penyedia = Penyedia.objects.get(namaInstansi=place)
+            vaksin = Vaksin.objects.get(penyedia=penyedia)
             vaksin.jumlah -= 1
             vaksin.save()
 
