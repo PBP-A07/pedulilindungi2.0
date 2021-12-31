@@ -5,9 +5,14 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.decorators import csrf
 from biodata.models import Peserta
 from django.core import serializers
 import datetime
+import json
+
+from django.views.decorators.csrf import csrf_exempt
+import json as JSON
 
 from daftar_vaksin.models import JadwalVaksin
 from .forms import *
@@ -43,6 +48,16 @@ def view_profile(request, usn):
     JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
 
     return render(request, 'profile.html', {'user':user, 'penerima':penerima})
+
+@csrf_exempt
+def view_profile_flutter(request, usn):
+    user = User.objects.get(username = usn).profile
+    penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+    JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
+
+    data = serializers.serialize('json', [user, penerima,])
+    return HttpResponse(data, content_type="application/json")
+
 
 @login_required(login_url='/auth/login/')
 def get_message(request):
@@ -144,6 +159,44 @@ def edit_profile(request):
     
     return render(request, 'profile-edit.html', {'form':form, 'user':penerima, 'userProf':user})
 
+@csrf_exempt
+def edit_profile_flutter(request, usn):
+
+    response = {}
+
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        namaLengkap = data['namaLengkap']  
+        nik = data['nik']  
+        tanggalLahir = data['tanggalLahir']
+        jenisKelamin = data['jenisKelamin']
+        nomorHandphone = data['nomorHandphone']
+        alamat = data['alamat']
+        # Updated Here: Added superUser
+        username = data['username']
+
+        if namaLengkap and nik and tanggalLahir and jenisKelamin and nomorHandphone and alamat and username:
+            penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+            form = PenerimaForm(request.POST or None, instance = penerima)
+
+            temp = form.save(commit = False)
+
+            temp.namaLengkap = namaLengkap
+            temp.NIK = nik
+            temp.tanggalLahir = tanggalLahir
+            temp.jenisKelamin = jenisKelamin
+            temp.nomorHandphone = nomorHandphone
+            temp.alamat = alamat
+
+            temp.save()
+
+            response = {
+                'msg':  'Biodata Anda berhasil disimpan!',
+                'id' : 1
+            }
+
+    return JsonResponse(response)
+
 def load_template(request):
     
     if request.user.profile.role != 'penerima':
@@ -156,6 +209,19 @@ def call_success(request):
 
 def call_failed(request):
     return render(request, 'failed-modal.html')
+
+@csrf_exempt
+def get_vaccine_flutter(request, usn):
+    JadwalVaksin.objects.filter(tanggal__lt=datetime.date.today()).delete()
+    penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+    try:
+        vaccine = JadwalVaksin.objects.get(penerima = penerima)
+
+        data = serializers.serialize('json', [penerima, vaccine, ])
+        return HttpResponse(data, content_type="application/json")
+
+    except JadwalVaksin.DoesNotExist:
+        return JsonResponse({'id' : -1})
 
 @login_required(login_url='/auth/login/')
 def view_vaccine(request):
@@ -227,3 +293,25 @@ def delete_vaccine(request, id):
         return Http404
     
     return render(request, 'delete-vaccine-modal.html', {'vaccine':vaccine})
+
+@csrf_exempt
+def delete_vaccine_flutter(request, usn):
+    response = {
+                'msg':  'Tikat anda berhasil dihapus',
+                'id' : 1
+            }
+
+    try:
+        penerima = Peserta.objects.get(superUser = User.objects.get(username = usn))
+        vaccine = JadwalVaksin.objects.get(penerima = penerima)
+
+        if(request.method == 'POST'):
+            vaccine.delete()
+            return JsonResponse(response)
+        
+    except JadwalVaksin.DoesNotExist:
+        return JsonResponse({
+                'msg':  'Tikat anda gagal dihapus',
+                'id' : 1
+            })
+    return JsonResponse(response)
