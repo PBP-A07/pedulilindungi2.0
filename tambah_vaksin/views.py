@@ -1,13 +1,14 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from tambah_vaksin.forms import VaccineForm
 from tambah_vaksin.models import Vaksin
 from biodata.models import Penyedia
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 @login_required(login_url='/auth/login/')
 def tambah_vaksin(request):
@@ -19,7 +20,7 @@ def tambah_vaksin(request):
     tanggal = request.POST.get('tanggal')
     form.fields['tanggal'].choices = [(tanggal, tanggal)]
 
-    jumlah = request.POST.get('jumlah')
+    jumlah1 = request.POST.get('jumlah')
 
     if (form.is_valid() and request.method == 'POST'):
         person = Penyedia.objects.get(superUser=request.user)
@@ -27,9 +28,9 @@ def tambah_vaksin(request):
         jadwal = form.save(commit=False)
         jadwal.penyedia = person
         jadwal.save()
-        vaksin.jumlah -= 1
-        vaksin.save()
-        return HttpResponseRedirect('/')
+        vaksin.jumlah = int(jumlah1) - 1
+        # vaksin.save()
+        return HttpResponseRedirect('/profil-penerima/vaccine/ticket')
     else:
         form = VaccineForm()
 
@@ -50,3 +51,23 @@ def load_tempat(request):
     jenis_id = request.GET.get('jenis_vaksin')
     tempat = Vaksin.objects.filter(jenis=jenis_id).exclude(jumlah=0).distinct()
     return render(request, 'hr/tempat_dropdown.html', {'tempat': tempat})
+
+@csrf_exempt
+def penyedia_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        namaVaksin = data['namaVaksin']
+        jumlah = data['jumlah']
+        
+        if namaVaksin and jumlah and username:
+            Vaksin.objects.create(
+                jenis = namaVaksin,
+                jumlah = jumlah
+            )
+
+            response = {
+                'msg':  'Vaksin berhasil ditambahkan!',
+                'id' : 1
+            }
+        
+        return JsonResponse(response)

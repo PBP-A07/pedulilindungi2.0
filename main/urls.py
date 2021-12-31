@@ -14,6 +14,7 @@ urlpatterns = [
     path('json-flutter',  views.json_flutter, name='json-2'),
     path('json-account',  views.json_account_flutter, name='json-3'),
     path('post-question-flutter',  views.post_question_flutter, name='post-flutter'),
+    path('post-jawaban-flutter',  views.post_jawaban_flutter, name='post-flutter'),
 ]
  
 
