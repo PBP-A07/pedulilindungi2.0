@@ -1,12 +1,15 @@
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponseRedirect
+from django.http import response, JsonResponse
+from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from datetime import date
 from .forms import DaftarVaksinForm
 from tambah_vaksin.models import Vaksin
 from biodata.models import Penyedia, Peserta
+from django.contrib.auth.models import User
 from .models import JadwalVaksin
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
 import json
 
 
@@ -71,35 +74,49 @@ def load_tempat(request):
 def daftar_vaksin_flutter(request):
     JadwalVaksin.objects.filter(tanggal__lt=date.today()).delete()
     Vaksin.objects.filter(tanggal__lt=date.today()).delete()
-    person = Peserta.objects.get(superUser=request.user)
-    form = DaftarVaksinForm(request.POST or None)
 
-    if(JadwalVaksin.objects.filter(penerima=person).exists()):
-        return HttpResponseRedirect('/profil-penerima/vaccine/ticket')
-    else:
-        kota = request.POST.get('kota')
-        form.fields['kota'].choices = [(kota, kota)]
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        kota = data['kota']
+        tanggal = data['tanggal']
+        jenis_vaksin = data['jenis_vaksin']
+        tempat = data['tempat']
+        place = data['place']
+        penerima = data['penerima']
 
-        tanggal = request.POST.get('tanggal')
-        form.fields['tanggal'].choices = [(tanggal, tanggal)]
+        if kota and tanggal and jenis_vaksin and tempat and place and penerima:
+            JadwalVaksin.objects.create(
+                kota = kota,
+                tanggal = tanggal,
+                jenis_vaksin = jenis_vaksin,
+                tempat = tempat,
+                place = place,
+                penerima = penerima,
+            )
 
-        jenis_vaksin = request.POST.get('jenis_vaksin')
-        form.fields['jenis_vaksin'].choices = [(jenis_vaksin, jenis_vaksin)]
-
-        tempat = request.POST.get('tempat')
-        form.fields['tempat'].choices = [(tempat, tempat)]
-
-        if (form.is_valid() and request.method == 'POST'):
-            jadwal = form.save(commit=False)
-            jadwal.place = Penyedia.objects.get(namaInstansi=jadwal.tempat)
-            jadwal.penerima = person
-            jadwal.save()
-            vaksin = Vaksin.objects.get(penyedia=jadwal.place)
+            vaksin = Vaksin.objects.get(penyedia=jadwal.penyedia)
             vaksin.jumlah -= 1
             vaksin.save()
-            return HttpResponseRedirect('/profil-penerima/vaccine/ticket')
-        else:
-            form = DaftarVaksinForm()
 
-    return render(request, 'daftar_vaksin.html', {'form': form})
+            response = {
+                'msg':  'Jadwal Anda berhasil disimpan!',
+                'id': 1
+            }
+
+        return JsonResponse(response)
+        
+@csrf_exempt
+def get_vaksin_data(request):
+    kota = [(i['penyedia__kota'], i['penyedia__kota'])
+            for i in Vaksin.objects.values('penyedia__kota').exclude(jumlah=0).distinct()]
+    tanggal = [(i['penyedia__tanggal'], i['penyedia__tanggal'])
+               for i in Vaksin.objects.values('penyedia__tanggal').exclude(jumlah=0).distinct()]
+    jenis_vaksin = [(i['penyedia__jenis_vaksin'], i['penyedia__jenis_vaksin'])
+                    for i in Vaksin.objects.values('penyedia__jenis_vaksin').exclude(jumlah=0).distinct()]
+    tempat = [(i['penyedia__tempat'], i['penyedia__tempat'])
+              for i in Vaksin.objects.values('penyedia__tempat').exclude(jumlah=0).distinct()]
+
+    data = serializers.serialize('json', [kota, tanggal, jenis_vaksin, tempat])
+    return HttpResponse(data, content_type="application/json")
+
 
