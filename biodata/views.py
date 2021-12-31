@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from .forms import PesertaForm, PenyediaForm
 from .models import *
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 @login_required(login_url='/auth/login/')
 def biodata_peserta(request):
@@ -87,4 +89,62 @@ def ajax_posting_penyedia(request):
                 'msg':  'Silahkan isi form dengan benar!', 
                 'id' : 2
             }
+        return JsonResponse(response)
+
+@csrf_exempt
+def peserta_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        namaLengkap = data['namaLengkap']  
+        nik = data['nik']  
+        tanggalLahir = data['tanggalLahir']
+        jenisKelamin = data['jenisKelamin']
+        nomorHandphone = data['nomorHandphone']
+        alamat = data['alamat']
+        # Updated Here: Added superUser
+        username = data['username']
+        
+        if namaLengkap and nik and tanggalLahir and jenisKelamin and nomorHandphone and alamat and username:
+            Peserta.objects.create(
+                namaLengkap = namaLengkap, 
+                NIK = nik,
+                tanggalLahir = tanggalLahir,
+                jenisKelamin = jenisKelamin,
+                nomorHandphone = nomorHandphone,
+                alamat = alamat,
+                superUser = User.objects.get(username=username),
+            )
+
+            response = {
+                'msg':  'Biodata Anda berhasil disimpan!',
+                'id' : 1
+            }
+        
+        return JsonResponse(response)
+
+@csrf_exempt
+def penyedia_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        namaInstansi = data['namaInstansi']  
+        kota = data['kota'] 
+        nomorTelepon = data['nomorTelepon']
+        alamat = data['alamat']
+        # Updated Here: Added superUser
+        username = data['username']
+        
+        if namaInstansi and kota and nomorTelepon and alamat and username:
+            Penyedia.objects.create(
+                namaInstansi = namaInstansi, 
+                kota = kota,
+                nomorTelepon = nomorTelepon,
+                alamat = alamat,
+                superUser = User.objects.get(username=username),
+            )
+
+            response = {
+                'msg':  'Informasi instansi Anda berhasil disimpan!',
+                'id' : 1
+            }
+        
         return JsonResponse(response)

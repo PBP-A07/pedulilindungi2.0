@@ -1,11 +1,16 @@
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponseRedirect
+from django.http import response, JsonResponse
+from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from datetime import date
 from .forms import DaftarVaksinForm
 from tambah_vaksin.models import Vaksin
 from biodata.models import Penyedia, Peserta
+from django.contrib.auth.models import User
 from .models import JadwalVaksin
+from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+import json
 
 
 @login_required(login_url='/auth/login/')
@@ -64,4 +69,54 @@ def load_tempat(request):
     tempat = Vaksin.objects.filter(
         jenis=jenis_id, tanggal=tanggal_id, penyedia__kota=kota_id).exclude(jumlah=0).distinct()
     return render(request, 'hr/tempat_dropdown.html', {'tempat': tempat})
+
+@csrf_exempt
+def daftar_vaksin_flutter(request):
+    JadwalVaksin.objects.filter(tanggal__lt=date.today()).delete()
+    Vaksin.objects.filter(tanggal__lt=date.today()).delete()
+
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        kota = data['kota']
+        tanggal = data['tanggal']
+        jenis_vaksin = data['jenis_vaksin']
+        tempat = data['tempat']
+        place = data['place']
+        penerima = data['penerima']
+
+        if kota and tanggal and jenis_vaksin and tempat and place and penerima:
+            JadwalVaksin.objects.create(
+                kota = kota,
+                tanggal = tanggal,
+                jenis_vaksin = jenis_vaksin,
+                tempat = tempat,
+                place = place,
+                penerima = penerima,
+            )
+
+            vaksin = Vaksin.objects.get(penyedia=jadwal.penyedia)
+            vaksin.jumlah -= 1
+            vaksin.save()
+
+            response = {
+                'msg':  'Jadwal Anda berhasil disimpan!',
+                'id': 1
+            }
+
+        return JsonResponse(response)
+        
+@csrf_exempt
+def get_vaksin_data(request):
+    kota = [(i['penyedia__kota'], i['penyedia__kota'])
+            for i in Vaksin.objects.values('penyedia__kota').exclude(jumlah=0).distinct()]
+    tanggal = [(i['penyedia__tanggal'], i['penyedia__tanggal'])
+               for i in Vaksin.objects.values('penyedia__tanggal').exclude(jumlah=0).distinct()]
+    jenis_vaksin = [(i['penyedia__jenis_vaksin'], i['penyedia__jenis_vaksin'])
+                    for i in Vaksin.objects.values('penyedia__jenis_vaksin').exclude(jumlah=0).distinct()]
+    tempat = [(i['penyedia__tempat'], i['penyedia__tempat'])
+              for i in Vaksin.objects.values('penyedia__tempat').exclude(jumlah=0).distinct()]
+
+    data = serializers.serialize('json', [kota, tanggal, jenis_vaksin, tempat])
+    return HttpResponse(data, content_type="application/json")
+
 
