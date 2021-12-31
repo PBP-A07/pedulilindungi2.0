@@ -143,11 +143,8 @@ def post_question_flutter(request):
         body = data['body']
        
         if title and body :
-            # try :
-            person = Profile.objects.get(email="a@gmail.com")
-            # print(person)
-            # except :
-            #     print("gabisa ambil user")
+            person = User.objects.get(username=data['username'])
+            person = Profile.objects.get(user=person)
            
             Questions.objects.create(
                 author = person,
@@ -156,7 +153,30 @@ def post_question_flutter(request):
             )
  
             response = {
-                'msg':  'Informasi instansi Anda berhasil disimpan!',
+                'msg':  'Pertanyaan Anda berhasil disimpan!',
+                'id' : 1
+            }
+       
+        return JsonResponse(response)
+
+@csrf_exempt
+def post_jawaban_flutter(request):
+    if request.method == 'POST':
+        data = JSON.loads(request.body.decode('utf-8'))  
+        body = data['body']
+        person = User.objects.get(username=data['username'])
+        person = Profile.objects.get(user=person)
+        forum = Questions.objects.get(pk=data['forum'])
+       
+        if body :
+            Discussion.objects.create(
+                author = person,
+                body = body, 
+                forum = forum
+            )
+ 
+            response = {
+                'msg':  'Pertanyaan Anda berhasil disimpan!',
                 'id' : 1
             }
        
